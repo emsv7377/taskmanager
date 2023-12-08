@@ -1,22 +1,28 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, Button, SafeAreaView, Alert, Pressable, TouchableOpacity, Touchable} from 'react-native';
+import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View} from 'react-native';
+
 
 const WelcomeScreen = ({navigation}) => {
     return (
       <>
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Welcome to Task Dealer insertIconHere
+          </Text>
+          </View>
         <TouchableOpacity 
           style={styles.button}
           onPress={() => navigation.navigate('Profile', {name:'Jane'})}>
           <Text style={styles.text}> Navigate to profile </Text>  
         </TouchableOpacity>
+
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate('Settings')}>
             <Text style={styles.text}>
               Settings
             </Text></TouchableOpacity>
-        </View>
+        </SafeAreaView>
       </>
     );
   };
@@ -40,7 +46,19 @@ const WelcomeScreen = ({navigation}) => {
     text:{
       color:'white',
       fontSize: 20,
+    },
+    title:{
+      fontSize:30,
+      fontWeight:'bold',
+      fontColor:'black'
+    },
+    titleContainer:{
+      justifyContent:'flex-start',
+      marginBottom:'50%',
+      height:'10%',
+
     }
+
   });
 
   export default WelcomeScreen;
