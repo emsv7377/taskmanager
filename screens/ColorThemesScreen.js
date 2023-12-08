@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View, Dimensions, FlatList, Alert } from 'react-native';
-
+import { DARK, LIGHT, PASTEL, SAILOR } from '../assets/Theme';
 
 const items = [
-{
-    id: 1, 
-    title: 'dark',
-    backgroundColor: 'black',
+    {
+        id: 1, 
+        title: 'dark',
+        backgroundColor: 'black',
         color: 'white',
     },
     {
@@ -30,30 +30,76 @@ const items = [
 ]
 
 
-const renderItem = ({item}) => {
-    return(
-        <TouchableOpacity 
-            style={{ 
-                backgroundColor: item.backgroundColor, 
-                borderRadius: 15, 
-                //height:'60%',
-                //width:'40%',
-                width: Dimensions.get('window').width / 2 - 20, 
-                margin: 6, 
-                alignItems:'center',
-                justifyContent:'center'}}
-            onPress={() => Alert.alert('dark theme')}>
-            <Text 
-                key={item.id} 
-                style={{ fontSize:20, color:item.color, fontWeight: 'bold', padding:30,}}>
-                    {item.title}
-                </Text>
-        </TouchableOpacity>
-    )
-}
 
 const ColorThemesScreen = ({navigation}) => {
+    const [theme, setTheme] = useState({});
+
+    const onThemeChange = (themeTitle) => {
+        let newTheme = {};
+        switch(theme){
+            case 'dark':
+                newTheme = DARK;
+                break;
+            case 'light':
+                newTheme = LIGHT;
+                break;
+            case 'pastel':
+                newTheme = PASTEL;
+                break;
+            case 'sailor':
+                newTheme = SAILOR;
+                break;
+        }
+        setTheme({ theme: newTheme })
+    }
+
+    const renderItem = ({item}) => {
+        return(
+            <>
+            <TouchableOpacity 
+                style={{ 
+                    backgroundColor: item.backgroundColor, 
+                    borderRadius: 15, 
+                    width: Dimensions.get('window').width / 2 - 20, 
+                    margin: 6, 
+                    alignItems:'center',
+                    justifyContent:'center'}}
+                onPress={() => onThemeChange(item.title)}>
+                <Text 
+                    key={item.id} 
+                    style={{ fontSize:20, color:item.color, fontWeight: 'bold', padding:30,}}>
+                        {item.title}
+                </Text>
+            </TouchableOpacity>
+            </>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        container: {
+          flex: 1,
+          backgroundColor: theme.colors ? theme.colors.background : 'white', // default to white if theme is not set 
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+        flatListContainer:{
+            alignItems:'center',
+            justifyContent:'center',
+            flexGrow:1,
+        },
+        title:{
+            fontSize:30,
+            fontWeight:'bold',
+            fontColor: theme.colors ? theme.colors.text : 'black', // defaults to black if theme is not set 
+        },
+        titleContainer:{
+            justifyContent:'flex-end',
+            //marginBottom:'50%',
+            //height:'10%',
+        }
     
+      });
+
     return(
         <>
         <SafeAreaView style={styles.container}>
@@ -75,29 +121,6 @@ const ColorThemesScreen = ({navigation}) => {
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    flatListContainer:{
-        alignItems:'center',
-        justifyContent:'center',
-        flexGrow:1,
-    },
-    title:{
-        fontSize:30,
-        fontWeight:'bold',
-        fontColor:'black'
-    },
-    titleContainer:{
-        justifyContent:'flex-end',
-        //marginBottom:'50%',
-        //height:'10%',
-    }
 
-  });
 
 export default ColorThemesScreen;

@@ -13,7 +13,6 @@ const SettingsScreen = ({navigation}) => {
                 Settings 
                 </Text>
             </View>
-        
             <View style={styles.settingsList}>
             <TouchableOpacity
                 style={styles.listItem}

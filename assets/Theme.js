@@ -1,23 +1,41 @@
-export const Theme = {
-    light:{
-        textColor: '#000',
-        buttonColor: '#000',
-        borderColor:'#000',
-        containerColor: '#fff'
+export const LIGHT = {
+    theme: 'light',
+    colors: {
+        text: '#000',
+        button: '#000',
+        border:'#000',
+        container: '#fff',
+        background: '#fff'
     },
-    dark:{
-        textColor: '#fff',
-        buttonColor: '#fff',
-        borderColor:'#fff',
-        containerColor: '#000'
+}
+export const DARK = {
+    theme: 'dark',
+    colors: {
+        text: '#fff',
+        button: '#fff',
+        border:'#fff',
+        container: '#000',
+        background: '#000'
     },
-    pastel:{
-        // implement
-    }, 
-    sailor:{
-        textColor: '',
-        buttonColor:'',
-        borderColor:'',
-        containerColor:'',
-    },
+}
+export const PASTEL = {
+    theme: 'pastel',
+    colors: {
+        text: '#fff',
+        button: '#fff',
+        border:'#fff',
+        container: '#000',
+        background: 'black'
+    }
+}
+
+export const SAILOR = {
+    theme: 'sailor',
+    colors: {
+        text: '#fff',
+        button: '#fff',
+        border:'#fff',
+        container: '#000',
+        background: 'black'
+    }
 }

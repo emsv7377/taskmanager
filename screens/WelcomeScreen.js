@@ -1,8 +1,44 @@
-import * as React from 'react';
+import React, {useContext} from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View} from 'react-native';
 
+import ThemeContext from '../assets/ThemeContext';
 
 const WelcomeScreen = ({navigation}) => {
+  const theme = useContext(ThemeContext);
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors ? theme.colors.background : 'white', // default if not set
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    button:{
+      alignItems:'center',
+      backgroundColor:theme.colors ? theme.colors.button : 'black', // default if not set 
+      fontSize: 24,
+      padding: 15,
+      margin: 4,
+      width:'80%',
+      borderRadius: 20,
+    },
+    buttonText:{
+      color: theme.colors ? theme.colors.buttonText : 'white',  // default if not set
+      fontSize: 20,
+    },
+    title:{
+      fontSize:30,
+      fontWeight:'bold',
+      color: theme.colors ? theme.colors.title : 'black', // default if not set 
+    },
+    titleContainer:{
+      justifyContent:'flex-start',
+      marginBottom:'50%',
+      height:'10%',
+    }
+
+  });
+
     return (
       <>
       <SafeAreaView style={styles.container}>
@@ -28,38 +64,7 @@ const WelcomeScreen = ({navigation}) => {
     );
   };
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    button:{
-      alignItems:'center',
-      backgroundColor:'black',
-      fontSize: 24,
-      padding: 15,
-      margin: 4,
-      width:'80%',
-      borderRadius: 20,
-    },
-    buttonText:{
-      color:'white',
-      fontSize: 20,
-    },
-    title:{
-      fontSize:30,
-      fontWeight:'bold',
-      fontColor:'black'
-    },
-    titleContainer:{
-      justifyContent:'flex-start',
-      marginBottom:'50%',
-      height:'10%',
-    }
 
-  });
 
   export default WelcomeScreen;
 
