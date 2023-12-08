@@ -7,22 +7,23 @@ const WelcomeScreen = ({navigation}) => {
       <>
       <SafeAreaView style={styles.container}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Welcome to Task Dealer insertIconHere
+          <Text style={styles.title}>Welcome to Task Dealer -insert icon here-
           </Text>
           </View>
         <TouchableOpacity 
           style={styles.button}
           onPress={() => navigation.navigate('Profile', {name:'Jane'})}>
-          <Text style={styles.text}> Navigate to profile </Text>  
+          <Text style={styles.buttonText}> Get started </Text>  
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate('Settings')}>
-            <Text style={styles.text}>
+            <Text style={styles.buttonText}>
               Settings
-            </Text></TouchableOpacity>
-        </SafeAreaView>
+            </Text>
+        </TouchableOpacity>
+      </SafeAreaView>
       </>
     );
   };
@@ -43,7 +44,7 @@ const WelcomeScreen = ({navigation}) => {
       width:'80%',
       borderRadius: 20,
     },
-    text:{
+    buttonText:{
       color:'white',
       fontSize: 20,
     },
@@ -56,7 +57,6 @@ const WelcomeScreen = ({navigation}) => {
       justifyContent:'flex-start',
       marginBottom:'50%',
       height:'10%',
-
     }
 
   });
