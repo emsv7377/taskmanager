@@ -3,19 +3,25 @@ export const LIGHT = {
     colors: {
         text: '#000',
         button: '#000',
+        buttonText: 'black',
         border:'#000',
         container: '#fff',
-        background: '#fff'
+        background: '#fff',
+        title: '#blue',
+        border: 'black',
     },
 }
 export const DARK = {
     theme: 'dark',
     colors: {
         text: '#fff',
-        button: '#fff',
+        button: 'gray',
+        buttonText: 'black',
         border:'#fff',
         container: '#000',
-        background: '#000'
+        background: '#000',
+        title: '#D3D3D3',
+        border: '#A9A9A9',
     },
 }
 export const PASTEL = {
@@ -23,9 +29,12 @@ export const PASTEL = {
     colors: {
         text: '#fff',
         button: '#fff',
+        buttonText: 'pink',
         border:'#fff',
         container: '#000',
-        background: 'black'
+        background: 'black',
+        title: 'pink', 
+        border: 'green',
     }
 }
 
@@ -36,6 +45,7 @@ export const SAILOR = {
         button: '#fff',
         border:'#fff',
         container: '#000',
-        background: 'black'
+        background: 'black',
+        border: 'blue',
     }
 }

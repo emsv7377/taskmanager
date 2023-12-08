@@ -1,10 +1,39 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, View, Button, SafeAreaView, TouchableOpacity} from 'react-native';
+import ThemeContext from '../assets/ThemeContext';
 
 const ProfileScreen = ({navigation, route}) => {
+    const theme = useContext(ThemeContext);
+
+    const styles = StyleSheet.create({
+        container: {
+          flex: 1,
+          backgroundColor: theme.colors ? theme.colors.background : 'black',
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+        text:{
+            fontSize: 20,
+            color: theme.colors ? theme.colors.text : 'red',
+        },
+        button:{
+            alignItems:'center',
+            backgroundColor: theme.colors ? theme.colors.button : 'gray',
+            fontSize: 24,
+            padding: 15,
+            margin: 4,
+            width:'80%',
+            borderRadius: 20,
+          },
+        buttonText:{
+            color: theme.colors ? theme.colors.buttonText : 'darkgrey',
+            fontSize: 20,
+        },
+      });
+
     return( 
         <SafeAreaView style={styles.container}> 
-            <Text>
+            <Text style={styles.text}>
                 This is {route.params.name}'s profile
             </Text>       
             <TouchableOpacity 
@@ -16,26 +45,6 @@ const ProfileScreen = ({navigation, route}) => {
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    button:{
-        alignItems:'center',
-        backgroundColor:'black',
-        fontSize: 24,
-        padding: 15,
-        margin: 4,
-        width:'80%',
-        borderRadius: 20,
-      },
-    buttonText:{
-        color:'white',
-        fontSize: 20,
-    },
-  });
+
 
 export default ProfileScreen;

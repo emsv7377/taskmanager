@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View, Dimensions, FlatList, Alert } from 'react-native';
 import { DARK, LIGHT, PASTEL, SAILOR } from '../assets/Theme';
+
+import ThemeContext from '../assets/ThemeContext';
 
 const items = [
     {
@@ -31,11 +33,18 @@ const items = [
 
 
 
-const ColorThemesScreen = ({navigation}) => {
-    const [theme, setTheme] = useState({});
+export default ColorThemesScreen = ({navigation}) => {
+    //const [theme, setTheme] = useState({ theme: DARK });
 
-    const onThemeChange = (themeTitle) => {
+    const [theme, setCurrentTheme] = useContext(ThemeContext);
+
+    const setTheme = (newTheme) => {
+        setCurrentTheme({ theme: newTheme })
+    }
+
+    const onThemeChange = (theme) => {
         let newTheme = {};
+
         switch(theme){
             case 'dark':
                 newTheme = DARK;
@@ -49,30 +58,11 @@ const ColorThemesScreen = ({navigation}) => {
             case 'sailor':
                 newTheme = SAILOR;
                 break;
+            default:
+                newTheme = DARK; 
+                break;
         }
-        setTheme({ theme: newTheme })
-    }
-
-    const renderItem = ({item}) => {
-        return(
-            <>
-            <TouchableOpacity 
-                style={{ 
-                    backgroundColor: item.backgroundColor, 
-                    borderRadius: 15, 
-                    width: Dimensions.get('window').width / 2 - 20, 
-                    margin: 6, 
-                    alignItems:'center',
-                    justifyContent:'center'}}
-                onPress={() => onThemeChange(item.title)}>
-                <Text 
-                    key={item.id} 
-                    style={{ fontSize:20, color:item.color, fontWeight: 'bold', padding:30,}}>
-                        {item.title}
-                </Text>
-            </TouchableOpacity>
-            </>
-        )
+        setTheme({ theme: newTheme });
     }
 
     const styles = StyleSheet.create({
@@ -90,7 +80,7 @@ const ColorThemesScreen = ({navigation}) => {
         title:{
             fontSize:30,
             fontWeight:'bold',
-            fontColor: theme.colors ? theme.colors.text : 'black', // defaults to black if theme is not set 
+            color: theme.colors ? theme.colors.title : 'red', // defaults to black if theme is not set 
         },
         titleContainer:{
             justifyContent:'flex-end',
@@ -100,11 +90,33 @@ const ColorThemesScreen = ({navigation}) => {
     
       });
 
+    const renderItem = ({item}) => {
+        return(
+            <>
+            <TouchableOpacity 
+                style={{ 
+                    backgroundColor: item.backgroundColor, 
+                    borderRadius: 15, 
+                    width: Dimensions.get('window').width / 2 - 20, 
+                    margin: 6, 
+                    alignItems:'center',
+                    justifyContent:'center'}}
+                onPress={() => onThemeChange(theme)}>
+                <Text 
+                    key={item.id} 
+                    style={{ fontSize:20, color: item.color, fontWeight: 'bold', padding:30,}}>
+                        {item.title}
+                </Text>
+            </TouchableOpacity>
+            </>
+        )
+    }
+
     return(
         <>
         <SafeAreaView style={styles.container}>
             <View style={styles.titleContainer}>
-                <Text style={styles.title}> Color themes </Text>
+                <Text style={styles.title}>Color themes</Text>
             </View>
             <FlatList
                 data={items}
@@ -115,6 +127,15 @@ const ColorThemesScreen = ({navigation}) => {
                 key={4}
                 contentContainerStyle={styles.flatListContainer}
                 />
+                <TouchableOpacity 
+                style={{ 
+                    backgroundColor: 'gray', 
+                    borderRadius: 15, 
+                    width: Dimensions.get('window').width / 2 - 20, 
+                    margin: 6, 
+                    alignItems:'center',
+                    justifyContent:'center'}}
+                onPress={() => navigation.goBack()}/>
 
         </SafeAreaView>
         </>
@@ -123,4 +144,3 @@ const ColorThemesScreen = ({navigation}) => {
 
 
 
-export default ColorThemesScreen;

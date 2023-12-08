@@ -1,24 +1,26 @@
-import React from 'react';
+//import React, { createContext, useState } from 'react';
+//import { DARK } from './Theme';
 
-import Theme from './Theme.js';
+import React from 'react';
 
 export default React.createContext();
 
-/*export const useTheme = () => useContext(ThemeContext);
+/*const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState({
-    backgroundColor: 'white',
-    color: 'black'
-  });
-
-  const changeTheme = (newTheme) => {
-    setTheme(newTheme);
+    const [theme, setTheme] = useState({ theme: DARK });
+  
+    const toggleTheme = (newTheme) => {
+      setTheme({theme : newTheme});
+    };
+  
+    return (
+      <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        {children}
+      </ThemeContext.Provider>
+    );
   };
+  
+  export default ThemeContext;*/
 
-  return (
-    <ThemeContext.Provider value={{ theme, changeTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-};*/ 
+  

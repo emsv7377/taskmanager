@@ -1,9 +1,59 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View} from 'react-native';
+import ThemeContext from '../assets/ThemeContext';
 
 
 
 const SettingsScreen = ({navigation}) => {
+    const theme = useContext(ThemeContext);
+
+    const styles = StyleSheet.create({
+        container: {
+          flex: 1,
+          backgroundColor: theme.colors ? theme.colors.background : 'white',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          verticalAlign:'top',
+        },
+        title:{
+            fontSize: 24,
+            color: theme.colors ? theme.colors.title : 'red',
+            fontWeight: 'bold',
+        },
+        titleContainer:{
+            margin:'10%',
+            height:'10%',
+          },
+        settingsList:{
+            width:'80%',
+        },
+        listItem:{
+            borderColor: theme.colors ? theme.colors.border : 'black',
+            backgroundColor : theme.colors ? theme.colors.button : 'grey',
+            borderWidth:1,
+            padding:10,
+            margin:2,
+            borderRadius:20,
+        },
+        listText:{
+            fontSize:20,
+            color: theme.colors ? theme.colors.buttonText : 'black',
+        },
+        button:{
+            backgroundColor: theme.colors ? theme.colors.button : 'green',
+            fontSize: 24,
+            padding: 15,
+            margin: 4,
+            width:'80%',
+            borderRadius: 20,
+            marginTop:60,
+          },
+        buttonText:{
+            color: theme.colors ? theme.colors.buttonText : 'red',
+            fontSize: 20,
+        },
+      }
+    );
     
     return(
         <>
@@ -38,51 +88,6 @@ const SettingsScreen = ({navigation}) => {
     )
 };
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      verticalAlign:'top',
-    },
-    title:{
-        fontSize: 24,
-        fontWeight: 'bold',
-    },
-    titleContainer:{
-        margin:'10%',
-        height:'10%',
-      },
-    settingsList:{
-        backgroundColor:'white',
-        width:'80%',
-        //height:'auto'
-    },
-    listItem:{
-        borderColor:'black',
-        borderWidth:1,
-        padding:10,
-        margin:2,
-        borderRadius:20,
-    },
-    listText:{
-        fontSize:20,
-    },
-    button:{
-        backgroundColor:'black',
-        fontSize: 24,
-        padding: 15,
-        margin: 4,
-        width:'80%',
-        borderRadius: 20,
-        marginTop:60,
-      },
-    buttonText:{
-        color:'white',
-        fontSize: 20,
-    },
-  }
-);
+
 
 export default SettingsScreen;
