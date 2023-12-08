@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import WelcomeScreen from './screens/WelcomeScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import SettingsScreen from './screens/SettingsScreen'
+import ColorThemesScreen from './screens/ColorThemesScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,10 @@ export default function App() {
             <Stack.Screen 
             name="Settings" 
             component={SettingsScreen}
+            />
+            <Stack.Screen 
+            name="ColorThemes" 
+            component={ColorThemesScreen}
             />
       </Stack.Navigator>
     </NavigationContainer>

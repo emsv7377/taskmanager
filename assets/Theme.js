@@ -13,5 +13,11 @@ export const Theme = {
     },
     pastel:{
         // implement
-    }
+    }, 
+    sailor:{
+        textColor: '',
+        buttonColor:'',
+        borderColor:'',
+        containerColor:'',
+    },
 }
