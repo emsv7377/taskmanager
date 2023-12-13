@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View} from 'react-native';
+import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View, Image} from 'react-native';
 
 import ThemeContext from '../assets/ThemeContext';
 
@@ -35,7 +35,12 @@ const WelcomeScreen = ({navigation}) => {
       justifyContent:'flex-start',
       marginBottom:'50%',
       height:'10%',
-    }
+    },
+    logo: {
+      width: 200,
+      height: 200,
+      marginBottom: 20,
+    },
 
   });
 
@@ -45,6 +50,11 @@ const WelcomeScreen = ({navigation}) => {
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Welcome to Task Dealer -insert icon here-
           </Text>
+          <Image
+        source={require('../assets/ko.png')}
+        style={styles.logo}
+        resizeMode="contain"
+        />
           </View>
         <TouchableOpacity 
           style={styles.button}
@@ -58,6 +68,11 @@ const WelcomeScreen = ({navigation}) => {
             <Text style={styles.buttonText}>
               Settings
             </Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => navigation.navigate('Start')}>
+          <Text style={styles.text}> Navigate to start</Text>  
         </TouchableOpacity>
       </SafeAreaView>
       </>
