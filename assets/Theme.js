@@ -3,11 +3,11 @@ export const LIGHT = {
     colors: {
         text: '#000',
         button: '#000',
-        buttonText: 'black',
+        buttonText: '#000',
         border:'#000',
         container: '#fff',
         background: '#fff',
-        title: '#blue',
+        title: 'blue',
         border: 'black',
     },
 }

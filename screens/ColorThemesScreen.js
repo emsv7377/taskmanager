@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View, Dimensions, FlatList, Alert } from 'react-native';
 import { DARK, LIGHT, PASTEL, SAILOR } from '../assets/Theme';
 
@@ -33,19 +33,20 @@ const items = [
 
 
 
-export default ColorThemesScreen = ({navigation}) => {
+export default ColorThemesScreen = ({navigation, route}) => {
     //const [theme, setTheme] = useState({ theme: DARK });
+    const { theme, setTheme } = useContext(ThemeContext);
+    //const theme = route.params?.currentTheme || DARK; 
+    const { colors } = theme;
+    useEffect(() => {
+        console.log('Current theme: ', theme);
+    },[theme]);
 
-    const [theme, setCurrentTheme] = useContext(ThemeContext);
 
-    const setTheme = (newTheme) => {
-        setCurrentTheme({ theme: newTheme })
-    }
-
-    const onThemeChange = (theme) => {
+    const onThemeChange = (selectedTheme) => {
         let newTheme = {};
 
-        switch(theme){
+        switch(selectedTheme){
             case 'dark':
                 newTheme = DARK;
                 break;
@@ -62,7 +63,7 @@ export default ColorThemesScreen = ({navigation}) => {
                 newTheme = DARK; 
                 break;
         }
-        setTheme({ theme: newTheme });
+        setTheme(newTheme);
     }
 
     const styles = StyleSheet.create({
@@ -80,7 +81,7 @@ export default ColorThemesScreen = ({navigation}) => {
         title:{
             fontSize:30,
             fontWeight:'bold',
-            color: theme.colors ? theme.colors.title : 'red', // defaults to black if theme is not set 
+            color: colors ? theme.colors.title : 'red', // defaults to black if theme is not set 
         },
         titleContainer:{
             justifyContent:'flex-end',
@@ -101,7 +102,7 @@ export default ColorThemesScreen = ({navigation}) => {
                     margin: 6, 
                     alignItems:'center',
                     justifyContent:'center'}}
-                onPress={() => onThemeChange(theme)}>
+                onPress={() => onThemeChange(item.title)}>
                 <Text 
                     key={item.id} 
                     style={{ fontSize:20, color: item.color, fontWeight: 'bold', padding:30,}}>

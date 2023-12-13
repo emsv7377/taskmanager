@@ -7,7 +7,7 @@ import ProfileScreen from './screens/ProfileScreen'
 import SettingsScreen from './screens/SettingsScreen'
 import ColorThemesScreen from './screens/ColorThemesScreen';
 
-import ThemeContext, { ThemeProvider } from './assets/ThemeContext';
+import ThemeProvider from './assets/ThemeProvider';
 
 import { DARK } from './assets/Theme';
 
@@ -15,10 +15,10 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-  const [theme, setTheme] = useState({ theme: DARK });
+  //const [theme, setTheme] = useState({ theme: DARK });
 
   return (
-    <ThemeContext.Provider value={theme.theme}>
+    <ThemeProvider>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
@@ -42,6 +42,6 @@ export default function App() {
             />
       </Stack.Navigator>
     </NavigationContainer>
-    </ThemeContext.Provider>
+    </ThemeProvider>
   );
 }

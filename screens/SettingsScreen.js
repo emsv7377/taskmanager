@@ -5,19 +5,20 @@ import ThemeContext from '../assets/ThemeContext';
 
 
 const SettingsScreen = ({navigation}) => {
-    const theme = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
+    const { colors } = theme;
 
     const styles = StyleSheet.create({
         container: {
           flex: 1,
-          backgroundColor: theme.colors ? theme.colors.background : 'white',
+          backgroundColor: colors ? colors.background : 'white',
           alignItems: 'center',
           justifyContent: 'flex-start',
           verticalAlign:'top',
         },
         title:{
             fontSize: 24,
-            color: theme.colors ? theme.colors.title : 'red',
+            color: colors ? colors.title : 'red',
             fontWeight: 'bold',
         },
         titleContainer:{
@@ -28,8 +29,8 @@ const SettingsScreen = ({navigation}) => {
             width:'80%',
         },
         listItem:{
-            borderColor: theme.colors ? theme.colors.border : 'black',
-            backgroundColor : theme.colors ? theme.colors.button : 'grey',
+            borderColor: colors ? colors.border : 'black',
+            backgroundColor : colors ? colors.button : 'grey',
             borderWidth:1,
             padding:10,
             margin:2,
@@ -37,10 +38,10 @@ const SettingsScreen = ({navigation}) => {
         },
         listText:{
             fontSize:20,
-            color: theme.colors ? theme.colors.buttonText : 'black',
+            color: colors ? colors.buttonText : 'black',
         },
         button:{
-            backgroundColor: theme.colors ? theme.colors.button : 'green',
+            backgroundColor: colors ? colors.button : 'green',
             fontSize: 24,
             padding: 15,
             margin: 4,
@@ -49,7 +50,7 @@ const SettingsScreen = ({navigation}) => {
             marginTop:60,
           },
         buttonText:{
-            color: theme.colors ? theme.colors.buttonText : 'red',
+            color: colors ? colors.buttonText : 'red',
             fontSize: 20,
         },
       }
@@ -66,7 +67,7 @@ const SettingsScreen = ({navigation}) => {
             <View style={styles.settingsList}>
             <TouchableOpacity
                 style={styles.listItem}
-                onPress={() => navigation.navigate('ColorThemes')}>
+                onPress={() => navigation.navigate('ColorThemes', { currentTheme : theme})}>
                 <Text style={styles.listText}>
                     Color themes
                 </Text>
