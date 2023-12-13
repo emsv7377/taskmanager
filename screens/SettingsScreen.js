@@ -32,16 +32,18 @@ const SettingsScreen = ({navigation}) => {
             borderColor: colors ? colors.border : 'black',
             backgroundColor : colors ? colors.button : 'grey',
             borderWidth:1,
-            padding:10,
-            margin:2,
+            padding:15,
+            margin:4,
             borderRadius:20,
+            width:'80%',
         },
         listText:{
             fontSize:20,
             color: colors ? colors.buttonText : 'black',
         },
         button:{
-            backgroundColor: colors ? colors.button : 'green',
+            alignItems: 'center',
+            backgroundColor: colors ? colors.backButton : 'green',
             fontSize: 24,
             padding: 15,
             margin: 4,
@@ -64,7 +66,7 @@ const SettingsScreen = ({navigation}) => {
                 Settings 
                 </Text>
             </View>
-            <View style={styles.settingsList}>
+            
             <TouchableOpacity
                 style={styles.listItem}
                 onPress={() => navigation.navigate('ColorThemes', { currentTheme : theme})}>
@@ -78,7 +80,6 @@ const SettingsScreen = ({navigation}) => {
                     Notifications
                 </Text>
             </TouchableOpacity>
-            </View>
             <TouchableOpacity 
                 style={styles.button}
                 onPress={() => navigation.goBack()} >
