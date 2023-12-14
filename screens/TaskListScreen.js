@@ -20,27 +20,20 @@ const TaskListScreen = ({navigation}) => {
     nextDay.setDate(nextDay.getDate() + 1);
     console.log('nextday', nextDay);
 
-    // Skapa en instans av DateTimeFormat
-    const dateFormatter = new Intl.DateTimeFormat('en-US', {
-      weekday: 'long',
-      month: 'long',
-      day: 'numeric',
-    });
-  
     // Formatera nästa dag enligt önskat format
     const formattedDate = dateFormatter.format(nextDay);
-    console.log(formattedDate);
     setSelectedDate(formattedDate);
   };
 
-  // Filtrera tasks baserat på valt datum
   const filteredTasks = tasks.filter(task => {
-    return task.tag === selectedDate; // Jämför taggen med det valda datumet
+    const taskDate = new Date(task.date); // Antag att task.date är i formatet "YYYY-MM-DD"
+    const day = selectedDate.split(' ')[2]; // Split by space and get the third part
+    return taskDate.getDate() == day;
   });
 
   const renderTaskItem = ({ item }) => {
     const handleTaskPress = () => {
-      // Handle when a task is pressed, e.g., navigate to task details
+      // TODO: Handle when a task is pressed, e.g., navigate to task details
       // Example: navigation.navigate('TaskDetails', { taskId: item.id });
     };
 
@@ -64,11 +57,16 @@ const TaskListScreen = ({navigation}) => {
         <Text style={styles.dateText}>{selectedDate}</Text>
       </View>
       <FlatList
-        data={tasks}
+        data={filteredTasks}
         renderItem={renderTaskItem}
         keyExtractor={(item, index) => index.toString()}
         contentContainerStyle={styles.taskList}
       />
+        <TouchableOpacity 
+                style={styles.button}
+                onPress={() => navigation.goBack()} >
+          <Text style={styles.buttonText}> Back </Text>  
+        </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -108,6 +106,17 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
+          button:{
+            alignItems:'center',
+            fontSize: 24,
+            padding: 15,
+            margin: 4,
+            width:'80%',
+            borderRadius: 20,
+          },
+        buttonText:{
+            fontSize: 20,
+        },
 });
 
 export default TaskListScreen;

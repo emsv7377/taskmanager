@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { TasksContext } from './TasksContext';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 
 
 const AddTaskScreen = ({ navigation }) => {
@@ -10,7 +12,34 @@ const AddTaskScreen = ({ navigation }) => {
   const [time, setTime] = useState('');
   const { addTask } = useContext(TasksContext);
   const [tag, setTag] = useState(''); // State för att hålla taggen
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [date, setDate] = useState(new Date())
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+  const dateFormatter = new Intl.DateTimeFormat('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+  });  
+  const formattedDate = dateFormatter.format(date);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setShow(false);
+    setDate(currentDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+  };
 
   const handleAddTask = () => {
     // Code to add task to Today's list
@@ -20,13 +49,13 @@ const AddTaskScreen = ({ navigation }) => {
       color: color,
       time: time,
       completed: false,
-      tag: tag,
+      date: date,
     };
 
     addTask(newTask);
     navigation.navigate('TaskList');
-
   };
+
 
   return (
     <View style={styles.container}>
@@ -60,7 +89,21 @@ const AddTaskScreen = ({ navigation }) => {
         keyboardType="numeric"
       />
 
-    <Text style={styles.label}>Date</Text>
+  <View style={styles.dateContainer}>
+    <Text style={styles.label}>Date: {formattedDate}</Text>
+    <TouchableOpacity onPress={showDatepicker} style={styles.changeButton}>
+        <Text style={styles.buttonText}>Change</Text>
+      </TouchableOpacity>
+      </View>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          onChange={onChange}
+        />
+      )}
       <TouchableOpacity onPress={handleAddTask} style={styles.addButton}>
         <Text style={styles.buttonText}>Add Task</Text>
       </TouchableOpacity>
@@ -88,6 +131,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#3498db',
     paddingVertical: 15,
     paddingHorizontal: 30,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  dateContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    // Additional styles for the container of date text and button
+  },
+  changeButton: {
+    backgroundColor: '#3498db',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    margin: 20,
     borderRadius: 5,
     alignItems: 'center',
   },
