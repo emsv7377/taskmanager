@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { StyleSheet, Text, View, Button, SafeAreaView, TouchableOpacity} from 'react-native';
 import ThemeContext from '../assets/ThemeContext';
-
+import Styles from '../assets/Styles';
 
 const StartScreen = ({navigation}) => {
   const { theme } = useContext(ThemeContext);
-  const { colors } = theme;
+  const { colors: themeColors } = theme;
+
+  const styles = Styles({themeColors});
 
     const handleTodayPress = () => {
         // Navigate to 'Today' screen or perform related action
@@ -26,52 +28,7 @@ const StartScreen = ({navigation}) => {
         // Navigate to 'Add New' screen or perform related action
         navigation.navigate('AddTask');
       };
-      
-      /* Allows dynamic colors */
-      const styles = StyleSheet.create({
-        container: {
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          paddingHorizontal: 20,
-          backgroundColor: colors ? colors.background : '#fff',
-        },
-        row: {
-          flexDirection: 'row',
-          marginBottom: 20,
-        },
-        box: {
-          flex: 1,
-          aspectRatio: 1, // Keeps the boxes square
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: colors ? colors.box : '#3498db',
-          margin: 5,
-          borderRadius: 10,
-          borderWidth: 1,
-          borderColor:'black',
-        },
-        boxText: {
-          color: colors ? colors.boxText : '#fff',
-          fontSize: 18,
-          fontWeight: 'bold',
-        },
-        button:{
-          alignItems: 'center',
-          backgroundColor: colors ? colors.backButton : 'green',
-          fontSize: 24,
-          padding: 15,
-          margin: 4,
-          width:'80%',
-          borderRadius: 20,
-          marginTop:60,
-        },
-      buttonText:{
-          color: colors ? colors.buttonText : 'red',
-          fontSize: 20,
-      },
-      });
-
+    
       return (
         <SafeAreaView style={styles.container}>
           <View style={styles.row}>

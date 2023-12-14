@@ -6,11 +6,7 @@ const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => DARK);
 
   const themeContextValue = useMemo(() => ({theme, setTheme}), [theme]);
-  useEffect(()=> {
-    //console.log('Current theme: ', theme);
-  }, [theme]);
   
-
   return (
     <ThemeContext.Provider value={themeContextValue}>
       {children}

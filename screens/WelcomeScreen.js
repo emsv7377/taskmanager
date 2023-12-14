@@ -1,66 +1,25 @@
-import React, { useContext, useEffect } from 'react';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View, Image} from 'react-native';
+import React, { useContext } from 'react';
+import { Text, SafeAreaView, TouchableOpacity, View, Image} from 'react-native';
 
 import ThemeContext from '../assets/ThemeContext';
+import Styles from '../assets/Styles';
 
 const WelcomeScreen = ({navigation}) => {
   const { theme } = useContext(ThemeContext);
-  const { colors } = theme;
-
-  /*useEffect(() => {
-    console.log("theme: ", theme);
-  })*/
-
-  /* Allows dynamic colors  */
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: colors ? colors.background : 'white', // default if not set
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    button:{
-      alignItems:'center',
-      backgroundColor: colors ? colors.button : 'black', // default if not set 
-      fontSize: 24,
-      padding: 15,
-      margin: 4,
-      width:'80%',
-      borderRadius: 20,
-    },
-    buttonText:{
-      color: colors ? colors.buttonText : 'white',  // default if not set
-      fontSize: 20,
-    },
-    title:{
-      fontSize:30,
-      fontWeight:'bold',
-      color: colors ? colors.title : 'black', // default if not set 
-    },
-    titleContainer:{
-      justifyContent:'flex-start',
-      marginBottom:'50%',
-      height:'10%',
-    },
-    logo: {
-      width: 200,
-      height: 200,
-      marginBottom: 20,
-    },
-
-  });
-
+  const { colors:themeColors } = theme;
+  const styles = Styles({themeColors});
     return (
       <>
       <SafeAreaView style={styles.container}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Welcome to Task Dealer -insert icon here-
-          </Text>
+        <View style={styles.welcomeTitleContainer}>
+          <Text style={styles.appName}>Task Dealer</Text> 
+          <Text style={[styles.title, { marginTop: '10%' }]}>Welcome to the task{'\n'}
+          manager of your dreams.</Text>
           <Image
-        source={require('../assets/ko.png')}
-        style={styles.logo}
-        resizeMode="contain"
-        />
+            source={require('../assets/ko.png')}
+            style={styles.welcomeLogo}
+            resizeMode="contain"
+          />
           </View>
         <TouchableOpacity 
           style={styles.button}
@@ -78,7 +37,7 @@ const WelcomeScreen = ({navigation}) => {
         <TouchableOpacity 
           style={styles.button}
           onPress={() => navigation.navigate('Start')}>
-          <Text style={styles.text}> Navigate to start</Text>  
+          <Text style={styles.buttonText}> Navigate to start</Text>  
         </TouchableOpacity>
       </SafeAreaView>
       </>

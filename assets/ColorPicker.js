@@ -1,12 +1,17 @@
 import React, { useContext, useEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList, StyleSheet, SafeAreaView, Modal } from 'react-native';
 import ThemeContext from '../assets/ThemeContext';
+import Styles from '../assets/Styles';
 
 const ColorPicker = ({ onSelectColor, isVisible, onClose }) => {
   const { theme } = useContext(ThemeContext);
   const { colors } = theme;
 
+  const styles = Styles(colors);
+
+  // fetch task colors from theme
   const colorOptions = colors.taskColors || {
+    // if theme is null, default to these colors 
     one: '#3498db', 
     two: '#e74c3c', 
     three: '#2ecc71', 
@@ -15,46 +20,6 @@ const ColorPicker = ({ onSelectColor, isVisible, onClose }) => {
 };
 
 const colorArray = Object.entries(colorOptions);
-
-  useEffect(() =>{
-    console.log(colorOptions)
-  }, [colorOptions]);
-
-  const styles = StyleSheet.create({
-    modalContainer:{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    colorPickerContainer: {
-        width:'80%',
-        padding: 20,
-        backgroundColor: colors ? colors.colorPicker : 'black',
-        borderRadius: 10,
-        marginBottom: 20,
-        elevation: 5, // adds shadow on Android 
-        //opacity: 0.9,
-    },
-    colorPickerTitle: {
-        fontSize: 18,
-        //fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    colorOption: {
-        width: 45,
-        height: 45,
-        borderRadius: 10,
-        marginRight: 10,
-    },
-    closeButtonContainer:{
-        alignItems: 'flex-end',
-        marginTop: 20,
-    },
-    closeButton: {
-        fontSize: 16,
-        color: colors ? colors.buttonText : 'black',
-    },
-});
 
   return (
     <SafeAreaView>

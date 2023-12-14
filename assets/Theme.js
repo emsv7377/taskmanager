@@ -21,6 +21,7 @@ export const LIGHT = {
         inputContainer:'#B0BEC5',
         labelText: '#000',
         colorPicker:'#000',
+        listItem:'#ECEFF1',
         taskColors: {
             one: '#ffb3ba',
             two: '#ffdfba',
@@ -47,6 +48,7 @@ export const DARK = {
         inputContainer:'#d9d9d9', 
         labelText: '#828282',
         colorPicker:'#808080',
+        listItem:'#A7A2A0',
         taskColors: {
             one: '#ffb3ba',
             two: '#ffdfba',

@@ -3,7 +3,7 @@ import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View, Dimensions, Fla
 import { DARK, LIGHT, PASTEL, FOREST } from '../assets/Theme';
 
 import ThemeContext from '../assets/ThemeContext';
-
+import Styles from '../assets/Styles';
 
 const items = [
     {
@@ -34,13 +34,10 @@ const items = [
 
 
 export default ColorThemesScreen = ({navigation, route}) => {
-    //const [theme, setTheme] = useState({ theme: DARK });
     const { theme, setTheme } = useContext(ThemeContext);
-    //const theme = route.params?.currentTheme || DARK; 
-    const { colors } = theme;
-    /*useEffect(() => {
-        console.log('Current theme: ', theme);
-    },[theme]);*/
+    const { colors:themeColors } = theme;
+
+    const styles = Styles({themeColors});
 
     const onThemeChange = (selectedTheme) => {
         let newTheme = {};
@@ -65,7 +62,7 @@ export default ColorThemesScreen = ({navigation, route}) => {
         setTheme(newTheme);
     }
 
-    /* Allows dynamic colors */
+    /* Allows dynamic colors 
     const styles = StyleSheet.create({
         container: {
           flex: 1,
@@ -98,7 +95,7 @@ export default ColorThemesScreen = ({navigation, route}) => {
             //height:'10%',
         }
     
-      });
+      });*/
 
     const renderItem = ({item}) => {
         return(
