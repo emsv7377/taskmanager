@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { TasksContext } from './TasksContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import ThemeContext from '../assets/ThemeContext';
 
 const TaskListScreen = ({navigation}) => {
   const { tasks } = useContext(TasksContext);
@@ -13,6 +14,8 @@ const TaskListScreen = ({navigation}) => {
   });  
   const formattedDate = dateFormatter.format(currentDate);
   const [selectedDate, setSelectedDate] = useState(formattedDate); // State för att hålla det valda datumet
+  const { theme } = useContext(ThemeContext);   // fetch current theme
+  const { colors } = theme;                     // fetch colors of current theme
 
   const handleNextDay = () => {
     const nextDay = new Date(currentDate);
@@ -43,6 +46,7 @@ const TaskListScreen = ({navigation}) => {
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: 20,
+    backgroundColor: colors ? colors.background : 'white',
   },
   taskList: {
     paddingBottom: 20,
