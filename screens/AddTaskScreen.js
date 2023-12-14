@@ -1,28 +1,38 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Modal, Pressable } from 'react-native';
 import { TasksContext } from './TasksContext';
 import ThemeContext from '../assets/ThemeContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
+import ColorPicker from '../assets/ColorPicker';
+
 const AddTaskScreen = ({ navigation }) => {
   const [taskName, setTaskName] = useState('');
   const [description, setDescription] = useState('');
-  const [color, setColor] = useState('#3498db'); // Default color
+  //const [color, setColor] = useState('#3498db'); // Default color
   const [time, setTime] = useState('');
   const { addTask } = useContext(TasksContext);
   const [tag, setTag] = useState(''); // State för att hålla taggen
   const [selectedDate, setSelectedDate] = useState(new Date());
   
   const { theme } = useContext(ThemeContext);   // Fetch current theme
-  const { colors } = theme;                     // Fetch colors of current theme 
+  const { colors } = theme;                     // Fetch colors for components current theme 
+  
+  const [pickedColor, setPickedColor] = useState(colors ? colors.button : '#575A5E');  // TODO: change default value 
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  
+  const handleColorSelect = (selectedColor) => {
+    setPickedColor(selectedColor);
+    setShowColorPicker(false);
+  };
 
   const handleAddTask = () => {
     // Code to add task to Today's list
     const newTask = {
       name: taskName,
       description: description,
-      color: color,
+      color: pickedColor,
       time: time,
       completed: false,
       tag: tag,
@@ -77,6 +87,7 @@ const AddTaskScreen = ({ navigation }) => {
       fontSize: 20,
       //fontWeight: 'bold',
     },
+    
     button:{
       alignItems:'center',
       backgroundColor: colors ? colors.button : 'black', // default if not set 
@@ -86,20 +97,43 @@ const AddTaskScreen = ({ navigation }) => {
       width:'80%',
       borderRadius: 20,
     },
+    modalContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    closeButton: {
+      fontSize: 18,
+      color: 'blue',
+      marginTop: 20,
+    },
+    colorPickerButton: {
+      padding: 10,
+      borderRadius: 5,
+      backgroundColor: pickedColor,
+      marginBottom: 20,
+    },
+    colorPickerButtonText: {
+      color: colors ? colors.buttonText : '#fff',
+      fontSize: 16,
+    },
   });
+
+
+  
 
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView>
       <View style={styles.titleContainer}><Text style={styles.title}>Add new task</Text></View>
-      <Text style={styles.label}>Task Name</Text>
+      <Text style={styles.label}>Task name:</Text>
       <TextInput
         style={styles.input}
         value={taskName}
         onChangeText={text => setTaskName(text)}
       />
 
-      <Text style={styles.label}>Description</Text>
+      <Text style={styles.label}>Description:</Text>
       <TextInput
         style={styles.input}
         value={description}
@@ -107,25 +141,37 @@ const AddTaskScreen = ({ navigation }) => {
         multiline
       />
 
-      <Text style={styles.label}>Color</Text>
-      <TextInput
+      
+      {/*<TextInput
         style={styles.input}
         value={color}
         onChangeText={text => setColor(text)}
-      />
+  />*/}
 
-      <Text style={styles.label}>Time</Text>
+      <Text style={styles.label}>Estimated duration (minutes):</Text>
       <TextInput
         style={styles.input}
         value={time}
         onChangeText={text => setTime(text)}
         keyboardType="numeric"
       />
+      <Pressable
+          style={styles.colorPickerButton}
+          onPress={() => setShowColorPicker(true)}>
+          <Text style={styles.colorPickerButtonText}>Choose color</Text>
+      </Pressable>
+      <ColorPicker
+        isVisible={showColorPicker}
+        onClose={() => setShowColorPicker(false)}
+        onSelectColor={handleColorSelect}
+      />
 
-    <Text style={styles.label}>Date</Text>
+    <Text style={styles.label}>Date:</Text>
       <TouchableOpacity onPress={handleAddTask} style={styles.addButton}>
         <Text style={styles.buttonText}>Add Task</Text>
       </TouchableOpacity>
+
+      
       <TouchableOpacity 
                 style={styles.button}
                 onPress={() => navigation.goBack()} >

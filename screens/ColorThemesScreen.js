@@ -38,9 +38,9 @@ export default ColorThemesScreen = ({navigation, route}) => {
     const { theme, setTheme } = useContext(ThemeContext);
     //const theme = route.params?.currentTheme || DARK; 
     const { colors } = theme;
-    useEffect(() => {
+    /*useEffect(() => {
         console.log('Current theme: ', theme);
-    },[theme]);
+    },[theme]);*/
 
     const onThemeChange = (selectedTheme) => {
         let newTheme = {};

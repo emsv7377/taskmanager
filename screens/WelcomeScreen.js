@@ -7,9 +7,9 @@ const WelcomeScreen = ({navigation}) => {
   const { theme } = useContext(ThemeContext);
   const { colors } = theme;
 
-  useEffect(() => {
+  /*useEffect(() => {
     console.log("theme: ", theme);
-  })
+  })*/
 
   /* Allows dynamic colors  */
   const styles = StyleSheet.create({

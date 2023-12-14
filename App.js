@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native'; 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import WelcomeScreen from './screens/WelcomeScreen'
 import ProfileScreen from './screens/ProfileScreen'
@@ -10,56 +11,30 @@ import StartScreen from './screens/StartScreen'
 import AddTaskScreen from './screens/AddTaskScreen';
 import TaskListScreen from './screens/TaskListScreen';
 import { TasksProvider } from './screens/TasksContext';
-
 import ThemeProvider from './assets/ThemeProvider';
 
-import { DARK } from './assets/Theme';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-
-  //const [theme, setTheme] = useState({ theme: DARK });
-
-  return (
-    <ThemeProvider>
-    <NavigationContainer>
-    <TasksProvider>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false
-        }}>
-        <Stack.Screen
-          name="Welcome"
-          component={WelcomeScreen}
-          />
-          <Stack.Screen 
-            name="Profile" 
-            component={ProfileScreen}
-            />
-            <Stack.Screen 
-            name="Settings" 
-            component={SettingsScreen}
-            />
-            <Stack.Screen 
-            name="ColorThemes" 
-            component={ColorThemesScreen}
-            />
-            <Stack.Screen 
-            name="Start" 
-            component={StartScreen}
-            />
-            <Stack.Screen 
-            name="AddTask" 
-            component={AddTaskScreen}
-            />
-            <Stack.Screen 
-            name="TaskList" 
-            component={TaskListScreen}
-            />
-      </Stack.Navigator>
-      </TasksProvider>
-    </NavigationContainer>
-    </ThemeProvider>
+  return ( 
+      <ThemeProvider>
+        <NavigationContainer>
+          <TasksProvider>
+            <Stack.Navigator
+              screenOptions={{
+                headerShown: false
+            }}>
+              <Stack.Screen name="Welcome" component={WelcomeScreen} />
+              <Stack.Screen name="Profile" component={ProfileScreen} />
+              <Stack.Screen name="Settings" component={SettingsScreen} />
+              <Stack.Screen name="ColorThemes" component={ColorThemesScreen} />
+              <Stack.Screen name="Start" component={StartScreen} />
+              <Stack.Screen name="AddTask" component={AddTaskScreen} />
+              <Stack.Screen name="TaskList" component={TaskListScreen} />
+            </Stack.Navigator>
+          </TasksProvider>
+        </NavigationContainer>
+      </ThemeProvider>
   );
-}
+};

@@ -19,7 +19,15 @@ export const LIGHT = {
         box: '#CFD8DC',
         boxText: '#08090A',
         inputContainer:'#B0BEC5',
-        labelText: '#000'
+        labelText: '#000',
+        colorPicker:'#000',
+        taskColors: {
+            one: '#ffb3ba',
+            two: '#ffdfba',
+            three: '#ffffba',
+            four: '#baffc9',
+            five: '#bae1ff',
+        }
     },
 }
 export const DARK = {
@@ -38,6 +46,14 @@ export const DARK = {
         boxText: '#828282',
         inputContainer:'#d9d9d9', 
         labelText: '#828282',
+        colorPicker:'#808080',
+        taskColors: {
+            one: '#ffb3ba',
+            two: '#ffdfba',
+            three: '#ffffba',
+            four: '#baffc9',
+            five: '#bae1ff',
+        }
     },
 }
 export const PASTEL = {
@@ -59,6 +75,15 @@ export const PASTEL = {
         boxText: '#000',
         inputContainer: '#FCF9F2',
         labelText: '#312e30',
+        colorPicker:'#000',
+        // pastel rainbow 
+        taskColors: {
+            one: '#ffb3ba',
+            two: '#ffdfba',
+            three: '#ffffba',
+            four: '#baffc9',
+            five: '#bae1ff',
+        }
     }
 }
 
@@ -78,6 +103,13 @@ export const FOREST = {
         box: '#AAC847',
         boxText: '#C9DBB2',
         inputContainer: '#E3F2C1',
-        labelText: '#00000'
+        labelText: '#00000',
+        taskColors: {
+            one: '#ffb3ba',
+            two: '#ffdfba',
+            three: '#ffffba',
+            four: '#baffc9',
+            five: '#bae1ff',
+        }
     }
 }
