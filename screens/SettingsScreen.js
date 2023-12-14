@@ -2,8 +2,6 @@ import React, { useContext } from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View} from 'react-native';
 import ThemeContext from '../assets/ThemeContext';
 
-
-
 const SettingsScreen = ({navigation}) => {
     const { theme } = useContext(ThemeContext);
     const { colors } = theme;
