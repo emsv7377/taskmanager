@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import { TasksContext } from './TasksContext';
 import ThemeContext from '../assets/ThemeContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const AddTaskScreen = ({ navigation }) => {
   const [taskName, setTaskName] = useState('');
@@ -89,6 +90,7 @@ const AddTaskScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <KeyboardAwareScrollView>
       <View style={styles.titleContainer}><Text style={styles.title}>Add new task</Text></View>
       <Text style={styles.label}>Task Name</Text>
       <TextInput
@@ -129,6 +131,7 @@ const AddTaskScreen = ({ navigation }) => {
                 onPress={() => navigation.goBack()} >
           <Text style={styles.buttonText}> Back </Text>  
         </TouchableOpacity>
+        </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };
