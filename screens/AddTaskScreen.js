@@ -90,12 +90,15 @@ const AddTaskScreen = ({ navigation }) => {
       </TouchableOpacity>
 
       
-      <TouchableOpacity 
-                style={styles.button}
-                onPress={() => navigation.goBack()} >
-          <Text style={styles.buttonText}> Back </Text>  
-        </TouchableOpacity>
-        </KeyboardAwareScrollView>
+      
+      </KeyboardAwareScrollView>
+      <View style={styles.backButtonPlacement}>
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => navigation.goBack()} >
+        <Text style={styles.buttonText}> Back </Text>  
+      </TouchableOpacity>
+            </View>
     </SafeAreaView>
   );
 };

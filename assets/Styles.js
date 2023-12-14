@@ -171,7 +171,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         backgroundColor: themeColors ? themeColors.button : '#3498db',
         paddingVertical: 15,
         paddingHorizontal: 30,
-        borderRadius: 5,
+        borderRadius: 20,
         alignItems: 'center',
       },
       buttonText: {
