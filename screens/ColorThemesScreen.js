@@ -65,6 +65,7 @@ export default ColorThemesScreen = ({navigation, route}) => {
         setTheme(newTheme);
     }
 
+    /* Allows dynamic colors */
     const styles = StyleSheet.create({
         container: {
           flex: 1,

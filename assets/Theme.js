@@ -1,15 +1,25 @@
 export const LIGHT = {
+    // Light: #FFFFFF #DDEE4E7
+    /// Dark: #37474F #22222
+
+    /*
+        Primary: #FFFFFF    95: #ECEFF1     90: #CFD8DC     80 Secondary: #B0BEC5   70: #90A4AE     Interactive: #0071BC    Error: #BF0000
+    */
     theme: 'light',
     colors: {
         text: '#000',
-        button: '#000',
+        button: '#DEE4E7',
         backButton:'#586F7C',
         buttonText: '#000',
-        border:'#000',
+        border:'#DEE4E7',
         container: '#fff',
         background: '#fff',
-        title: 'blue',
+        title: '#37474F',
         border: 'black',
+        box: '#CFD8DC',
+        boxText: '#08090A',
+        inputContainer:'#B0BEC5',
+        labelText: '#000'
     },
 }
 export const DARK = {
@@ -24,6 +34,10 @@ export const DARK = {
         background: '#08090A',
         title: '#F4F7F5',
         border: '#000',
+        box: '#363636',
+        boxText: '#828282',
+        inputContainer:'#d9d9d9', 
+        labelText: '#828282',
     },
 }
 export const PASTEL = {
@@ -41,6 +55,10 @@ export const PASTEL = {
         background: '#FDDAE3',
         title: '#312e30',
         border: '#ffd7e9', 
+        box: '#FCF9F2',
+        boxText: '#000',
+        inputContainer: '#FCF9F2',
+        labelText: '#312e30',
     }
 }
 
@@ -57,5 +75,9 @@ export const FOREST = {
         background: '#8B9474',
         title: '#3A3B3C',
         border: '#000',
+        box: '#AAC847',
+        boxText: '#C9DBB2',
+        inputContainer: '#E3F2C1',
+        labelText: '#00000'
     }
 }

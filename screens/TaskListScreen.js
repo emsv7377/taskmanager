@@ -38,42 +38,7 @@ const TaskListScreen = ({navigation}) => {
     return task.tag === selectedDate; // Jämför taggen med det valda datumet
   });
 
-  const renderTaskItem = ({ item }) => {
-    const handleTaskPress = () => {
-      // Handle when a task is pressed, e.g., navigate to task details
-      // Example: navigation.navigate('TaskDetails', { taskId: item.id });
-    };
-
-    return (
-      <TouchableOpacity onPress={handleTaskPress}>
-        <View style={[styles.taskItem, { backgroundColor: item.color }]}>
-          <Text style={styles.taskName}>{item.name}</Text>
-          <Text style={styles.taskDescription}>{item.description}</Text>
-          <Text style={styles.taskTime}>{item.time} mins</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  };
-
-  return (
-    <SafeAreaView style={styles.container}>
-     <View style={styles.header}>
-        <TouchableOpacity onPress={handleNextDay}>
-          <Text style={styles.navigationText}>Next Day</Text>
-        </TouchableOpacity>
-        <Text style={styles.dateText}>{selectedDate}</Text>
-      </View>
-      <FlatList
-        data={tasks}
-        renderItem={renderTaskItem}
-        keyExtractor={(item, index) => index.toString()}
-        contentContainerStyle={styles.taskList}
-      />
-    </SafeAreaView>
-  );
-};
-
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
@@ -109,5 +74,42 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+  const renderTaskItem = ({ item }) => {
+    const handleTaskPress = () => {
+      // Handle when a task is pressed, e.g., navigate to task details
+      // Example: navigation.navigate('TaskDetails', { taskId: item.id });
+    };
+
+    return (
+      <TouchableOpacity onPress={handleTaskPress}>
+        <View style={[styles.taskItem, { backgroundColor: item.color }]}>
+          <Text style={styles.taskName}>{item.name}</Text>
+          <Text style={styles.taskDescription}>{item.description}</Text>
+          <Text style={styles.taskTime}>{item.time} mins</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+     <View style={styles.header}>
+        <TouchableOpacity onPress={handleNextDay}>
+          <Text style={styles.navigationText}>Next Day</Text>
+        </TouchableOpacity>
+        <Text style={styles.dateText}>{selectedDate}</Text>
+      </View>
+      <FlatList
+        data={tasks}
+        renderItem={renderTaskItem}
+        keyExtractor={(item, index) => index.toString()}
+        contentContainerStyle={styles.taskList}
+      />
+    </SafeAreaView>
+  );
+};
+
+
 
 export default TaskListScreen;

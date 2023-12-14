@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View, Image} from 'react-native';
 
 import ThemeContext from '../assets/ThemeContext';
@@ -11,6 +11,7 @@ const WelcomeScreen = ({navigation}) => {
     console.log("theme: ", theme);
   })
 
+  /* Allows dynamic colors  */
   const styles = StyleSheet.create({
     container: {
       flex: 1,

@@ -6,6 +6,7 @@ const ProfileScreen = ({navigation, route}) => {
     const { theme } = useContext(ThemeContext);
     const { colors } = theme;
 
+    /* Allows dynamic colors */
     const styles = StyleSheet.create({
         container: {
           flex: 1,
