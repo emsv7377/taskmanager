@@ -1,14 +1,15 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View, Dimensions, FlatList, Alert } from 'react-native';
-import { DARK, LIGHT, PASTEL, SAILOR } from '../assets/Theme';
+import { DARK, LIGHT, PASTEL, FOREST } from '../assets/Theme';
 
 import ThemeContext from '../assets/ThemeContext';
+
 
 const items = [
     {
         id: 1, 
         title: 'dark',
-        backgroundColor: 'black',
+        backgroundColor: '#3A3B3C',
         color: 'white',
     },
     {
@@ -20,32 +21,31 @@ const items = [
     {
         id:3,  
         title: 'pastel',
-        backgroundColor: '#FF90BC',
+        backgroundColor: '#cb7a9d',
         color: '#F9F9E0',
     },
     {
         id:4, 
-        title: 'sailor',
-        backgroundColor: '#5A7684',
+        title: 'forest',
+        backgroundColor: '#AAC8A7',
         color: 'white ',
     }
 ]
 
 
-
-export default ColorThemesScreen = ({navigation}) => {
+export default ColorThemesScreen = ({navigation, route}) => {
     //const [theme, setTheme] = useState({ theme: DARK });
+    const { theme, setTheme } = useContext(ThemeContext);
+    //const theme = route.params?.currentTheme || DARK; 
+    const { colors } = theme;
+    useEffect(() => {
+        console.log('Current theme: ', theme);
+    },[theme]);
 
-    const [theme, setCurrentTheme] = useContext(ThemeContext);
-
-    const setTheme = (newTheme) => {
-        setCurrentTheme({ theme: newTheme })
-    }
-
-    const onThemeChange = (theme) => {
+    const onThemeChange = (selectedTheme) => {
         let newTheme = {};
 
-        switch(theme){
+        switch(selectedTheme){
             case 'dark':
                 newTheme = DARK;
                 break;
@@ -55,14 +55,14 @@ export default ColorThemesScreen = ({navigation}) => {
             case 'pastel':
                 newTheme = PASTEL;
                 break;
-            case 'sailor':
-                newTheme = SAILOR;
+            case 'forest':
+                newTheme = FOREST;
                 break;
             default:
                 newTheme = DARK; 
                 break;
         }
-        setTheme({ theme: newTheme });
+        setTheme(newTheme);
     }
 
     const styles = StyleSheet.create({
@@ -80,8 +80,17 @@ export default ColorThemesScreen = ({navigation}) => {
         title:{
             fontSize:30,
             fontWeight:'bold',
-            color: theme.colors ? theme.colors.title : 'red', // defaults to black if theme is not set 
+            color: colors ? theme.colors.title : 'red', // defaults to black if theme is not set 
         },
+        button:{
+            alignItems:'center',
+            backgroundColor: colors ? colors.backButton : 'gray',
+            fontSize: 24,
+            padding: 15,
+            margin: 4,
+            width:'80%',
+            borderRadius: 15,
+          },
         titleContainer:{
             justifyContent:'flex-end',
             //marginBottom:'50%',
@@ -101,7 +110,7 @@ export default ColorThemesScreen = ({navigation}) => {
                     margin: 6, 
                     alignItems:'center',
                     justifyContent:'center'}}
-                onPress={() => onThemeChange(theme)}>
+                onPress={() => onThemeChange(item.title)}>
                 <Text 
                     key={item.id} 
                     style={{ fontSize:20, color: item.color, fontWeight: 'bold', padding:30,}}>
@@ -127,15 +136,11 @@ export default ColorThemesScreen = ({navigation}) => {
                 key={4}
                 contentContainerStyle={styles.flatListContainer}
                 />
-                <TouchableOpacity 
-                style={{ 
-                    backgroundColor: 'gray', 
-                    borderRadius: 15, 
-                    width: Dimensions.get('window').width / 2 - 20, 
-                    margin: 6, 
-                    alignItems:'center',
-                    justifyContent:'center'}}
-                onPress={() => navigation.goBack()}/>
+            <TouchableOpacity 
+                style={styles.button}
+                onPress={() => navigation.goBack()} >
+                <Text style={styles.buttonText}> Back </Text>
+            </TouchableOpacity> 
 
         </SafeAreaView>
         </>

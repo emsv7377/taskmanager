@@ -3,22 +3,23 @@ import { StyleSheet, Text, View, Button, SafeAreaView, TouchableOpacity} from 'r
 import ThemeContext from '../assets/ThemeContext';
 
 const ProfileScreen = ({navigation, route}) => {
-    const theme = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
+    const { colors } = theme;
 
     const styles = StyleSheet.create({
         container: {
           flex: 1,
-          backgroundColor: theme.colors ? theme.colors.background : 'black',
+          backgroundColor: colors ? colors.background : 'black',
           alignItems: 'center',
           justifyContent: 'center',
         },
         text:{
             fontSize: 20,
-            color: theme.colors ? theme.colors.text : 'red',
+            color: colors ? colors.text : 'red',
         },
         button:{
             alignItems:'center',
-            backgroundColor: theme.colors ? theme.colors.button : 'gray',
+            backgroundColor: colors ? colors.button : 'gray',
             fontSize: 24,
             padding: 15,
             margin: 4,
@@ -26,7 +27,7 @@ const ProfileScreen = ({navigation, route}) => {
             borderRadius: 20,
           },
         buttonText:{
-            color: theme.colors ? theme.colors.buttonText : 'darkgrey',
+            color: colors ? colors.buttonText : 'darkgrey',
             fontSize: 20,
         },
       });

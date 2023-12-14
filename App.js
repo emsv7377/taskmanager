@@ -11,7 +11,7 @@ import AddTaskScreen from './screens/AddTaskScreen';
 import TaskListScreen from './screens/TaskListScreen';
 import { TasksProvider } from './screens/TasksContext';
 
-import ThemeContext, { ThemeProvider } from './assets/ThemeContext';
+import ThemeProvider from './assets/ThemeProvider';
 
 import { DARK } from './assets/Theme';
 
@@ -19,10 +19,10 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-  const [theme, setTheme] = useState({ theme: DARK });
+  //const [theme, setTheme] = useState({ theme: DARK });
 
   return (
-    <ThemeContext.Provider value={theme.theme}>
+    <ThemeProvider>
     <NavigationContainer>
     <TasksProvider>
       <Stack.Navigator
@@ -60,6 +60,6 @@ export default function App() {
       </Stack.Navigator>
       </TasksProvider>
     </NavigationContainer>
-    </ThemeContext.Provider>
+    </ThemeProvider>
   );
 }
