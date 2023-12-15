@@ -2,6 +2,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useContext, useEffect, useState } from 'react';
 import { View, Text ,StyleSheet, TouchableOpacity} from 'react-native';
 import { TasksContext } from './TasksContext';
+import Styles from '../components/Styles';
 
 const TaskDetailsScreen = ( {route, navigation} ) => {
   // Fetch task details based on the taskId
