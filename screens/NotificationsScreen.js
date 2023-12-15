@@ -11,18 +11,57 @@ const NotificationsScreen = ({navigation}) => {
     const styles = Styles({themeColors});
 
     const[allPaused, setAllPaused] = useState(false);
-    const[flashOn, setFlashOn] = useState(false);
-    const[soundOn, setSoundOn] = useState(false);
-    const[vibrationOn, setVibrationOn] = useState(false);
-    const[alertOn, setAlertOn] = useState(false);
+    const[flashOn, setFlash] = useState(false);
+    const[soundOn, setSound] = useState(false);
+    const[vibrationOn, setVibration] = useState(false);
+    const[alertOn, setAlert] = useState(false);
     const[volumeLevel, setVolumeLevel] = useState(50);
 
-    const toggleAllPaused = () => {
-        setAllPaused(!allPaused);
-    }
-
+    // Handle volume change 
     const onVolumeChange = (value) => {
         setVolumeLevel(value);
+    }
+
+    // Handle flash notification
+    const toggleFlash = () => {
+        setFlash(!flashOn);
+    }
+
+    // Handle sound notification 
+    const toggleSound = () => {
+        setSound(!soundOn);
+    }
+
+    // Handle vibration notification
+    const toggleVibration = () => {
+        setVibration(!vibrationOn);
+    }
+
+    // Handle alert notification 
+    const toggleAlert = () => {
+        setAlert(!alertOn);
+    }
+
+    // Handle all notifications 
+    const toggleAllPaused = () => {
+        const newPausedState = !allPaused;
+        console.log("New pause state: ", newPausedState);
+        setAllPaused(newPausedState);
+
+        if (!newPausedState){
+            setFlash(false);
+            setSound(false);
+            setVibration(false);
+            setAlert(false);
+        }
+    }
+
+
+    const toggleAllSwitches = (value) => {
+        setFlash(value);
+        setSound(value);
+        setVibration(value);
+        setAlert(value);
     }
 
 
@@ -40,11 +79,16 @@ const NotificationsScreen = ({navigation}) => {
                 </View>
                 <View
                     style={styles.menuItem}>
-                    <Text style={styles.menuText}>Pause all</Text>
+                    <Text style={styles.menuText}>
+                        { allPaused ? 'Turn off all notifications' : 'Turn on all notifications' }</Text>
                     <View style={styles.switchContainer}>
                     <Switch
+                        key={allPaused ? 'on' : 'off'}
                         value={allPaused}
-                        onValueChange={toggleAllPaused}
+                        onValueChange={(value) => {
+                            toggleAllPaused();
+                            toggleAllSwitches(value);
+                        }}
                         thumbColor={allPaused ? (themeColors ? themeColors.switchThumbOn : 'red') : (themeColors ? themeColors.switchThumbOff : 'blue')}
                         trackColor={{ false : (themeColors ? themeColors.switchTrackOn : 'black'), true : (themeColors ? themeColors.switchTrackOff : 'yellow')}} />
                     </View>
@@ -54,9 +98,32 @@ const NotificationsScreen = ({navigation}) => {
                     <Text style={styles.menuText}>Flash</Text>
                     <View style={styles.switchContainer}>
                     <Switch
-                        value={allPaused}
-                        onValueChange={toggleAllPaused}
-                        thumbColor={allPaused ? (themeColors ? themeColors.switchThumbOn : 'red') : (themeColors ? themeColors.switchThumbOff : 'blue')}
+                        value={flashOn}
+                        onValueChange={toggleFlash}
+                        thumbColor={ allPaused || flashOn ? (themeColors ? themeColors.switchThumbOn : 'red') : (themeColors ? themeColors.switchThumbOff : 'blue')}
+                        trackColor={{ false : (themeColors ? themeColors.switchTrackOn : 'black'), true : (themeColors ? themeColors.switchTrackOff : 'yellow')}} />
+                    </View>
+                </View>
+                
+                <View
+                    style={styles.menuItem}>
+                    <Text style={styles.menuText}>Vibration</Text>
+                    <View style={styles.switchContainer}>
+                    <Switch
+                        value={vibrationOn}
+                        onValueChange={toggleVibration}
+                        thumbColor={allPaused || vibrationOn ? (themeColors ? themeColors.switchThumbOn : 'red') : (themeColors ? themeColors.switchThumbOff : 'blue')}
+                        trackColor={{ false : (themeColors ? themeColors.switchTrackOn : 'black'), true : (themeColors ? themeColors.switchTrackOff : 'yellow')}} />
+                    </View>
+                </View>
+                <View
+                    style={styles.menuItem}>
+                    <Text style={styles.menuText}>Alert</Text>
+                    <View style={styles.switchContainer}>
+                    <Switch
+                        value={alertOn}
+                        onValueChange={toggleAlert}
+                        thumbColor={allPaused || alertOn ? (themeColors ? themeColors.switchThumbOn : 'red') : (themeColors ? themeColors.switchThumbOff : 'blue')}
                         trackColor={{ false : (themeColors ? themeColors.switchTrackOn : 'black'), true : (themeColors ? themeColors.switchTrackOff : 'yellow')}} />
                     </View>
                 </View>
@@ -65,9 +132,9 @@ const NotificationsScreen = ({navigation}) => {
                     <Text style={styles.menuText}>Sound</Text>
                     <View style={styles.switchContainer}>
                     <Switch
-                        value={allPaused}
-                        onValueChange={toggleAllPaused}
-                        thumbColor={allPaused ? (themeColors ? themeColors.switchThumbOn : 'red') : (themeColors ? themeColors.switchThumbOff : 'blue')}
+                        value={soundOn}
+                        onValueChange={toggleSound}
+                        thumbColor={allPaused || soundOn ? (themeColors ? themeColors.switchThumbOn : 'red') : (themeColors ? themeColors.switchThumbOff : 'blue')}
                         trackColor={{ false : (themeColors ? themeColors.switchTrackOn : 'black'), true : (themeColors ? themeColors.switchTrackOff : 'yellow')}} />
                     </View>
                 </View>
@@ -84,28 +151,6 @@ const NotificationsScreen = ({navigation}) => {
                             minimumTrackTintColor={themeColors ? themeColors.sliderTrack : 'black'}
                             maximumTrackTintColor={themeColors ? themeColors.sliderTrack : 'gray'}
                         />
-                    </View>
-                </View>
-                <View
-                    style={styles.menuItem}>
-                    <Text style={styles.menuText}>Vibration</Text>
-                    <View style={styles.switchContainer}>
-                    <Switch
-                        value={allPaused}
-                        onValueChange={toggleAllPaused}
-                        thumbColor={allPaused ? (themeColors ? themeColors.switchThumbOn : 'red') : (themeColors ? themeColors.switchThumbOff : 'blue')}
-                        trackColor={{ false : (themeColors ? themeColors.switchTrackOn : 'black'), true : (themeColors ? themeColors.switchTrackOff : 'yellow')}} />
-                    </View>
-                </View>
-                <View
-                    style={styles.menuItem}>
-                    <Text style={styles.menuText}>Alert</Text>
-                    <View style={styles.switchContainer}>
-                    <Switch
-                        value={allPaused}
-                        onValueChange={toggleAllPaused}
-                        thumbColor={allPaused ? (themeColors ? themeColors.switchThumbOn : 'red') : (themeColors ? themeColors.switchThumbOff : 'blue')}
-                        trackColor={{ false : (themeColors ? themeColors.switchTrackOn : 'black'), true : (themeColors ? themeColors.switchTrackOff : 'yellow')}} />
                     </View>
                 </View>
     

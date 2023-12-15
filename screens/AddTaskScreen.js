@@ -89,8 +89,6 @@ const AddTaskScreen = ({ navigation }) => {
         <Text style={styles.buttonText}>Add Task</Text>
       </TouchableOpacity>
 
-      
-      
       </KeyboardAwareScrollView>
       <View style={styles.backButtonPlacement}>
         <TouchableOpacity 

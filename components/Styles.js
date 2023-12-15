@@ -33,7 +33,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
     menuItem:{
         flexDirection:'row',
         borderWidth:1,
-        padding:10,
+        padding:8,
         margin:4,
         borderRadius:15,
         width:'80%',
@@ -54,13 +54,19 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         flex: 1,
         justifyContent:'flex-end',
         alignItems:'flex-end',
+        transform:[{ scale: 0.9 }]
     },
     sliderContainer:{
-        marginTop: 10, 
+        marginLeft:'5%',
+        alignItems:'center',
+        width:'70%',
     },
     slider:{
-        width:200,
-        height:30,
+        flex: 1, 
+        //height:30,
+        //width: 50,
+        alignSelf:'flex-end',
+        width:'80%',
         //height:'20%',
     },
     /*  ---- Settings menu end ----  */
@@ -228,11 +234,12 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        //backgroundColor : themeColors ? themeColors.colorPicker : 'gray',
     },
     colorPickerContainer: {
         width:'80%',
         padding: 20,
-        backgroundColor: themeColors ? themeColors.colorPicker : 'black',
+        backgroundColor: themeColors ? themeColors.colorPicker : 'gray',
         borderRadius: 10,
         marginBottom: 20,
         elevation: 5, // adds shadow on Android 
