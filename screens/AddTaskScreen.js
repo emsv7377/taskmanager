@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Modal, Pressable } from 'react-native';
 import { TasksContext } from './TasksContext';
 import ThemeContext from '../components/ThemeContext';
@@ -11,11 +12,33 @@ import Styles from '../components/Styles';
 const AddTaskScreen = ({ navigation }) => {
   const [taskName, setTaskName] = useState('');
   const [description, setDescription] = useState('');
-  //const [color, setColor] = useState('#3498db'); // Default color
   const [time, setTime] = useState('');
   const { addTask } = useContext(TasksContext);
-  const [tag, setTag] = useState(''); // State för att hålla taggen
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [date, setDate] = useState(new Date())
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+  const dateFormatter = new Intl.DateTimeFormat('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+  });  
+  const formattedDate = dateFormatter.format(date);
+  const [subTaskName, setSubTaskName] = useState('');
+  const [subTasks, setSubTasks] = useState([]);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setShow(false);
+    setDate(currentDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
   
   const { theme } = useContext(ThemeContext);   // Fetch current theme
   const { colors: themeColors } = theme;                     // Fetch colors for components current theme 
@@ -29,21 +52,50 @@ const AddTaskScreen = ({ navigation }) => {
     setShowColorPicker(false);
   };
 
+  const showTimepicker = () => {
+    showMode('time');
+  };
+
+  //Generate a random id
+ function generateUUID(digits) {
+    let str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXZ';
+    let uuid = [];
+    for (let i = 0; i < digits; i++) {
+        uuid.push(str[Math.floor(Math.random() * str.length)]);
+    }
+    return uuid.join('');
+}
+
+// Function to handle adding sub-tasks
+const handleAddSubTask = () => {
+  if (subTaskName.trim() !== '') {
+    const newSubTask = {
+      id: generateUUID(10), // Generate unique ID for sub-task
+      name: subTaskName.trim(),
+      completed: false,
+    };
+    setSubTasks([...subTasks, newSubTask]);
+    setSubTaskName(''); // Clear input field after adding
+  }
+};
   const handleAddTask = () => {
+    const taskId = generateUUID(10);
     // Code to add task to Today's list
     const newTask = {
+      id: taskId, // Assign the generated ID to the task
       name: taskName,
       description: description,
       color: pickedColor,
       time: time,
       completed: false,
-      tag: tag,
+      date: date,
+      subTasks: subTasks,
     };
 
     addTask(newTask);
     navigation.navigate('TaskList');
-
   };
+
 
   return (
     <SafeAreaView style={styles.addTaskContainer}>
@@ -65,14 +117,22 @@ const AddTaskScreen = ({ navigation }) => {
           multiline
         />
 
-      
-        <Text style={styles.label}>Estimated duration (minutes):</Text>
-        <TextInput
-          style={styles.input}
-          value={time}
-          onChangeText={text => setTime(text)}
-          keyboardType="numeric"
-        />
+      <Text style={styles.label}>Sub Tasks</Text>
+      <View style={styles.inputContainer}>
+      <TextInput
+        style={styles.input}
+        value={subTaskName}
+        onChangeText={text => setSubTaskName(text)}
+        placeholder="Enter sub-task name"
+      />
+      <TouchableOpacity onPress={handleAddSubTask}>
+        <Text>+</Text>
+        </TouchableOpacity>
+        </View>
+        {subTasks.map(subTask => (
+        <Text key={subTask.id}>{subTask.name}</Text>
+      ))}
+
       <Pressable
           style={styles.colorPickerButton}
           onPress={() => setShowColorPicker(true)}>
@@ -84,12 +144,32 @@ const AddTaskScreen = ({ navigation }) => {
         onSelectColor={handleColorSelect}
       />
 
-    <Text style={styles.label}>Date:</Text>
+      <Text style={styles.label}>Estimated duration (minutes):</Text>
+        <TextInput
+          style={styles.input}
+          value={time}
+          onChangeText={text => setTime(text)}
+          keyboardType="numeric"
+        />
+
+  <View style={styles.dateContainer}>
+    <Text style={styles.label}>Date: {formattedDate}</Text>
+    <TouchableOpacity onPress={showDatepicker} style={styles.changeButton}>
+        <Text style={styles.buttonText}>Change</Text>
+      </TouchableOpacity>
+      </View>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          onChange={onChange}
+        />
+      )}
       <TouchableOpacity onPress={handleAddTask} style={styles.addButton}>
         <Text style={styles.buttonText}>Add Task</Text>
-      </TouchableOpacity>
-
-      
+      </TouchableOpacity>      
       
       </KeyboardAwareScrollView>
       <View style={styles.backButtonPlacement}>
@@ -102,7 +182,5 @@ const AddTaskScreen = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-
-
 
 export default AddTaskScreen;

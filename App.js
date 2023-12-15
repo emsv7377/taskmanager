@@ -11,12 +11,14 @@ import StartScreen from './screens/StartScreen'
 import AddTaskScreen from './screens/AddTaskScreen';
 import TaskListScreen from './screens/TaskListScreen';
 import { TasksProvider } from './screens/TasksContext';
+import TaskScreen from './screens/TaskScreen';
 import ThemeProvider from './components/ThemeProvider';
 
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  
   return ( 
       <ThemeProvider>
         <NavigationContainer>
@@ -32,6 +34,7 @@ export default function App() {
               <Stack.Screen name="Start" component={StartScreen} />
               <Stack.Screen name="AddTask" component={AddTaskScreen} />
               <Stack.Screen name="TaskList" component={TaskListScreen} />
+              <Stack.Screen name="Task" component={TaskScreen}/>  
             </Stack.Navigator>
           </TasksProvider>
         </NavigationContainer>
