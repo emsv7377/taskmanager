@@ -5,14 +5,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import IntroductionScreen from './screens/IntroductionScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import NotificationScreen from './components/NotificationScreen';
 import SettingsScreen from './screens/SettingsScreen';
-import NotificationsScreen from './screens/NotificationsScreen';
 import ColorThemesScreen from './screens/ColorThemesScreen';
 import StartScreen from './screens/StartScreen'
 import AddTaskScreen from './screens/AddTaskScreen';
 import TaskListScreen from './screens/TaskListScreen';
 import { TasksProvider } from './screens/TasksContext';
 import ThemeProvider from './components/ThemeProvider';
+import SettingsNotificationsScreen from './screens/SettingsNotificationsScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -28,8 +29,9 @@ export default function App() {
             }}>
               <Stack.Screen name="Introduction" component={IntroductionScreen} />
               <Stack.Screen name="Profile" component={ProfileScreen} />
+              <Stack.Screen name="Notification" component={NotificationScreen} />
               <Stack.Screen name="Settings" component={SettingsScreen} />
-              <Stack.Screen name="Notifications" component={NotificationsScreen} />
+              <Stack.Screen name="Notifications" component={SettingsNotificationsScreen} />
               <Stack.Screen name="ColorThemes" component={ColorThemesScreen} />
               <Stack.Screen name="Start" component={StartScreen} />
               <Stack.Screen name="AddTask" component={AddTaskScreen} />

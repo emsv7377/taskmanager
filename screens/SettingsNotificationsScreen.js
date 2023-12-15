@@ -5,7 +5,7 @@ import Slider from '@react-native-community/slider';
 import ThemeContext from '../components/ThemeContext';
 import Styles from '../components/Styles';
 
-const NotificationsScreen = ({navigation}) => {
+const SettingsNotificationsScreen = ({navigation}) => {
     const { theme } = useContext(ThemeContext);
     const { colors: themeColors } = theme;
     const styles = Styles({themeColors});
@@ -20,27 +20,27 @@ const NotificationsScreen = ({navigation}) => {
     // Handle volume change 
     const onVolumeChange = (value) => {
         setVolumeLevel(value);
-    }
+    };
 
     // Handle flash notification
     const toggleFlash = () => {
         setFlash(!flashOn);
-    }
+    };
 
     // Handle sound notification 
     const toggleSound = () => {
         setSound(!soundOn);
-    }
+    };
 
     // Handle vibration notification
     const toggleVibration = () => {
         setVibration(!vibrationOn);
-    }
+    };
 
     // Handle alert notification 
     const toggleAlert = () => {
         setAlert(!alertOn);
-    }
+    };
 
     // Handle all notifications 
     const toggleAllPaused = () => {
@@ -54,7 +54,7 @@ const NotificationsScreen = ({navigation}) => {
             setVibration(false);
             setAlert(false);
         }
-    }
+    };
 
 
     const toggleAllSwitches = (value) => {
@@ -62,7 +62,7 @@ const NotificationsScreen = ({navigation}) => {
         setSound(value);
         setVibration(value);
         setAlert(value);
-    }
+    };
 
 
     return(
@@ -171,4 +171,4 @@ const NotificationsScreen = ({navigation}) => {
 
 
 
-export default NotificationsScreen;
+export default SettingsNotificationsScreen;
