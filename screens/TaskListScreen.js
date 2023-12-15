@@ -3,6 +3,7 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native
 import { TasksContext } from './TasksContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ThemeContext from '../components/ThemeContext';
+import Styles from '../components/Styles';
 
 const TaskListScreen = ({navigation}) => {
   const { tasks, toggleTaskCompletion } = useContext(TasksContext);
@@ -15,7 +16,10 @@ const TaskListScreen = ({navigation}) => {
   const formattedDate = dateFormatter.format(currentDate);
   const [selectedDate, setSelectedDate] = useState(formattedDate); // State för att hålla det valda datumet
   const { theme } = useContext(ThemeContext);   // fetch current theme
-  const { colors } = theme;                     // fetch colors of current theme
+  const { colors: themeColors } = theme;                     // Fetch colors for components current theme 
+  const [pickedColor, setPickedColor] = useState(themeColors ? themeColors.button : '#575A5E');  // TODO: change default value 
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const styles = Styles({themeColors, pickedColor});
 
   const handleNextDay = () => {
     const nextDay = new Date(currentDate);
@@ -64,12 +68,9 @@ const TaskListScreen = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-     <View style={styles.header}>
-        <TouchableOpacity onPress={handleNextDay}>
-          <Text style={styles.navigationText}>Next Day</Text>
-        </TouchableOpacity>
-        <Text style={styles.dateText}>{selectedDate}</Text>
+    <SafeAreaView style={styles.addTaskContainer}>
+     <View style={styles.titleContainer}>
+        <Text style={styles.title}>{selectedDate}</Text>
       </View>
       <FlatList
         data={filteredTasks}
@@ -77,6 +78,9 @@ const TaskListScreen = ({navigation}) => {
         keyExtractor={(item, index) => index.toString()}
         contentContainerStyle={styles.taskList}
       />
+          <TouchableOpacity onPress={handleNextDay} style={styles.button}>
+          <Text style={styles.buttonText}>Next Day</Text>
+        </TouchableOpacity>
         <TouchableOpacity 
                 style={styles.button}
                 onPress={() => navigation.goBack()} >

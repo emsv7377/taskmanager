@@ -207,6 +207,26 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         color: themeColors ? themeColors.buttonText : '#fff',
         fontSize: 16,
       },
+
+      displaySubtasks: {
+        fontSize:16,
+        color: themeColors ? themeColors.labelText : 'gray',
+        alignItems: 'flex-start',
+        margin: 20,
+      },
+      dateContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        // Additional styles for the container of date text and button
+      },
+      changeButton: {
+        backgroundColor: themeColors ? themeColors.button : '#3498db',
+        paddingVertical: 10,
+        paddingHorizontal: 10,
+        margin: 20,
+        borderRadius: 5,
+        alignItems: 'center',
+      },
     /// END AddTaskScreen 
 
     // ColorPicker 
@@ -242,6 +262,71 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         fontSize: 16,
         color: themeColors ? themeColors.buttonText : 'black',
     },
+
+    //Tasklistscreen
+      taskItem: {
+        padding: 15,
+        marginBottom: 15,
+        borderRadius: 10,
+      },
+      taskName: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 5,
+      },
+      taskDescription: {
+        fontSize: 16,
+        marginBottom: 5,
+      },
+      taskTime: {
+        fontSize: 14,
+        fontStyle: 'italic',
+      },
+      checkbox: {
+        width: 20,
+        height: 20,
+        borderWidth: 1,
+        borderColor: 'black',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    //End TasklistScreen
+
+    //TaskScreen:
+      description: {
+        marginBottom: 15,
+      },
+      time: {
+        marginBottom: 15,
+      },
+      subTasksTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+      },
+      subTaskContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 5,
+      },
+      subTask: {
+        fontSize: 16,
+        marginRight: 10,
+      },
+      completedSubTask: {
+        fontSize: 16,
+        marginRight: 10,
+        textDecorationLine: 'line-through',
+      },
+      checkbox: {
+        width: 20,
+        height: 20,
+        borderWidth: 1,
+        borderColor: 'black',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    //End TaskScreen
 }); 
 
 export default Styles;

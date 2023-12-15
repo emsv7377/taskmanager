@@ -118,19 +118,15 @@ const handleAddSubTask = () => {
         />
 
       <Text style={styles.label}>Sub Tasks</Text>
-      <View style={styles.inputContainer}>
       <TextInput
         style={styles.input}
         value={subTaskName}
         onChangeText={text => setSubTaskName(text)}
         placeholder="Enter sub-task name"
+        onSubmitEditing={handleAddSubTask} // Triggered when "Enter" is pressed
       />
-      <TouchableOpacity onPress={handleAddSubTask}>
-        <Text>+</Text>
-        </TouchableOpacity>
-        </View>
         {subTasks.map(subTask => (
-        <Text key={subTask.id}>{subTask.name}</Text>
+        <Text style={styles.displaySubtasks}key={subTask.id}>{subTask.name}</Text>
       ))}
 
       <Pressable
@@ -171,7 +167,6 @@ const handleAddSubTask = () => {
         <Text style={styles.buttonText}>Add Task</Text>
       </TouchableOpacity>      
       
-      </KeyboardAwareScrollView>
       <View style={styles.backButtonPlacement}>
         <TouchableOpacity 
           style={styles.button}
@@ -179,6 +174,7 @@ const handleAddSubTask = () => {
         <Text style={styles.buttonText}> Back </Text>  
       </TouchableOpacity>
             </View>
+            </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };
