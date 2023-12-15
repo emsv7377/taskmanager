@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { Text, SafeAreaView, TouchableOpacity, View, Image} from 'react-native';
 
-import ThemeContext from '../assets/ThemeContext';
-import Styles from '../assets/Styles';
+import ThemeContext from '../components/ThemeContext';
+import Styles from '../components/Styles';
 
-const WelcomeScreen = ({navigation}) => {
+const IntroductionScreen = ({navigation}) => {
   const { theme } = useContext(ThemeContext);
   const { colors:themeColors } = theme;
+
   const styles = Styles({themeColors});
     return (
       <>
@@ -16,7 +17,7 @@ const WelcomeScreen = ({navigation}) => {
           <Text style={[styles.title, { marginTop: '10%' }]}>Welcome to the task{'\n'}
           manager of your dreams.</Text>
           <Image
-            source={require('../assets/ko.png')}
+            source={require('../components/ko.png')}
             style={styles.welcomeLogo}
             resizeMode="contain"
           />
@@ -46,5 +47,5 @@ const WelcomeScreen = ({navigation}) => {
 
 
 
-  export default WelcomeScreen;
+  export default IntroductionScreen;
 

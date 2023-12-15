@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Text, View, Button, SafeAreaView, TouchableOpacity} from 'react-native';
-import ThemeContext from '../assets/ThemeContext';
-import Styles from '../assets/Styles';
+import ThemeContext from '../components/ThemeContext';
+import Styles from '../components/Styles';
 
 
 const ProfileScreen = ({navigation, route}) => {

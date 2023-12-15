@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native'; 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-import WelcomeScreen from './screens/WelcomeScreen'
+
+import IntroductionScreen from './screens/IntroductionScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import SettingsScreen from './screens/SettingsScreen'
 import ColorThemesScreen from './screens/ColorThemesScreen';
@@ -11,7 +11,7 @@ import StartScreen from './screens/StartScreen'
 import AddTaskScreen from './screens/AddTaskScreen';
 import TaskListScreen from './screens/TaskListScreen';
 import { TasksProvider } from './screens/TasksContext';
-import ThemeProvider from './assets/ThemeProvider';
+import ThemeProvider from './components/ThemeProvider';
 
 
 const Stack = createNativeStackNavigator();
@@ -25,7 +25,7 @@ export default function App() {
               screenOptions={{
                 headerShown: false
             }}>
-              <Stack.Screen name="Welcome" component={WelcomeScreen} />
+              <Stack.Screen name="Introduction" component={IntroductionScreen} />
               <Stack.Screen name="Profile" component={ProfileScreen} />
               <Stack.Screen name="Settings" component={SettingsScreen} />
               <Stack.Screen name="ColorThemes" component={ColorThemesScreen} />

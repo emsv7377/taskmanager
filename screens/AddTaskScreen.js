@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Modal, Pressable } from 'react-native';
 import { TasksContext } from './TasksContext';
-import ThemeContext from '../assets/ThemeContext';
+import ThemeContext from '../components/ThemeContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import ColorPicker from '../assets/ColorPicker';
-import Styles from '../assets/Styles';
+import ColorPicker from '../components/ColorPicker';
+import Styles from '../components/Styles';
 
 const AddTaskScreen = ({ navigation }) => {
   const [taskName, setTaskName] = useState('');

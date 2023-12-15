@@ -3,32 +3,49 @@ import { StyleSheet } from 'react-native';
 
 // colors 
 const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
-    /// ColorThemesScreen
     flatListContainer:{
         alignItems:'center',
         justifyContent:'center',
         flexGrow:1,
     },
-    
-    /// SETTINGS
+    // Settings menu 
     menu:{
         alignItems:'center',
         marginTop:'10%',
         width:'100%',
     },
+    menuHeaderContainer:{
+        paddingBottom: 4,
+        margin: 4,
+        borderBottomWidth: 1,
+        borderColor: themeColors ? themeColors.headerBorder : 'gray',
+        width:'80%',
+    },
+    menuHeader:{
+        fontSize:16,
+        color: themeColors ? themeColors.labelText : 'gray',
+        textAlign:'center',
+    },
     menuItem:{
-        borderColor: themeColors ? themeColors.border : 'black',
-        backgroundColor : themeColors ? themeColors.listItem : 'grey',
+        flexDirection:'row',
         borderWidth:1,
-        padding:15,
+        padding:10,
         margin:4,
-        borderRadius:20,
+        borderRadius:15,
         width:'80%',
     },
     menuText:{
         fontSize:20,
-        color: themeColors ? themeColors.buttonText : 'black',
+        color: themeColors ? themeColors.text : 'black',
     },
+    menuArrow:{
+      position:'absolute',
+      right:15,
+      alignSelf:'center',
+      fontSize:20,
+      color: themeColors ? themeColors.text : 'black',  
+    },
+    // Settings menu end 
     button:{
         alignItems: 'center',
         backgroundColor: themeColors ? themeColors.backButton : 'green',
@@ -167,6 +184,10 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         paddingHorizontal: 10,
         borderRadius:15, 
       },
+      buttonText: {
+        color: themeColors ? themeColors.buttonText : '#fff',
+        fontSize: 20,
+      },
       addButton: {
         backgroundColor: themeColors ? themeColors.button : '#3498db',
         paddingVertical: 15,
@@ -174,11 +195,6 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         borderRadius: 20,
         alignItems: 'center',
       },
-      buttonText: {
-        color: themeColors ? themeColors.buttonText : '#fff',
-        fontSize: 20,
-      },
-      
       button:{
         alignItems:'center',
         backgroundColor: themeColors ? themeColors.button : 'black', // default if not set 

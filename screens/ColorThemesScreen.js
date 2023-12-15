@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View, Dimensions, FlatList, Alert } from 'react-native';
-import { DARK, LIGHT, PASTEL, FOREST } from '../assets/Theme';
+import { DARK, LIGHT, PASTEL, FOREST } from '../components/Theme';
 
-import ThemeContext from '../assets/ThemeContext';
-import Styles from '../assets/Styles';
+import ThemeContext from '../components/ThemeContext';
+import Styles from '../components/Styles';
 
 const items = [
     {
@@ -61,41 +61,6 @@ export default ColorThemesScreen = ({navigation, route}) => {
         }
         setTheme(newTheme);
     }
-
-    /* Allows dynamic colors 
-    const styles = StyleSheet.create({
-        container: {
-          flex: 1,
-          backgroundColor: theme.colors ? theme.colors.background : 'white', // default to white if theme is not set 
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
-        flatListContainer:{
-            alignItems:'center',
-            justifyContent:'center',
-            flexGrow:1,
-        },
-        title:{
-            fontSize:30,
-            fontWeight:'bold',
-            color: colors ? theme.colors.title : 'red', // defaults to black if theme is not set 
-        },
-        button:{
-            alignItems:'center',
-            backgroundColor: colors ? colors.backButton : 'gray',
-            fontSize: 24,
-            padding: 15,
-            margin: 4,
-            width:'80%',
-            borderRadius: 15,
-          },
-        titleContainer:{
-            justifyContent:'flex-end',
-            //marginBottom:'50%',
-            //height:'10%',
-        }
-    
-      });*/
 
     const renderItem = ({item}) => {
         return(

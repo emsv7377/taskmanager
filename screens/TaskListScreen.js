@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { TasksContext } from './TasksContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import ThemeContext from '../assets/ThemeContext';
+import ThemeContext from '../components/ThemeContext';
 
 const TaskListScreen = ({navigation}) => {
   const { tasks } = useContext(TasksContext);

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View} from 'react-native';
-import ThemeContext from '../assets/ThemeContext';
-import Styles from '../assets/Styles';
+import ThemeContext from '../components/ThemeContext';
+import Styles from '../components/Styles';
 
 const SettingsScreen = ({navigation}) => {
     const { theme } = useContext(ThemeContext);
@@ -17,19 +17,53 @@ const SettingsScreen = ({navigation}) => {
                 </Text>
             </View>
             <View style={styles.menu}>
-            <TouchableOpacity
-                style={styles.menuItem}
-                onPress={() => navigation.navigate('ColorThemes', { currentTheme : theme})}>
-                <Text style={styles.menuText}>
-                    Color themes
-                </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.menuItem}>
-                <Text style={styles.menuText}>
-                    Notifications
-                </Text>
-            </TouchableOpacity>
+                <View style={styles.menuHeaderContainer}>    
+                    <Text style={styles.menuHeader}> ACCOUNT & INTEGRITY </Text>
+                </View>
+                <TouchableOpacity
+                    style={styles.menuItem}>
+                    <Text style={styles.menuText}> User preferences </Text>
+                    <Text style={styles.menuArrow}>{'→'}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.menuItem}> 
+                    <Text style={styles.menuText}> Integrity </Text>
+                    <Text style={styles.menuArrow}>{'→'}</Text>
+                </TouchableOpacity>
+                <View style={styles.menuHeaderContainer}>    
+                    <Text style={styles.menuHeader}> PREFERENCES </Text>
+                </View>
+                <TouchableOpacity
+                    style={styles.menuItem}
+                    onPress={() => navigation.navigate('ColorThemes', { currentTheme : theme})}>
+                    <Text style={styles.menuText}> Color themes </Text>
+                    <Text style={styles.menuArrow}>{'→'}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.menuItem}>
+                    <Text style={styles.menuText}> Notifications </Text>
+                    <Text style={styles.menuArrow}>{'→'}</Text>
+                </TouchableOpacity>
+                <View style={styles.menuHeaderContainer}>    
+                    <Text style={styles.menuHeader}> HELP </Text>
+                </View>
+                <TouchableOpacity
+                    style={styles.menuItem}>
+                    <Text style={styles.menuText}> FAQ </Text>
+                    <Text style={styles.menuArrow}>{'→'}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.menuItem}> 
+                    <Text style={styles.menuText}> Contact us </Text>
+                    <Text style={styles.menuArrow}>{'→'}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.menuItem}> 
+                    <Text style={styles.menuText}> Sign out </Text>
+                    <Text style={styles.menuArrow}>{'→'}</Text>
+                </TouchableOpacity>
+
+                
             </View>
             <View style={styles.backButtonPlacement}>
             <TouchableOpacity 

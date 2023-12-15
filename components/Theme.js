@@ -22,6 +22,8 @@ export const LIGHT = {
         labelText: '#000',
         colorPicker:'#000',
         listItem:'#ECEFF1',
+        subHeader:'#CFD8DC',
+        headerBorder:'#CFD8DC',
         taskColors: {
             one: '#ffb3ba',
             two: '#ffdfba',
@@ -49,6 +51,8 @@ export const DARK = {
         labelText: '#828282',
         colorPicker:'#808080',
         listItem:'#A7A2A0',
+        subHeader:'#808080',
+        headerBorder:'#808080',
         taskColors: {
             one: '#ffb3ba',
             two: '#ffdfba',
@@ -78,6 +82,8 @@ export const PASTEL = {
         inputContainer: '#FCF9F2',
         labelText: '#312e30',
         colorPicker:'#000',
+        subHeader:'#F2BAD1',
+        headerBorder:'#F2BAD1',
         // pastel rainbow 
         taskColors: {
             one: '#ffb3ba',
@@ -106,6 +112,8 @@ export const FOREST = {
         boxText: '#C9DBB2',
         inputContainer: '#E3F2C1',
         labelText: '#00000',
+        subHeader:'#C9DBB2',
+        headerBorder:'#C9DBB2',
         taskColors: {
             one: '#ffb3ba',
             two: '#ffdfba',

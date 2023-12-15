@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList, StyleSheet, SafeAreaView, Modal } from 'react-native';
-import ThemeContext from '../assets/ThemeContext';
-import Styles from '../assets/Styles';
+import ThemeContext from './ThemeContext';
+import Styles from './Styles';
 
 const ColorPicker = ({ onSelectColor, isVisible, onClose }) => {
   const { theme } = useContext(ThemeContext);
