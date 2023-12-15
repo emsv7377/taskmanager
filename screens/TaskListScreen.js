@@ -4,7 +4,7 @@ import { TasksContext } from './TasksContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const TaskListScreen = ({navigation}) => {
-  const { tasks } = useContext(TasksContext);
+  const { tasks, toggleTaskCompletion } = useContext(TasksContext);
   const [currentDate, setCurrentDate] = useState(new Date());
   const dateFormatter = new Intl.DateTimeFormat('en-US', {
     weekday: 'long',
@@ -32,19 +32,31 @@ const TaskListScreen = ({navigation}) => {
   });
 
   const renderTaskItem = ({ item }) => {
-    const handleTaskPress = () => {
-      // TODO: Handle when a task is pressed, e.g., navigate to task details
-      // Example: navigation.navigate('TaskDetails', { taskId: item.id });
+    const handleCompletion = () => {
+      toggleTaskCompletion(item.id);
+    };
+    const handleMoreInfo = () => {
+      navigation.navigate('Task', { taskId: item.id }); // Navigate to TaskDetails screen with taskId
     };
 
     return (
-      <TouchableOpacity onPress={handleTaskPress}>
         <View style={[styles.taskItem, { backgroundColor: item.color }]}>
           <Text style={styles.taskName}>{item.name}</Text>
           <Text style={styles.taskDescription}>{item.description}</Text>
           <Text style={styles.taskTime}>{item.time} mins</Text>
+          <TouchableOpacity onPress={handleCompletion}>
+          <View style={[styles.checkbox, item.completed ? styles.checkedCheckbox : null]}>
+          {item.completed ? (
+            <Text style={styles.checkmark}>✓</Text> // Show a checkmark when completed
+          ) : (
+            <Text> </Text> // Show an empty space for the unchecked checkbox
+          )}
         </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleMoreInfo}>
+        <Text>more</Text>
+        </TouchableOpacity>
+        </View>
     );
   };
 
@@ -116,6 +128,15 @@ const styles = StyleSheet.create({
           },
         buttonText:{
             fontSize: 20,
+        },
+        checkbox: {
+          width: 24,
+          height: 24,
+          borderWidth: 2,
+          borderRadius: 4,
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginRight: 16,
         },
 });
 

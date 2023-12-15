@@ -21,6 +21,8 @@ const AddTaskScreen = ({ navigation }) => {
     day: 'numeric',
   });  
   const formattedDate = dateFormatter.format(date);
+  const [subTaskName, setSubTaskName] = useState('');
+  const [subTasks, setSubTasks] = useState([]);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
@@ -41,15 +43,40 @@ const AddTaskScreen = ({ navigation }) => {
     showMode('time');
   };
 
+  //Generate a random id
+ function generateUUID(digits) {
+    let str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXZ';
+    let uuid = [];
+    for (let i = 0; i < digits; i++) {
+        uuid.push(str[Math.floor(Math.random() * str.length)]);
+    }
+    return uuid.join('');
+}
+
+// Function to handle adding sub-tasks
+const handleAddSubTask = () => {
+  if (subTaskName.trim() !== '') {
+    const newSubTask = {
+      id: generateUUID(10), // Generate unique ID for sub-task
+      name: subTaskName.trim(),
+      completed: false,
+    };
+    setSubTasks([...subTasks, newSubTask]);
+    setSubTaskName(''); // Clear input field after adding
+  }
+};
   const handleAddTask = () => {
+    const taskId = generateUUID(10);
     // Code to add task to Today's list
     const newTask = {
+      id: taskId, // Assign the generated ID to the task
       name: taskName,
       description: description,
       color: color,
       time: time,
       completed: false,
       date: date,
+      subTasks: subTasks,
     };
 
     addTask(newTask);
@@ -73,6 +100,22 @@ const AddTaskScreen = ({ navigation }) => {
         onChangeText={text => setDescription(text)}
         multiline
       />
+
+      <Text style={styles.label}>Sub Tasks</Text>
+      <View style={styles.inputContainer}>
+      <TextInput
+        style={styles.input}
+        value={subTaskName}
+        onChangeText={text => setSubTaskName(text)}
+        placeholder="Enter sub-task name"
+      />
+      <TouchableOpacity onPress={handleAddSubTask}>
+        <Text>+</Text>
+        </TouchableOpacity>
+        </View>
+        {subTasks.map(subTask => (
+        <Text key={subTask.id}>{subTask.name}</Text>
+      ))}
 
       <Text style={styles.label}>Color</Text>
       <TextInput
@@ -126,6 +169,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
     paddingHorizontal: 10,
+  },
+
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   addButton: {
     backgroundColor: '#3498db',

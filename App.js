@@ -10,6 +10,7 @@ import StartScreen from './screens/StartScreen'
 import AddTaskScreen from './screens/AddTaskScreen';
 import TaskListScreen from './screens/TaskListScreen';
 import { TasksProvider } from './screens/TasksContext';
+import TaskScreen from './screens/TaskScreen';
 
 import ThemeContext, { ThemeProvider } from './assets/ThemeContext';
 
@@ -56,6 +57,10 @@ export default function App() {
             <Stack.Screen 
             name="TaskList" 
             component={TaskListScreen}
+            />
+            <Stack.Screen 
+            name="Task" 
+            component={TaskScreen}
             />
       </Stack.Navigator>
       </TasksProvider>
