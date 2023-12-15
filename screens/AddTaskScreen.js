@@ -1,17 +1,19 @@
 import React, { useState, useContext } from 'react';
-import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { TasksContext } from './TasksContext';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Modal, Pressable } from 'react-native';
+import { TasksContext } from './TasksContext';
+import ThemeContext from '../components/ThemeContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-
+import ColorPicker from '../components/ColorPicker';
+import Styles from '../components/Styles';
 
 const AddTaskScreen = ({ navigation }) => {
   const [taskName, setTaskName] = useState('');
   const [description, setDescription] = useState('');
-  const [color, setColor] = useState('#3498db'); // Default color
   const [time, setTime] = useState('');
   const { addTask } = useContext(TasksContext);
-  const [tag, setTag] = useState(''); // State för att hålla taggen
   const [date, setDate] = useState(new Date())
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
@@ -37,6 +39,17 @@ const AddTaskScreen = ({ navigation }) => {
 
   const showDatepicker = () => {
     showMode('date');
+  
+  const { theme } = useContext(ThemeContext);   // Fetch current theme
+  const { colors: themeColors } = theme;                     // Fetch colors for components current theme 
+  
+  const [pickedColor, setPickedColor] = useState(themeColors ? themeColors.button : '#575A5E');  // TODO: change default value 
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const styles = Styles({themeColors, pickedColor});
+
+  const handleColorSelect = (selectedColor) => {
+    setPickedColor(selectedColor);
+    setShowColorPicker(false);
   };
 
   const showTimepicker = () => {
@@ -72,7 +85,7 @@ const handleAddSubTask = () => {
       id: taskId, // Assign the generated ID to the task
       name: taskName,
       description: description,
-      color: color,
+      color: pickedColor,
       time: time,
       completed: false,
       date: date,
@@ -85,21 +98,24 @@ const handleAddSubTask = () => {
 
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Task Name</Text>
-      <TextInput
-        style={styles.input}
-        value={taskName}
-        onChangeText={text => setTaskName(text)}
-      />
+    <SafeAreaView style={styles.addTaskContainer}>
+      <KeyboardAwareScrollView>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Add new task</Text></View>
+        <Text style={styles.label}>Task name:</Text>
+        <TextInput
+          style={styles.input}
+          value={taskName}
+          onChangeText={text => setTaskName(text)}
+        />
 
-      <Text style={styles.label}>Description</Text>
-      <TextInput
-        style={styles.input}
-        value={description}
-        onChangeText={text => setDescription(text)}
-        multiline
-      />
+        <Text style={styles.label}>Description:</Text>
+        <TextInput
+          style={styles.input}
+          value={description}
+          onChangeText={text => setDescription(text)}
+          multiline
+        />
 
       <Text style={styles.label}>Sub Tasks</Text>
       <View style={styles.inputContainer}>
@@ -117,20 +133,24 @@ const handleAddSubTask = () => {
         <Text key={subTask.id}>{subTask.name}</Text>
       ))}
 
-      <Text style={styles.label}>Color</Text>
-      <TextInput
-        style={styles.input}
-        value={color}
-        onChangeText={text => setColor(text)}
+      <Pressable
+          style={styles.colorPickerButton}
+          onPress={() => setShowColorPicker(true)}>
+          <Text style={styles.colorPickerButtonText}>Choose color</Text>
+      </Pressable>
+      <ColorPicker
+        isVisible={showColorPicker}
+        onClose={() => setShowColorPicker(false)}
+        onSelectColor={handleColorSelect}
       />
 
-      <Text style={styles.label}>Time</Text>
-      <TextInput
-        style={styles.input}
-        value={time}
-        onChangeText={text => setTime(text)}
-        keyboardType="numeric"
-      />
+      <Text style={styles.label}>Estimated duration (minutes):</Text>
+        <TextInput
+          style={styles.input}
+          value={time}
+          onChangeText={text => setTime(text)}
+          keyboardType="numeric"
+        />
 
   <View style={styles.dateContainer}>
     <Text style={styles.label}>Date: {formattedDate}</Text>
@@ -149,57 +169,18 @@ const handleAddSubTask = () => {
       )}
       <TouchableOpacity onPress={handleAddTask} style={styles.addButton}>
         <Text style={styles.buttonText}>Add Task</Text>
+      </TouchableOpacity>      
+      
+      </KeyboardAwareScrollView>
+      <View style={styles.backButtonPlacement}>
+        <TouchableOpacity 
+          style={styles.button}
+          onPress={() => navigation.goBack()} >
+        <Text style={styles.buttonText}> Back </Text>  
       </TouchableOpacity>
-    </View>
+            </View>
+    </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-  label: {
-    fontSize: 18,
-    marginBottom: 5,
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 20,
-    paddingHorizontal: 10,
-  },
-
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  addButton: {
-    backgroundColor: '#3498db',
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  dateContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    // Additional styles for the container of date text and button
-  },
-  changeButton: {
-    backgroundColor: '#3498db',
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    margin: 20,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});
 
 export default AddTaskScreen;

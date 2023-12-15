@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { TasksContext } from './TasksContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import ThemeContext from '../components/ThemeContext';
 
 const TaskListScreen = ({navigation}) => {
   const { tasks, toggleTaskCompletion } = useContext(TasksContext);
@@ -13,6 +14,8 @@ const TaskListScreen = ({navigation}) => {
   });  
   const formattedDate = dateFormatter.format(currentDate);
   const [selectedDate, setSelectedDate] = useState(formattedDate); // State för att hålla det valda datumet
+  const { theme } = useContext(ThemeContext);   // fetch current theme
+  const { colors } = theme;                     // fetch colors of current theme
 
   const handleNextDay = () => {
     const nextDay = new Date(currentDate);
@@ -82,62 +85,5 @@ const TaskListScreen = ({navigation}) => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 20,
-    paddingTop: 20,
-  },
-  taskList: {
-    paddingBottom: 20,
-  },
-  taskItem: {
-    padding: 15,
-    marginBottom: 15,
-    borderRadius: 10,
-  },
-  taskName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  taskDescription: {
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  taskTime: {
-    fontSize: 14,
-    fontStyle: 'italic',
-  },
-  header: {
-    marginBottom: 20,
-    alignItems: 'center',
-  },
-  dateText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-          button:{
-            alignItems:'center',
-            fontSize: 24,
-            padding: 15,
-            margin: 4,
-            width:'80%',
-            borderRadius: 20,
-          },
-        buttonText:{
-            fontSize: 20,
-        },
-        checkbox: {
-          width: 24,
-          height: 24,
-          borderWidth: 2,
-          borderRadius: 4,
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginRight: 16,
-        },
-});
 
 export default TaskListScreen;

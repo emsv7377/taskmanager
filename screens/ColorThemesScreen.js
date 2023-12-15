@@ -1,14 +1,16 @@
-import React, { useState, useContext } from 'react';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View, Dimensions, FlatList, Alert } from 'react-native';
-import { DARK, LIGHT, PASTEL, SAILOR } from '../assets/Theme';
+import React, { useContext } from 'react';
+import { Text, SafeAreaView, TouchableOpacity, View, Dimensions, FlatList } from 'react-native';
+import { DARK, LIGHT, PASTEL, FOREST } from '../components/Theme';
 
-import ThemeContext from '../assets/ThemeContext';
+import ThemeContext from '../components/ThemeContext';
+import Styles from '../components/Styles';
 
+// TODO: change these? Fetch from themes? 
 const items = [
     {
         id: 1, 
         title: 'dark',
-        backgroundColor: 'black',
+        backgroundColor: '#3A3B3C',
         color: 'white',
     },
     {
@@ -20,32 +22,28 @@ const items = [
     {
         id:3,  
         title: 'pastel',
-        backgroundColor: '#FF90BC',
+        backgroundColor: '#cb7a9d',
         color: '#F9F9E0',
     },
     {
         id:4, 
-        title: 'sailor',
-        backgroundColor: '#5A7684',
+        title: 'forest',
+        backgroundColor: '#AAC8A7',
         color: 'white ',
     }
 ]
 
 
+export default ColorThemesScreen = ({navigation, route}) => {
+    // Fetch current theme and color preferences 
+    const { theme, setTheme } = useContext(ThemeContext);
+    const { colors:themeColors } = theme;
+    const styles = Styles({themeColors});
 
-export default ColorThemesScreen = ({navigation}) => {
-    //const [theme, setTheme] = useState({ theme: DARK });
-
-    const [theme, setCurrentTheme] = useContext(ThemeContext);
-
-    const setTheme = (newTheme) => {
-        setCurrentTheme({ theme: newTheme })
-    }
-
-    const onThemeChange = (theme) => {
+    // Handle theme change 
+    const onThemeChange = (selectedTheme) => {
         let newTheme = {};
-
-        switch(theme){
+        switch(selectedTheme){
             case 'dark':
                 newTheme = DARK;
                 break;
@@ -55,41 +53,17 @@ export default ColorThemesScreen = ({navigation}) => {
             case 'pastel':
                 newTheme = PASTEL;
                 break;
-            case 'sailor':
-                newTheme = SAILOR;
+            case 'forest':
+                newTheme = FOREST;
                 break;
             default:
                 newTheme = DARK; 
                 break;
         }
-        setTheme({ theme: newTheme });
+        setTheme(newTheme);
     }
 
-    const styles = StyleSheet.create({
-        container: {
-          flex: 1,
-          backgroundColor: theme.colors ? theme.colors.background : 'white', // default to white if theme is not set 
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
-        flatListContainer:{
-            alignItems:'center',
-            justifyContent:'center',
-            flexGrow:1,
-        },
-        title:{
-            fontSize:30,
-            fontWeight:'bold',
-            color: theme.colors ? theme.colors.title : 'red', // defaults to black if theme is not set 
-        },
-        titleContainer:{
-            justifyContent:'flex-end',
-            //marginBottom:'50%',
-            //height:'10%',
-        }
-    
-      });
-
+    // Render theme option items 
     const renderItem = ({item}) => {
         return(
             <>
@@ -101,7 +75,7 @@ export default ColorThemesScreen = ({navigation}) => {
                     margin: 6, 
                     alignItems:'center',
                     justifyContent:'center'}}
-                onPress={() => onThemeChange(theme)}>
+                onPress={() => onThemeChange(item.title)}>
                 <Text 
                     key={item.id} 
                     style={{ fontSize:20, color: item.color, fontWeight: 'bold', padding:30,}}>
@@ -118,6 +92,7 @@ export default ColorThemesScreen = ({navigation}) => {
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>Color themes</Text>
             </View>
+            {/* Render a grid with the different theme options */}
             <FlatList
                 data={items}
                 renderItem={renderItem}
@@ -127,15 +102,11 @@ export default ColorThemesScreen = ({navigation}) => {
                 key={4}
                 contentContainerStyle={styles.flatListContainer}
                 />
-                <TouchableOpacity 
-                style={{ 
-                    backgroundColor: 'gray', 
-                    borderRadius: 15, 
-                    width: Dimensions.get('window').width / 2 - 20, 
-                    margin: 6, 
-                    alignItems:'center',
-                    justifyContent:'center'}}
-                onPress={() => navigation.goBack()}/>
+            <TouchableOpacity 
+                style={styles.button}
+                onPress={() => navigation.goBack()} >
+                <Text style={styles.buttonText}> Back </Text>
+            </TouchableOpacity> 
 
         </SafeAreaView>
         </>

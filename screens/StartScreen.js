@@ -1,7 +1,14 @@
-import * as React from 'react';
-import { StyleSheet, Text, View, Button, SafeAreaView, TouchableOpacity} from 'react-native';
+import React, { useContext } from 'react';
+import { Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
+import ThemeContext from '../components/ThemeContext';
+import Styles from '../components/Styles';
 
 const StartScreen = ({navigation}) => {
+  const { theme } = useContext(ThemeContext);
+  const { colors: themeColors } = theme;
+
+  const styles = Styles({themeColors});
+
     const handleTodayPress = () => {
         // Navigate to 'Today' screen or perform related action
         navigation.navigate('TaskList');
@@ -40,35 +47,15 @@ const StartScreen = ({navigation}) => {
               <Text style={styles.boxText}>Add New</Text>
             </TouchableOpacity>
           </View>
+          <TouchableOpacity 
+                style={styles.button}
+                onPress={() => navigation.goBack()} >
+                <Text style={styles.buttonText}> Back </Text>
+            </TouchableOpacity>  
         </SafeAreaView>
       );
     };
     
-    const styles = StyleSheet.create({
-      container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-      },
-      row: {
-        flexDirection: 'row',
-        marginBottom: 20,
-      },
-      box: {
-        flex: 1,
-        aspectRatio: 1, // Keeps the boxes square
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#3498db',
-        margin: 5,
-        borderRadius: 10,
-      },
-      boxText: {
-        color: '#fff',
-        fontSize: 18,
-        fontWeight: 'bold',
-      },
-    });
+    
   
 export default StartScreen;
