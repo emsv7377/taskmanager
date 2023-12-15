@@ -39,7 +39,7 @@ const AddTaskScreen = ({ navigation }) => {
 
   const showDatepicker = () => {
     showMode('date');
-  
+  };
   const { theme } = useContext(ThemeContext);   // Fetch current theme
   const { colors: themeColors } = theme;                     // Fetch colors for components current theme 
   
