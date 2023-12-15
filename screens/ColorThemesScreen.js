@@ -1,10 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View, Dimensions, FlatList, Alert } from 'react-native';
+import React, { useContext } from 'react';
+import { Text, SafeAreaView, TouchableOpacity, View, Dimensions, FlatList } from 'react-native';
 import { DARK, LIGHT, PASTEL, FOREST } from '../components/Theme';
 
 import ThemeContext from '../components/ThemeContext';
 import Styles from '../components/Styles';
 
+// TODO: change these? Fetch from themes? 
 const items = [
     {
         id: 1, 
@@ -34,14 +35,14 @@ const items = [
 
 
 export default ColorThemesScreen = ({navigation, route}) => {
+    // Fetch current theme and color preferences 
     const { theme, setTheme } = useContext(ThemeContext);
     const { colors:themeColors } = theme;
-
     const styles = Styles({themeColors});
 
+    // Handle theme change 
     const onThemeChange = (selectedTheme) => {
         let newTheme = {};
-
         switch(selectedTheme){
             case 'dark':
                 newTheme = DARK;
@@ -62,6 +63,7 @@ export default ColorThemesScreen = ({navigation, route}) => {
         setTheme(newTheme);
     }
 
+    // Render theme option items 
     const renderItem = ({item}) => {
         return(
             <>
@@ -90,6 +92,7 @@ export default ColorThemesScreen = ({navigation, route}) => {
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>Color themes</Text>
             </View>
+            {/* Render a grid with the different theme options */}
             <FlatList
                 data={items}
                 renderItem={renderItem}

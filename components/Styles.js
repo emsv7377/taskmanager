@@ -1,14 +1,18 @@
-import React, { useContext, useEffect } from 'react';
+/**
+ *          StyleSheet for the application
+ * 
+ */
 import { StyleSheet } from 'react-native';
 
-// colors 
 const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
+
+    // Used by FlatList elements in ColorThemeScreen
     flatListContainer:{
         alignItems:'center',
         justifyContent:'center',
         flexGrow:1,
     },
-    // Settings menu 
+    /*  ---- Settings menu start ---- */ 
     menu:{
         alignItems:'center',
         marginTop:'10%',
@@ -45,7 +49,9 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
       fontSize:20,
       color: themeColors ? themeColors.text : 'black',  
     },
-    // Settings menu end 
+    /*  ---- Settings menu end ----  */
+    
+    // Common design for buttons 
     button:{
         alignItems: 'center',
         backgroundColor: themeColors ? themeColors.backButton : 'green',
@@ -56,68 +62,57 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         borderRadius: 20,
         marginTop:60,
     },
-    buttonText:{
-        color: themeColors ? themeColors.buttonText : 'red',
-        fontSize: 20,
-    },
+
+    // Placement for back buttons 
     backButtonPlacement:{
+        // TODO: change ? should this be on top of the screen
         flex: 1,
         justifyContent:'flex-end',
         alignItems:'center',
         marginBottom:40,
         width:'100%'
     },
-
-    /// END Settings
     
-    /// ProfileScreen
+    // Common body text used 
     text:{
         fontSize: 20,
         color: themeColors ? themeColors.text : 'red',
     },
+
+    // Commonly used buttons 
     button:{
         alignItems:'center',
-          backgroundColor: themeColors ? themeColors.button : 'gray',
-          fontSize: 24,
-          padding: 15,
-          margin: 4,
-          width:'80%',
-          borderRadius: 20,
-        },
-      buttonText:{
-          color: themeColors ? themeColors.buttonText : 'darkgrey',
-          fontSize: 20,
-      },
-
-    /// END ProfileScreen
-    
-    /// WelcomeScreen
-    title:{
-        fontSize:25,
-        color: themeColors ? themeColors.title : 'black', // default if not set
-        textAlign:'center',
-        marginTop:'10%', 
+        backgroundColor: themeColors ? themeColors.button : 'gray',
+        fontSize: 24,
+        padding: 15,
+        margin: 4,
+        width:'80%',
+        borderRadius: 20,
     },
+    buttonText:{
+        color: themeColors ? themeColors.buttonText : 'darkgrey',
+        fontSize: 20,
+    },
+    // Application name on IntroductionScreen 
     appName:{
         fontSize:60,
         fontFamily:'Georgia',
         color:'white',
     },
+    // Welcome text on IntroductionScreen 
     welcomeTitleContainer:{
         justifyContent:'center',
         alignItems:'center',
         marginBottom:'40%',
         height:'40%',
     },
+    // Welcome logo on IntroductionScreen
     welcomeLogo: {
         marginTop:'10%',
         width: 150,
         height: 150,
-        //marginBottom: 20,
     },
-    /// END WelcomeScreen
-
-    /// StartScreen
+    // Common background settings shared by multiple components
     container: {
         flex: 1,
         justifyContent: 'center',
@@ -125,13 +120,15 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         paddingHorizontal: 20,
         backgroundColor: themeColors ? themeColors.background : '#fff',
     },
+    
+    // Row used by AddTaskScreen
     row: {
         flexDirection: 'row',
         marginBottom: 10,
         marginRight:10,
         marginLeft:10,
-        //margin: 20,
     },
+    // Boxes in the grid in AddTaskScreen 
     box: {
         flex: 1,
         aspectRatio: 1, // Keeps the boxes square
@@ -143,38 +140,41 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         borderWidth: 1,
         borderColor:'black',
     },
+    // Text for the boxes in AddTaskScreen 
     boxText: {
         color: themeColors ? themeColors.boxText : '#fff',
         fontSize: 18,
         fontWeight: 'bold',
     },
-    //// END StartSCreen
-    
-    /// AddTaskScreen
+    // Used by AddTaskScreen for grid view
     addTaskContainer:{
         flex: 1, 
         padding: 20,
         backgroundColor: themeColors ? themeColors.background : '#000',
-        //width:'90%',
     },
+    // Common titles 
     title:{
         fontSize: 24,
         color: themeColors ? themeColors.title : 'red',
         fontWeight: 'bold',
     },
+
+    // Container for the common titles 
     titleContainer:{
-        //position:'absolute',
-        //top:'10%',
         marginTop:'5%',
         height:'10%',
         alignItems:'center',
         justifyContent:'flex-start',
       },
+
+      // Labels for text input and similarly 
       label: {
         fontSize: 18,
         marginBottom: 5,
         color: themeColors ? themeColors.labelText : 'black',
       },
+
+      // Text input elements
       input: {
         height: 40,
         borderColor: themeColors ? themeColors.inputContainer : 'gray',
@@ -184,6 +184,8 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         paddingHorizontal: 10,
         borderRadius:15, 
       },
+
+
       buttonText: {
         color: themeColors ? themeColors.buttonText : '#fff',
         fontSize: 20,
@@ -194,15 +196,6 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         paddingHorizontal: 30,
         borderRadius: 20,
         alignItems: 'center',
-      },
-      button:{
-        alignItems:'center',
-        backgroundColor: themeColors ? themeColors.button : 'black', // default if not set 
-        fontSize: 24,
-        padding: 15,
-        margin: 4,
-        width:'80%',
-        borderRadius: 20,
       },
       colorPickerButton: {
         padding: 10,
@@ -216,7 +209,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
       },
     /// END AddTaskScreen 
 
-    /// - ColorPicker
+    // ColorPicker 
     modalContainer:{
         flex: 1,
         justifyContent: 'center',
@@ -229,11 +222,9 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         borderRadius: 10,
         marginBottom: 20,
         elevation: 5, // adds shadow on Android 
-        //opacity: 0.9,
     },
     colorPickerTitle: {
         fontSize: 18,
-        //fontWeight: 'bold',
         marginBottom: 10,
     },
     colorOption: {
@@ -247,10 +238,10 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         marginTop: 20,
     },
     closeButton: {
+        // Used by ColorPicker
         fontSize: 16,
         color: themeColors ? themeColors.buttonText : 'black',
     },
-    /// - End ColorPicker
 }); 
 
 export default Styles;
