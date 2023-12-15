@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Text, SafeAreaView, TouchableOpacity, View, Switch } from 'react-native';
-import { Slider } from '@react-native-community/slider';
+import Slider from '@react-native-community/slider';
 
 import ThemeContext from '../components/ThemeContext';
 import Styles from '../components/Styles';
@@ -49,7 +49,7 @@ const NotificationsScreen = ({navigation}) => {
                         trackColor={{ false : (themeColors ? themeColors.switchTrackOn : 'black'), true : (themeColors ? themeColors.switchTrackOff : 'yellow')}} />
                     </View>
                 </View>
-                {/*<View
+                <View
                     style={styles.menuItem}>
                     <Text style={styles.menuText}>Flash</Text>
                     <View style={styles.switchContainer}>
@@ -71,20 +71,21 @@ const NotificationsScreen = ({navigation}) => {
                         trackColor={{ false : (themeColors ? themeColors.switchTrackOn : 'black'), true : (themeColors ? themeColors.switchTrackOff : 'yellow')}} />
                     </View>
                 </View>
-                <TouchableOpacity
+                <View
                     style={styles.menuItem}>
                     <Text style={styles.menuText}>Volume</Text>
-                    <Slider
-                        style={styles.slider}
-                        value={volumeLevel}
-                        onValueChange={onVolumeChange}
-                        minimumValue={0}
-                        maximumValue={100}
-                        minimumTrackTintColor={themeColors ? themeColors.sliderTrack : 'black'}
-                        maximumTrackTintColor={themeColors ? themeColors.sliderTrack : 'gray'}
-                        thumbTintColor={themeColors ? themeColors.sliderThumb : 'blue'}
+                    <View style={styles.sliderContainer}>
+                        <Slider
+                            style={styles.slider}
+                            value={volumeLevel}
+                            onValueChange={onVolumeChange}
+                            minimumValue={0}
+                            maximumValue={100}
+                            minimumTrackTintColor={themeColors ? themeColors.sliderTrack : 'black'}
+                            maximumTrackTintColor={themeColors ? themeColors.sliderTrack : 'gray'}
                         />
-                </TouchableOpacity>
+                    </View>
+                </View>
                 <View
                     style={styles.menuItem}>
                     <Text style={styles.menuText}>Vibration</Text>
@@ -107,7 +108,7 @@ const NotificationsScreen = ({navigation}) => {
                         trackColor={{ false : (themeColors ? themeColors.switchTrackOn : 'black'), true : (themeColors ? themeColors.switchTrackOff : 'yellow')}} />
                     </View>
                 </View>
-    */}
+    
 
                 
             </View>

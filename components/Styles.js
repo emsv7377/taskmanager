@@ -55,6 +55,14 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         justifyContent:'flex-end',
         alignItems:'flex-end',
     },
+    sliderContainer:{
+        marginTop: 10, 
+    },
+    slider:{
+        width:200,
+        height:30,
+        //height:'20%',
+    },
     /*  ---- Settings menu end ----  */
     
     // Common design for buttons 
