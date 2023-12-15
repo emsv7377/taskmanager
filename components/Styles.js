@@ -37,6 +37,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         margin:4,
         borderRadius:15,
         width:'80%',
+        alignItems:'center',
     },
     menuText:{
         fontSize:20,
@@ -48,6 +49,11 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
       alignSelf:'center',
       fontSize:20,
       color: themeColors ? themeColors.text : 'black',  
+    },
+    switchContainer:{
+        flex: 1,
+        justifyContent:'flex-end',
+        alignItems:'flex-end',
     },
     /*  ---- Settings menu end ----  */
     
