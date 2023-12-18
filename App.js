@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import IntroductionScreen from './screens/IntroductionScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import NotificationScreen from './components/NotificationScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import ColorThemesScreen from './screens/ColorThemesScreen';
 import StartScreen from './screens/StartScreen'
@@ -29,7 +28,6 @@ export default function App() {
             }}>
               <Stack.Screen name="Introduction" component={IntroductionScreen} />
               <Stack.Screen name="Profile" component={ProfileScreen} />
-              <Stack.Screen name="Notification" component={NotificationScreen} />
               <Stack.Screen name="Settings" component={SettingsScreen} />
               <Stack.Screen name="Notifications" component={SettingsNotificationsScreen} />
               <Stack.Screen name="ColorThemes" component={ColorThemesScreen} />
