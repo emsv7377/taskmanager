@@ -24,6 +24,7 @@ export const LIGHT = {
         listItem:'#ECEFF1',
         subHeader:'#CFD8DC',
         headerBorder:'#CFD8DC',
+        addButton:'#37474F',
         taskColors: {
             one: '#ffb3ba',
             two: '#ffdfba',
@@ -53,6 +54,7 @@ export const DARK = {
         listItem:'#A7A2A0',
         subHeader:'#808080',
         headerBorder:'#808080',
+        addButton:'#253746',
         taskColors: {
             one: '#ffb3ba',
             two: '#ffdfba',
@@ -84,6 +86,7 @@ export const PASTEL = {
         colorPicker:'#000',
         subHeader:'#F2BAD1',
         headerBorder:'#F2BAD1',
+        addButton:'312e30',
         // pastel rainbow 
         taskColors: {
             one: '#ffb3ba',
@@ -114,6 +117,7 @@ export const FOREST = {
         labelText: '#00000',
         subHeader:'#C9DBB2',
         headerBorder:'#C9DBB2',
+        addButton:'#3A3B3C',
         taskColors: {
             one: '#ffb3ba',
             two: '#ffdfba',

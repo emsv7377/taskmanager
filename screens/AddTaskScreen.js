@@ -128,11 +128,11 @@ const handleAddSubTask = () => {
         {subTasks.map(subTask => (
         <Text style={styles.displaySubtasks}key={subTask.id}>{subTask.name}</Text>
       ))}
-
+      <Text style={styles.label}>Choose a color: </Text>
       <Pressable
           style={styles.colorPickerButton}
           onPress={() => setShowColorPicker(true)}>
-          <Text style={styles.colorPickerButtonText}>Choose color</Text>
+          <Text style={styles.colorPickerButtonText}>color</Text>
       </Pressable>
       <ColorPicker
         isVisible={showColorPicker}
@@ -163,18 +163,18 @@ const handleAddSubTask = () => {
           onChange={onChange}
         />
       )}
-      <TouchableOpacity onPress={handleAddTask} style={styles.addButton}>
-        <Text style={styles.buttonText}>Add Task</Text>
-      </TouchableOpacity>      
-      
+      {/* Add task & back-buttons  */}
       <View style={styles.backButtonPlacement}>
         <TouchableOpacity 
-          style={styles.button}
-          onPress={() => navigation.goBack()} >
-        <Text style={styles.buttonText}> Back </Text>  
-      </TouchableOpacity>
-            </View>
-            </KeyboardAwareScrollView>
+            style={styles.backButton}
+            onPress={() => navigation.goBack()} >
+          <Text style={styles.buttonText}> Cancel </Text>  
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleAddTask} style={styles.addButton}>
+          <Text style={styles.buttonText}>Add Task</Text>
+        </TouchableOpacity>      
+      </View>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };

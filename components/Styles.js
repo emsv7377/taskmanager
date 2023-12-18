@@ -54,7 +54,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
     // Common design for buttons 
     button:{
         alignItems: 'center',
-        backgroundColor: themeColors ? themeColors.backButton : 'green',
+        backgroundColor: themeColors ? themeColors.button : 'green',
         fontSize: 24,
         padding: 15,
         margin: 4,
@@ -63,13 +63,16 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         marginTop:60,
     },
 
+
     // Placement for back buttons 
     backButtonPlacement:{
         // TODO: change ? should this be on top of the screen
-        flex: 1,
-        justifyContent:'flex-end',
+        flexDirection: 'row',
+        justifyContent:'space-between',
         alignItems:'center',
         marginBottom:40,
+        paddingHorizontal:5,
+        marginTop: 20,
         width:'100%'
     },
     
@@ -191,15 +194,26 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         fontSize: 20,
       },
       addButton: {
-        backgroundColor: themeColors ? themeColors.button : '#3498db',
+        backgroundColor: themeColors ? themeColors.addButton : '#3498db',
         paddingVertical: 15,
         paddingHorizontal: 30,
         borderRadius: 20,
         alignItems: 'center',
+        width:'55%',
+        //marginRight:10,
+      },
+      backButton: {
+        backgroundColor: themeColors ? themeColors.button : '#3498db',
+        paddingVertical: 15,
+        paddingHorizontal: 30,
+        borderRadius: 20,
+        //marginLeft:10,
+        alignItems: 'center',
+        width:'40%',
       },
       colorPickerButton: {
         padding: 10,
-        borderRadius: 5,
+        borderRadius: 15,
         backgroundColor: pickedColor,
         marginBottom: 20,
       },
@@ -228,6 +242,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         alignItems: 'center',
       },
     /// END AddTaskScreen 
+
 
     // ColorPicker 
     modalContainer:{
