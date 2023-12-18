@@ -164,7 +164,7 @@ const handleAddSubTask = () => {
         />
       )}
       {/* Add task & back-buttons  */}
-      <View style={styles.backButtonPlacement}>
+      <View style={styles.cancelButtonPlacement}>
         <TouchableOpacity 
             style={styles.backButton}
             onPress={() => navigation.goBack()} >

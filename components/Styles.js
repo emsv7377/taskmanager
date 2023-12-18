@@ -90,6 +90,16 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
     backButtonPlacement:{
         // TODO: change ? should this be on top of the screen
         flexDirection: 'row',
+        justifyContent:'center',
+        alignItems:'center',
+        marginBottom:20,
+        paddingHorizontal:5,
+        width:'80%',
+        marginTop:80,
+    },
+    cancelButtonPlacement:{
+        // TODO: change ? should this be on top of the screen
+        flexDirection: 'row',
         justifyContent:'space-between',
         alignItems:'center',
         marginBottom:40,
@@ -126,8 +136,17 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         //padding:15, 
         //margin: 4, 
     },
-    timerButton:{
-        backgroundColor : themeColors ? themeColors.addButton : 'blue',
+    startButton:{
+        backgroundColor : themeColors ? themeColors.errorColor : 'blue',
+        padding:15,
+        margin:10,
+        width: '80%',
+        borderRadius: 20,
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    resetButton:{
+        backgroundColor : themeColors ? themeColors.resetButton : 'blue',
         padding:15,
         margin:10,
         width: '80%',

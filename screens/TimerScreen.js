@@ -158,11 +158,11 @@ const Timer = ({ navigation, route }) => {
             <Text style={styles.timerText}>{formatTime(timerSeconds)}</Text>
             {/* If timer is running */}
                 {!isTimerRunning ? (
-                <TouchableOpacity style={styles.timerButton} onPress={handleTimerStart}>
+                <TouchableOpacity style={styles.startButton} onPress={handleTimerStart}>
                     <Text style={styles.buttonText}>Start</Text>
                 </TouchableOpacity>
                 ) : (
-                <TouchableOpacity style={styles.timerButton} onPress={handleTimerStop}>
+                <TouchableOpacity style={styles.startButton} onPress={handleTimerStop}>
                     <Text style={styles.buttonText}>Stop</Text>
                 </TouchableOpacity>
                 )}
