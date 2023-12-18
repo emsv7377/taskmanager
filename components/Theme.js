@@ -25,6 +25,10 @@ export const LIGHT = {
         subHeader:'#CFD8DC',
         headerBorder:'#CFD8DC',
         addButton:'#37474F',
+        switchThumbOn: 'black',
+        switchThumbOff:'#c1c2c0',
+        switchTrackOn: '#f0b4ed',
+        switchTrackOff:'#fff',
         taskColors: {
             one: '#ffb3ba',
             two: '#ffdfba',
@@ -55,6 +59,11 @@ export const DARK = {
         subHeader:'#808080',
         headerBorder:'#808080',
         addButton:'#253746',
+        switchThumbOn: 'white',
+        switchThumbOff:'#DEE4E7',
+        switchTrackOn: '#08090A',
+        switchTrackOff:'#225394',
+        addButton:'#37474F',
         taskColors: {
             one: '#ffb3ba',
             two: '#ffdfba',
@@ -87,6 +96,11 @@ export const PASTEL = {
         subHeader:'#F2BAD1',
         headerBorder:'#F2BAD1',
         addButton:'312e30',
+        switchThumbOn: 'white',
+        switchThumbOff:'black',
+        switchTrackOn: '#ff85a4',
+        switchTrackOff:'#FDDAE3',
+        addButton:'#253746',
         // pastel rainbow 
         taskColors: {
             one: '#ffb3ba',
@@ -117,6 +131,10 @@ export const FOREST = {
         labelText: '#00000',
         subHeader:'#C9DBB2',
         headerBorder:'#C9DBB2',
+        switchThumbOn: 'white',
+        switchThumbOff:'black',
+        switchTrackOn: '#5d634e',
+        switchTrackOff:'#8B9474',
         addButton:'#3A3B3C',
         taskColors: {
             one: '#ffb3ba',

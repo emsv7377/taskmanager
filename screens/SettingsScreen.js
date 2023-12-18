@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, View} from 'react-native';
+import { Text, SafeAreaView, TouchableOpacity, View } from 'react-native';
 import ThemeContext from '../components/ThemeContext';
 import Styles from '../components/Styles';
 
@@ -41,7 +41,7 @@ const SettingsScreen = ({navigation}) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.menuItem}
-                    onPress={() => navigation.navigate('NotificationsScreen')}>
+                    onPress={() => navigation.navigate('Notifications')}>
                     <Text style={styles.menuText}>Notifications</Text>
                     <Text style={styles.menuArrow}>{'→'}</Text>
                 </TouchableOpacity>
