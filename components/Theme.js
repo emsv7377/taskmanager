@@ -61,6 +61,7 @@ export const DARK = {
         switchThumbOff:'#DEE4E7',
         switchTrackOn: '#08090A',
         switchTrackOff:'#225394',
+        addButton:'#37474F',
         taskColors: {
             one: '#ffb3ba',
             two: '#ffdfba',
@@ -96,6 +97,7 @@ export const PASTEL = {
         switchThumbOff:'black',
         switchTrackOn: '#ff85a4',
         switchTrackOff:'#FDDAE3',
+        addButton:'#253746',
         // pastel rainbow 
         taskColors: {
             one: '#ffb3ba',
@@ -130,6 +132,7 @@ export const FOREST = {
         switchThumbOff:'black',
         switchTrackOn: '#5d634e',
         switchTrackOff:'#8B9474',
+        addButton:'#3A3B3C',
         taskColors: {
             one: '#ffb3ba',
             two: '#ffdfba',

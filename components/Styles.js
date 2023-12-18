@@ -50,12 +50,14 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
       fontSize:20,
       color: themeColors ? themeColors.text : 'black',  
     },
+    /**     Switches in SettingsScreen  */
     switchContainer:{
         flex: 1,
         justifyContent:'flex-end',
         alignItems:'flex-end',
         transform:[{ scale: 0.9 }]
     },
+    /**     Slider in SettingsScreen */
     sliderContainer:{
         marginLeft:'5%',
         alignItems:'center',
@@ -69,7 +71,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         width:'80%',
         //height:'20%',
     },
-    /*  ---- Settings menu end ----  */
+    /**     Settings menu end    */
     
     // Common design for buttons 
     button:{
@@ -92,13 +94,45 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         marginBottom:40,
         width:'100%'
     },
+    taskName:{
+        fontSize:40,
+        color: themeColors ? themeColors.text : 'white',
+    },
     
     // Common body text used 
     text:{
         fontSize: 20,
         color: themeColors ? themeColors.text : 'red',
     },
-
+    timerContainer:{
+        alignItems: 'center',
+        flex:1,
+        justifyContent:'center',
+    },
+    timerText:{
+        fontSize: 80,
+        color: themeColors ? themeColors.text : 'white',
+        marginTop: 20,
+        marginBottom:30,
+    },
+    timerButtonContainer:{
+        width:'100%',
+        marginTop: '45%',
+        alignItems:'center',    // center the buttons
+        justifyContent:'space-evenly',
+        //padding:15, 
+        //margin: 4, 
+    },
+    timerButton:{
+        backgroundColor : themeColors ? themeColors.addButton : 'blue',
+        padding:15,
+        margin:10,
+        width: '80%',
+        borderRadius: 20,
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    
     // Commonly used buttons 
     button:{
         alignItems:'center',
@@ -178,7 +212,6 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         color: themeColors ? themeColors.title : 'red',
         fontWeight: 'bold',
     },
-
     // Container for the common titles 
     titleContainer:{
         marginTop:'5%',
@@ -193,7 +226,6 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         marginBottom: 5,
         color: themeColors ? themeColors.labelText : 'black',
       },
-
       // Text input elements
       input: {
         height: 40,
@@ -204,8 +236,6 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         paddingHorizontal: 10,
         borderRadius:15, 
       },
-
-
       buttonText: {
         color: themeColors ? themeColors.buttonText : '#fff',
         fontSize: 20,

@@ -35,6 +35,13 @@ const IntroductionScreen = ({navigation}) => {
               Settings
             </Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Timer')}>
+            <Text style={styles.buttonText}>
+              DEBUG: Timer
+            </Text>
+        </TouchableOpacity>
         <TouchableOpacity 
           style={styles.button}
           onPress={() => navigation.navigate('Start')}>
