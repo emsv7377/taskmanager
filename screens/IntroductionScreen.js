@@ -37,9 +37,9 @@ const IntroductionScreen = ({navigation}) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Timer')}>
+          onPress={() => navigation.navigate('AddTask')}>
             <Text style={styles.buttonText}>
-              DEBUG: Timer
+              DEBUG: Add task
             </Text>
         </TouchableOpacity>
         <TouchableOpacity 

@@ -4,7 +4,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Modal, Pressable }
 import { TasksContext } from './TasksContext';
 import ThemeContext from '../components/ThemeContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Calendar } from '@ant-design/icons'; 
 
 import ColorPicker from '../components/ColorPicker';
 import Styles from '../components/Styles';
@@ -99,70 +100,121 @@ const handleAddSubTask = () => {
 
   return (
     <SafeAreaView style={styles.addTaskContainer}>
-      <KeyboardAwareScrollView>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Add new task</Text></View>
-        <Text style={styles.label}>Task name:</Text>
+      <KeyboardAwareScrollView 
+        style={styles.keyboardAwareScrollView}
+        contentContainerStyle={styles.contentContainer}>
+
+        {/* Title of page */}
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Add new task</Text>
+        </View>
+        {/* Container for date picker */}
+        <View style={styles.dateContainer}>
+          {/* Enables formatting text differently but on a row */}
+          
+          <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center', marginTop:20}}>
+          {/* Now the whole row of date is the date picker */}
+          <TouchableOpacity onPress={showDatepicker} style={[styles.menuHeader, { flexDirection: 'row', alignItems:'center', marginBottom: 10,} ]}>
+            <Text style={styles.dateLabel}>Date:</Text>
+            <Text style={[styles.label, {alignSelf:'center', marginTop:5, marginLeft:10}]}> {formattedDate}</Text>
+            
+          </TouchableOpacity>
+          </View>
+          {show && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode={mode}
+            is24Hour={true}
+            onChange={onChange}
+          />
+        )}
+        </View>
+        {/* End of date container */}
+        
+        <View style={styles.textInputContainer}>
+          <Text style={styles.label}>Task name:</Text>
+        
+          <TextInput
+            style={styles.input}
+            value={taskName}
+            onChangeText={text => setTaskName(text)}
+          />
+          
+          <Text style={styles.label}>Description:</Text>
+          <TextInput
+            style={styles.input}
+            value={description}
+            onChangeText={text => setDescription(text)}
+            multiline
+          />
+      
+        <Text style={styles.label}>Sub Tasks</Text>
         <TextInput
           style={styles.input}
-          value={taskName}
-          onChangeText={text => setTaskName(text)}
+          value={subTaskName}
+          onChangeText={text => setSubTaskName(text)}
+          placeholder="Enter sub-task name"
+          onSubmitEditing={handleAddSubTask} // Triggered when "Enter" is pressed
         />
-
-        <Text style={styles.label}>Description:</Text>
-        <TextInput
-          style={styles.input}
-          value={description}
-          onChangeText={text => setDescription(text)}
-          multiline
-        />
-
-      <Text style={styles.label}>Sub Tasks</Text>
-      <TextInput
-        style={styles.input}
-        value={subTaskName}
-        onChangeText={text => setSubTaskName(text)}
-        placeholder="Enter sub-task name"
-        onSubmitEditing={handleAddSubTask} // Triggered when "Enter" is pressed
-      />
         {subTasks.map(subTask => (
-        <Text style={styles.displaySubtasks}key={subTask.id}>{subTask.name}</Text>
-      ))}
-      <Text style={styles.label}>Choose a color: </Text>
-      <Pressable
-          style={styles.colorPickerButton}
-          onPress={() => setShowColorPicker(true)}>
-          <Text style={styles.colorPickerButtonText}>color</Text>
-      </Pressable>
-      <ColorPicker
-        isVisible={showColorPicker}
-        onClose={() => setShowColorPicker(false)}
-        onSelectColor={handleColorSelect}
-      />
+          <Text style={styles.displaySubtasks}key={subTask.id}>{subTask.name}</Text>
+        ))}
+        <Text style={styles.label}>Estimated duration (minutes):</Text>
+          <TextInput
+            style={styles.input}
+            value={time}
+            onChangeText={text => setTime(text)}
+            keyboardType="numeric"
+          />
+          
+        {/** Wrap color & category picker in a View */}
+        <View style={styles.pickerContainer}>
+          {/* Makes a grid so label is symmetric to its corresponding pressable */}
+          <View style={styles.pickerColumn}>
+          <Text style={[styles.label, styles.pickerText]}>Color</Text>
+            <Pressable
+              style={styles.colorPickerButton}
+              onPress={() => setShowColorPicker(true)}>
+              {/*<Text style={styles.colorPickerButtonText}>{pickedColor}</Text>*/}
+          </Pressable>
+          <ColorPicker
+            isVisible={showColorPicker}
+            onClose={() => setShowColorPicker(false)}
+            onSelectColor={handleColorSelect}
+          />
+          </View>
 
-      <Text style={styles.label}>Estimated duration (minutes):</Text>
-        <TextInput
-          style={styles.input}
-          value={time}
-          onChangeText={text => setTime(text)}
-          keyboardType="numeric"
-        />
-
-  <View style={styles.dateContainer}>
-    <Text style={styles.label}>Date: {formattedDate}</Text>
-    <TouchableOpacity onPress={showDatepicker} style={styles.changeButton}>
-        <Text style={styles.buttonText}>Change</Text>
-      </TouchableOpacity>
+          <View style={styles.pickerColumn}>
+            <Text style={[styles.label, styles.pickerText]}>Category</Text>
+          <Pressable
+            style={styles.colorPickerButton}
+            onPress={() => setShowColorPicker(true)}>
+            {/*<Text style={styles.colorPickerButtonText}>{pickedColor}</Text>*/}
+          </Pressable>
+          <ColorPicker
+            isVisible={showColorPicker}
+            onClose={() => setShowColorPicker(false)}
+            onSelectColor={handleColorSelect}
+          />
+          </View>
+          <View style={styles.pickerColumn}>
+            <Text style={[styles.label, styles.pickerText]}>Priority</Text>
+          <Pressable
+            style={styles.colorPickerButton}
+            onPress={() => setShowColorPicker(true)}>
+            {/*<Text style={styles.colorPickerButtonText}>{pickedColor}</Text>*/}
+          </Pressable>
+          <ColorPicker
+            isVisible={showColorPicker}
+            onClose={() => setShowColorPicker(false)}
+            onSelectColor={handleColorSelect}
+          />
+          </View>
+        </View>
       </View>
-      {show && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode={mode}
-          is24Hour={true}
-          onChange={onChange}
-        />
-      )}
+  
+      
       {/* Add task & back-buttons  */}
       <View style={styles.cancelButtonPlacement}>
         <TouchableOpacity 

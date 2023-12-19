@@ -154,7 +154,6 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         alignItems:'center',
         justifyContent:'center',
     },
-    
     // Commonly used buttons 
     button:{
         alignItems:'center',
@@ -227,6 +226,38 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         flex: 1, 
         padding: 20,
         backgroundColor: themeColors ? themeColors.background : '#000',
+        alignItems:'center',
+    },
+    textInputContainer:{
+        marginBottom: 20,
+        alignItems: 'center',
+        width:'90%',
+    },
+    input: { 
+        // TextInput-elements 
+        height: 40,
+        borderColor: themeColors ? themeColors.inputContainer : 'gray',
+        backgroundColor: themeColors ? themeColors.inputContainer : 'gray',
+        borderWidth: 1,
+        marginBottom: 20,
+        paddingHorizontal: 10,
+        borderRadius:15,
+        width:'100%', 
+    },
+    keyboardAwareScrollView:{
+        flex:1, 
+    },
+    contentContainer:{
+        // For the KeyboardAwareScrollView element
+        padding:20,
+        alignItems:'center',
+    },
+    label: {
+        fontSize: 18,
+        marginBottom: 5,
+        color: themeColors ? themeColors.labelText : 'black',
+        textAlign:'left',
+        alignSelf:'flex-start',
     },
     // Common titles 
     title:{
@@ -236,33 +267,15 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
     },
     // Container for the common titles 
     titleContainer:{
-        marginTop:'5%',
-        height:'10%',
+        top:-20,
         alignItems:'center',
         justifyContent:'flex-start',
       },
-
-      // Labels for text input and similarly 
-      label: {
-        fontSize: 18,
-        marginBottom: 5,
-        color: themeColors ? themeColors.labelText : 'black',
-      },
-      // Text input elements
-      input: {
-        height: 40,
-        borderColor: themeColors ? themeColors.inputContainer : 'gray',
-        backgroundColor: themeColors ? themeColors.inputContainer : 'gray',
-        borderWidth: 1,
-        marginBottom: 20,
-        paddingHorizontal: 10,
-        borderRadius:15, 
-      },
-      buttonText: {
+    buttonText: {
         color: themeColors ? themeColors.buttonText : '#fff',
         fontSize: 20,
-      },
-      addButton: {
+    },
+    addButton: {
         backgroundColor: themeColors ? themeColors.addButton : '#3498db',
         paddingVertical: 15,
         paddingHorizontal: 30,
@@ -270,8 +283,9 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         alignItems: 'center',
         width:'55%',
         //marginRight:10,
-      },
-      backButton: {
+      
+    },
+    backButton: {
         backgroundColor: themeColors ? themeColors.button : '#3498db',
         paddingVertical: 15,
         paddingHorizontal: 30,
@@ -280,11 +294,32 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         alignItems: 'center',
         width:'40%',
       },
+      pickerContainer:{
+        flexDirection: 'row',
+        justifyContent:'flex-start',
+      },
+      pickerColumn:{
+        alignItems:'center',
+      },
+      pickerText:{
+        marginLeft:15, 
+        marginRight:10,
+      },
+      dateLabel:{
+        fontSize: 20,
+        color: themeColors ? themeColors.text : '#fff',
+        fontWeight:'bold', 
+
+      },
       colorPickerButton: {
         padding: 10,
-        borderRadius: 15,
+        width:40,
+        height:40,
+        borderRadius: 5,
         backgroundColor: pickedColor,
         marginBottom: 20,
+        marginLeft: 10, 
+        marginRight: 10,
       },
       colorPickerButtonText: {
         color: themeColors ? themeColors.buttonText : '#fff',
@@ -300,6 +335,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
       dateContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        width:'90%',
         // Additional styles for the container of date text and button
       },
       changeButton: {
