@@ -1,13 +1,14 @@
 import React, { useState, useContext } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Modal, Pressable } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Pressable } from 'react-native';
 import { TasksContext } from './TasksContext';
 import ThemeContext from '../components/ThemeContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Calendar } from '@ant-design/icons'; 
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import ColorPicker from '../components/ColorPicker';
+import CategoryPicker from '../components/CategoryPicker';
 import Styles from '../components/Styles';
 
 const AddTaskScreen = ({ navigation }) => {
@@ -43,11 +44,14 @@ const AddTaskScreen = ({ navigation }) => {
   };
   const { theme } = useContext(ThemeContext);   // Fetch current theme
   const { colors: themeColors } = theme;                     // Fetch colors for components current theme 
+  const styles = Styles({themeColors, pickedColor});
   
   const [pickedColor, setPickedColor] = useState(themeColors ? themeColors.button : '#575A5E');  // TODO: change default value 
   const [showColorPicker, setShowColorPicker] = useState(false);
-  const styles = Styles({themeColors, pickedColor});
+  const [showCategoryPicker, setShowCategoryPicker] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
+  // Handles selection of color 
   const handleColorSelect = (selectedColor) => {
     setPickedColor(selectedColor);
     setShowColorPicker(false);
@@ -67,18 +71,19 @@ const AddTaskScreen = ({ navigation }) => {
     return uuid.join('');
 }
 
-// Function to handle adding sub-tasks
-const handleAddSubTask = () => {
-  if (subTaskName.trim() !== '') {
-    const newSubTask = {
-      id: generateUUID(10), // Generate unique ID for sub-task
-      name: subTaskName.trim(),
-      completed: false,
-    };
-    setSubTasks([...subTasks, newSubTask]);
-    setSubTaskName(''); // Clear input field after adding
-  }
-};
+  // Function to handle adding sub-tasks
+  const handleAddSubTask = () => {
+    if (subTaskName.trim() !== '') {
+      const newSubTask = {
+        id: generateUUID(10), // Generate unique ID for sub-task
+        name: subTaskName.trim(),
+        completed: false,
+      };
+      setSubTasks([...subTasks, newSubTask]);
+      setSubTaskName(''); // Clear input field after adding
+    }
+  };
+
   const handleAddTask = () => {
     const taskId = generateUUID(10);
     // Code to add task to Today's list
@@ -106,35 +111,34 @@ const handleAddSubTask = () => {
 
         {/* Title of page */}
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Add new task</Text>
+          <Text style={styles.title}>Add new task </Text>
         </View>
         {/* Container for date picker */}
         <View style={styles.dateContainer}>
-          {/* Enables formatting text differently but on a row */}
-          
-          <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center', marginTop:20}}>
-          {/* Now the whole row of date is the date picker */}
-          <TouchableOpacity onPress={showDatepicker} style={[styles.menuHeader, { flexDirection: 'row', alignItems:'center', marginBottom: 10,} ]}>
-            <Text style={styles.dateLabel}>Date:</Text>
-            <Text style={[styles.label, {alignSelf:'center', marginTop:5, marginLeft:10}]}> {formattedDate}</Text>
-            
-          </TouchableOpacity>
-          </View>
+          {/* Ensures that the whole section of date is on the same row */}
+          <View style={styles.dateRow}>
+            <TouchableOpacity onPress={showDatepicker} 
+              style={styles.menuItem}>
+                  <Text style={styles.dateLabel}>Date:</Text>
+                <Text style={[styles.dateLabel, {marginLeft: 10, marginTop: 0, marginRight: 20, fontSize: 16, alignSelf: 'center', fontWeight:'normal'}]}> {formattedDate}</Text>
+                <Ionicons name='calendar-outline' size={24} color="#fff" />
+            </TouchableOpacity>
+            </View>
           {show && (
-          <DateTimePicker
+            <DateTimePicker
             testID="dateTimePicker"
             value={date}
             mode={mode}
             is24Hour={true}
             onChange={onChange}
-          />
-        )}
-        </View>
+            />
+            )}
+          
+          </View> 
         {/* End of date container */}
         
         <View style={styles.textInputContainer}>
           <Text style={styles.label}>Task name:</Text>
-        
           <TextInput
             style={styles.input}
             value={taskName}
@@ -149,12 +153,12 @@ const handleAddSubTask = () => {
             multiline
           />
       
-        <Text style={styles.label}>Sub Tasks</Text>
+        <Text style={styles.label}>Sub tasks:</Text>
         <TextInput
           style={styles.input}
           value={subTaskName}
           onChangeText={text => setSubTaskName(text)}
-          placeholder="Enter sub-task name"
+          placeholder="Enter name of sub task"
           onSubmitEditing={handleAddSubTask} // Triggered when "Enter" is pressed
         />
         {subTasks.map(subTask => (
@@ -187,16 +191,22 @@ const handleAddSubTask = () => {
 
           <View style={styles.pickerColumn}>
             <Text style={[styles.label, styles.pickerText]}>Category</Text>
-          <Pressable
-            style={styles.colorPickerButton}
-            onPress={() => setShowColorPicker(true)}>
-            {/*<Text style={styles.colorPickerButtonText}>{pickedColor}</Text>*/}
-          </Pressable>
-          <ColorPicker
-            isVisible={showColorPicker}
-            onClose={() => setShowColorPicker(false)}
-            onSelectColor={handleColorSelect}
-          />
+            <Pressable
+              style={styles.colorPickerButton}
+              onPress={() => setShowCategoryPicker(true)}>
+              {/* Display the selected category icon */}
+                {selectedCategory && (
+                  <Ionicons name={selectedCategory.icon} size={24} color={themeColors ? themeColors.icon : '#ffffff'} />
+                )}
+            </Pressable>
+            <CategoryPicker
+              isVisible={showCategoryPicker}
+              onClose={() => setShowCategoryPicker(false)}
+              onSelectCategory={(category) => {
+                setSelectedCategory(category);
+                setShowCategoryPicker(false);
+              }}
+            />
           </View>
           <View style={styles.pickerColumn}>
             <Text style={[styles.label, styles.pickerText]}>Priority</Text>

@@ -67,6 +67,7 @@ export const DARK = {
         addButton:'#37474F',
         errorColor:'#CF6679',
         resetButton:'#',
+        icon: '#fffff',
         taskColors: {
             one: '#ffb3ba',
             two: '#ffdfba',

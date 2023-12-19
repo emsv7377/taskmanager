@@ -39,6 +39,9 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         width:'80%',
         alignItems:'center',
     },
+    icon:{
+        color: themeColors ? themeColors.text : '#ffffff',
+    },
     menuText:{
         fontSize:20,
         color: themeColors ? themeColors.text : 'black',
@@ -84,8 +87,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         borderRadius: 20,
         marginTop:60,
     },
-
-
+    
     // Placement for back buttons 
     backButtonPlacement:{
         // TODO: change ? should this be on top of the screen
@@ -229,6 +231,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         alignItems:'center',
     },
     textInputContainer:{
+        marginTop:20,
         marginBottom: 20,
         alignItems: 'center',
         width:'90%',
@@ -305,11 +308,36 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         marginLeft:15, 
         marginRight:10,
       },
+      dateRow:{
+        flexDirection: 'row',
+        justifyContent:'center',
+        marginTop:20,
+        alignItems:'center', 
+        marginBottom:10,
+        borderBottomColor: themeColors ? themeColors.headerBorder : 'gray',
+        borderBottomWidth:1,
+        width:'100%',
+    },
       dateLabel:{
         fontSize: 20,
         color: themeColors ? themeColors.text : '#fff',
         fontWeight:'bold', 
-
+      },
+      dateContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width:'90%',
+        // Additional styles for the container of date text and button
+      },
+      categoryPickerButton:{
+        padding:10, 
+        width: 40,
+        height:40,
+        borderRadius:5,
+        backgroundColor: themeColors ? themeColors.text : '#fffff',
+        marginBottom: 20, 
+        marginLeft: 10,
+        marginRight: 10,
       },
       colorPickerButton: {
         padding: 10,
@@ -332,12 +360,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         alignItems: 'flex-start',
         margin: 20,
       },
-      dateContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        width:'90%',
-        // Additional styles for the container of date text and button
-      },
+      
       changeButton: {
         backgroundColor: themeColors ? themeColors.button : '#3498db',
         paddingVertical: 10,
@@ -357,6 +380,8 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         //backgroundColor : themeColors ? themeColors.colorPicker : 'gray',
     },
     colorPickerContainer: {
+        //flexDirection: 'row',
+        justifyContent:'space-between',
         width:'80%',
         padding: 20,
         backgroundColor: themeColors ? themeColors.colorPicker : 'gray',
