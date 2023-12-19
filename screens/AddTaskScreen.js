@@ -1,13 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { View, Text, TextInput, TouchableOpacity, Pressable } from 'react-native';
-import { TasksContext } from './TasksContext';
-import ThemeContext from '../components/ThemeContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 
+import { TasksContext } from './TasksContext';
+import ThemeContext from '../components/ThemeContext';
 import ColorPicker from '../components/ColorPicker';
 import CategoryPicker from '../components/CategoryPicker';
 import PriorityPicker from '../components/PriorityPicker';
@@ -37,6 +37,20 @@ const AddTaskScreen = ({ navigation }) => {
   const [subTaskName, setSubTaskName] = useState('');
   const [subTasks, setSubTasks] = useState([]);
 
+  // Checks if task is empty or not 
+  const [entriesFilled, setEntriesFilled] = useState(false);
+
+  useEffect(() => {
+    // Check if any of the required fields are filled
+    const anyEntryFilled =
+      taskName.trim() !== '' ||
+      description.trim() !== '' ||
+      subTasks.length > 0 ||
+      time.trim() !== '';
+
+    setEntriesFilled(anyEntryFilled);
+  }, [taskName, description, subTasks, time]);
+
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
     setShow(false);
@@ -44,10 +58,11 @@ const AddTaskScreen = ({ navigation }) => {
   };
 
   const showMode = (currentMode) => {
-    setShow(true);
+    setShow(!show);
     setMode(currentMode);
   };
 
+  // TODO: something happens with the whole layout when the show date is true
   const showDatepicker = () => {
     showMode('date');
   };
@@ -124,7 +139,7 @@ const AddTaskScreen = ({ navigation }) => {
     };
 
     addTask(newTask);
-    navigation.navigate('TaskList');
+    navigation.navigate('TaskList', { entriesFilled });
   };
 
 
@@ -177,6 +192,7 @@ const AddTaskScreen = ({ navigation }) => {
             onChangeText={text => setDescription(text)}
             multiline
           />
+          {/* TODO: multiline makes the input box look weird  */}
       
         <Text style={styles?.label}>Sub tasks:</Text>
         <TextInput

@@ -435,18 +435,18 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         flexDirection: 'row',
       },
       taskName: {
-        color: themeColors ? themeColors.boxText : '#fff',
+        color: themeColors ? themeColors.boxTextColor : '#fff',
         fontSize: 22,
         fontWeight: 'bold',
         marginBottom: 5,
       },
       taskDescription: {
-        color: themeColors ? themeColors.boxText : '#fff',
+        color: themeColors ? themeColors.boxTextColor  : '#fff',
         fontSize: 16,
         marginBottom: 5,
       },
       taskTime: {
-        color: themeColors ? themeColors.boxText : '#fff',
+        color: themeColors ? themeColors.boxTextColor  : '#fff',
         fontSize: 16,
       },
     checkBox:{
@@ -457,7 +457,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
       borderWidth: 5,
-      borderColor: themeColors ? themeColors.boxText : '#fff',
+      borderColor: themeColors ? themeColors.boxTextColor  : '#fff',
     },
     column1:{
       flexDirection: 'column',
@@ -470,12 +470,12 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
       flex: 1
     },
     checkMark:{
-      color: themeColors ? themeColors.boxText : '#fff',
+      color: themeColors ? themeColors.boxTextColor  : '#fff',
       fontSize: 20,
     },
     twobutton:{
       alignItems:'center',
-      backgroundColor: themeColors ? themeColors.button : 'gray',
+      backgroundColor: themeColors ? themeColors.buttonColor  : 'gray',
       fontSize: 24,
       padding: 15,
       margin: 4,

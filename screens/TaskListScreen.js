@@ -80,15 +80,18 @@ const TaskListScreen = ({navigation}) => {
         keyExtractor={(item, index) => index.toString()}
         contentContainerStyle={styles.taskList}
       />
-      <View style={styles.row}>
-          <TouchableOpacity onPress={handleNextDay} style={styles.twobutton}>
+
+    <View style={styles.cancelButtonPlacement}>
+    {/* Changed navigation since all data is left on the screen if goBack() is used */}
+      <TouchableOpacity 
+                style={styles.backButton}
+                onPress={() => navigation.navigate('AddTask')} >
+          <Text style={styles.buttonText}>Return</Text>  
+        </TouchableOpacity>
+          <TouchableOpacity onPress={handleNextDay} style={styles.addButton}>
           <Text style={styles.buttonText}>Next Day</Text>
         </TouchableOpacity>
-        <TouchableOpacity 
-                style={styles.twobutton}
-                onPress={() => navigation.goBack()} >
-          <Text style={styles.buttonText}> Back </Text>  
-        </TouchableOpacity>
+        
         </View>
     </SafeAreaView>
   );
