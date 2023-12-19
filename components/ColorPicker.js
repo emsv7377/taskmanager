@@ -6,11 +6,11 @@ import Styles from './Styles';
 const ColorPicker = ({ onSelectColor, isVisible, onClose }) => {
     // Fetch current theme and colors of current theme 
     const { theme } = useContext(ThemeContext);
-    const { colors } = theme;
-    const styles = Styles(colors);
+    const { colors: themeColors } = theme;
+    const styles = Styles({themeColors});
 
     // Fetch colorOptions for task colors for current theme
-    const colorOptions = colors.taskColors || {
+    const colorOptions = themeColors.taskColors || {
         // If theme is null, default to these colors 
         one: '#3498db', 
         two: '#e74c3c', 
@@ -26,7 +26,7 @@ const ColorPicker = ({ onSelectColor, isVisible, onClose }) => {
         <SafeAreaView>
             <Modal transparent={true} animationType="slide" visible={isVisible}>
                 <View style={styles.modalContainer}>
-                    <View style={styles.colorPickerContainer}>
+                    <View style={styles.optionsContainer}>
                         <FlatList
                             data={colorArray}
                             horizontal

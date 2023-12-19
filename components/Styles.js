@@ -22,12 +22,12 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         paddingBottom: 4,
         margin: 4,
         borderBottomWidth: 1,
-        borderColor: themeColors ? themeColors.headerBorder : 'gray',
+        borderColor: themeColors ? themeColors.headerBorderColor : 'gray',
         width:'80%',
     },
     menuHeader:{
         fontSize:16,
-        color: themeColors ? themeColors.labelText : 'gray',
+        color: themeColors ? themeColors.labelTextColor : 'gray',
         textAlign:'center',
     },
     menuItem:{
@@ -39,16 +39,19 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         width:'80%',
         alignItems:'center',
     },
+    icon:{
+        color: themeColors ? themeColors.textColor : '#ffffff',
+    },
     menuText:{
         fontSize:20,
-        color: themeColors ? themeColors.text : 'black',
+        color: themeColors ? themeColors.textColor : 'black',
     },
     menuArrow:{
       position:'absolute',
       right:15,
       alignSelf:'center',
       fontSize:20,
-      color: themeColors ? themeColors.text : 'black',  
+      color: themeColors ? themeColors.textColor : 'black',  
     },
     /**     Switches in SettingsScreen  */
     switchContainer:{
@@ -76,7 +79,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
     // Common design for buttons 
     button:{
         alignItems: 'center',
-        backgroundColor: themeColors ? themeColors.button : 'green',
+        backgroundColor: themeColors ? themeColors.buttonColor : 'green',
         fontSize: 24,
         padding: 15,
         margin: 4,
@@ -84,8 +87,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         borderRadius: 20,
         marginTop:60,
     },
-
-
+    
     // Placement for back buttons 
     backButtonPlacement:{
         // TODO: change ? should this be on top of the screen
@@ -109,13 +111,13 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
     },
     taskName:{
         fontSize:40,
-        color: themeColors ? themeColors.text : 'white',
+        color: themeColors ? themeColors.textColor : 'white',
     },
     
     // Common body text used 
     text:{
         fontSize: 20,
-        color: themeColors ? themeColors.text : 'red',
+        color: themeColors ? themeColors.textColor : 'red',
     },
     timerContainer:{
         alignItems: 'center',
@@ -124,7 +126,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
     },
     timerText:{
         fontSize: 80,
-        color: themeColors ? themeColors.text : 'white',
+        color: themeColors ? themeColors.textColor : 'white',
         marginTop: 20,
         marginBottom:30,
     },
@@ -146,7 +148,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         justifyContent:'center',
     },
     resetButton:{
-        backgroundColor : themeColors ? themeColors.resetButton : 'blue',
+        backgroundColor : themeColors ? themeColors.resetButtonColor : 'blue',
         padding:15,
         margin:10,
         width: '80%',
@@ -154,11 +156,10 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         alignItems:'center',
         justifyContent:'center',
     },
-    
     // Commonly used buttons 
     button:{
         alignItems:'center',
-        backgroundColor: themeColors ? themeColors.button : 'gray',
+        backgroundColor: themeColors ? themeColors.buttonColor : 'gray',
         fontSize: 24,
         padding: 15,
         margin: 4,
@@ -166,7 +167,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         borderRadius: 20,
     },
     buttonText:{
-        color: themeColors ? themeColors.buttonText : 'darkgrey',
+        color: themeColors ? themeColors.buttonTextColor : 'darkgrey',
         fontSize: 20,
     },
     // Application name on IntroductionScreen 
@@ -194,7 +195,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 20,
-        backgroundColor: themeColors ? themeColors.background : '#fff',
+        backgroundColor: themeColors ? themeColors.backgroundColor : '#fff',
     },
     
     // Row used by AddTaskScreen
@@ -210,7 +211,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         aspectRatio: 1, // Keeps the boxes square
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: themeColors ? themeColors.box : '#3498db',
+        backgroundColor: themeColors ? themeColors.boxColor : '#3498db',
         margin: 10,
         borderRadius: 10,
         borderWidth: 1,
@@ -218,7 +219,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
     },
     // Text for the boxes in AddTaskScreen 
     boxText: {
-        color: themeColors ? themeColors.boxText : '#fff',
+        color: themeColors ? themeColors.boxTextColor : '#fff',
         fontSize: 18,
         fontWeight: 'bold',
     },
@@ -226,53 +227,69 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
     addTaskContainer:{
         flex: 1, 
         padding: 20,
-        backgroundColor: themeColors ? themeColors.background : '#000',
+        backgroundColor: themeColors ? themeColors.backgroundColor : '#000',
+        alignItems:'center',
+    },
+    textInputContainer:{
+        marginTop:20,
+        marginBottom: 20,
+        alignItems: 'center',
+        width:'90%',
+    },
+    input: { 
+        // TextInput-elements 
+        height: 40,
+        borderColor: themeColors ? themeColors.inputContainerColor : 'gray',
+        backgroundColor: themeColors ? themeColors.inputContainerColor : 'gray',
+        borderWidth: 1,
+        marginBottom: 20,
+        paddingHorizontal: 10,
+        borderRadius:15,
+        width:'100%', 
+    },
+    keyboardAwareScrollView:{
+        flex:1, 
+    },
+    contentContainer:{
+        // For the KeyboardAwareScrollView element
+        padding:20,
+        alignItems:'center',
+    },
+    label: {
+        fontSize: 18,
+        marginBottom: 5,
+        color: themeColors ? themeColors.labelTextColor : 'black',
+        textAlign:'left',
+        alignSelf:'flex-start',
     },
     // Common titles 
     title:{
         fontSize: 24,
-        color: themeColors ? themeColors.title : 'red',
+        color: themeColors ? themeColors.titleColor : 'red',
         fontWeight: 'bold',
     },
     // Container for the common titles 
     titleContainer:{
-        marginTop:'5%',
-        height:'10%',
+        top:-20,
         alignItems:'center',
         justifyContent:'flex-start',
       },
-
-      // Labels for text input and similarly 
-      label: {
-        fontSize: 18,
-        marginBottom: 5,
-        color: themeColors ? themeColors.labelText : 'black',
-      },
-      // Text input elements
-      input: {
-        height: 40,
-        borderColor: themeColors ? themeColors.inputContainer : 'gray',
-        backgroundColor: themeColors ? themeColors.inputContainer : 'gray',
-        borderWidth: 1,
-        marginBottom: 20,
-        paddingHorizontal: 10,
-        borderRadius:15, 
-      },
-      buttonText: {
-        color: themeColors ? themeColors.buttonText : '#fff',
+    buttonText: {
+        color: themeColors ? themeColors.buttonTextColor : '#fff',
         fontSize: 20,
-      },
-      addButton: {
-        backgroundColor: themeColors ? themeColors.addButton : '#3498db',
+    },
+    addButton: {
+        backgroundColor: themeColors ? themeColors.addButtonColor : '#3498db',
         paddingVertical: 15,
         paddingHorizontal: 30,
         borderRadius: 20,
         alignItems: 'center',
         width:'55%',
         //marginRight:10,
-      },
-      backButton: {
-        backgroundColor: themeColors ? themeColors.button : '#3498db',
+      
+    },
+    backButton: {
+        backgroundColor: themeColors ? themeColors.buttonColor : '#3498db',
         paddingVertical: 15,
         paddingHorizontal: 30,
         borderRadius: 20,
@@ -280,50 +297,19 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         alignItems: 'center',
         width:'40%',
       },
-      colorPickerButton: {
-        padding: 10,
-        borderRadius: 15,
-        backgroundColor: pickedColor,
-        marginBottom: 20,
-      },
-      colorPickerButtonText: {
-        color: themeColors ? themeColors.buttonText : '#fff',
-        fontSize: 16,
-      },
-
-      displaySubtasks: {
-        fontSize:16,
-        color: themeColors ? themeColors.labelText : 'gray',
-        alignItems: 'flex-start',
-        margin: 20,
-      },
-      dateContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        // Additional styles for the container of date text and button
-      },
-      changeButton: {
-        backgroundColor: themeColors ? themeColors.button : '#3498db',
-        paddingVertical: 10,
-        paddingHorizontal: 10,
-        margin: 20,
-        borderRadius: 5,
-        alignItems: 'center',
-      },
-    /// END AddTaskScreen 
-
-
-    // ColorPicker 
+        // ColorPicker 
     modalContainer:{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         //backgroundColor : themeColors ? themeColors.colorPicker : 'gray',
     },
-    colorPickerContainer: {
+    optionsContainer: {
+        //flexDirection: 'row',
+        justifyContent:'space-between',
         width:'80%',
         padding: 20,
-        backgroundColor: themeColors ? themeColors.colorPicker : 'gray',
+        backgroundColor: themeColors ? themeColors.backButtonColor : 'blue',
         borderRadius: 10,
         marginBottom: 20,
         elevation: 5, // adds shadow on Android 
@@ -338,6 +324,94 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         borderRadius: 10,
         marginRight: 10,
     },
+    // Used in AddTaskScreen
+    pickerContainer:{
+        flexDirection: 'row',
+        justifyContent:'flex-start',
+      },
+    pickerColumn:{
+        alignItems:'center',
+      },
+    pickerText:{
+        marginLeft:15, 
+        marginRight:10,
+      },
+    dateRow:{
+        flexDirection: 'row',
+        justifyContent:'center',
+        marginTop:20,
+        alignItems:'center', 
+        marginBottom:10,
+        borderBottomColor: themeColors ? themeColors.headerBorderColor : 'gray',
+        borderBottomWidth:1,
+        width:'100%',
+    },
+    dateLabel:{
+        fontSize: 20,
+        color: themeColors ? themeColors.textColor : '#fff',
+        fontWeight:'bold', 
+      },
+    dateContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width:'90%',
+        // Additional styles for the container of date text and button
+    },
+    optionButton:{
+        width: '30%', // Adjust the width as needed for three buttons in a row
+        aspectRatio:1,  // this makes the button a perfect square
+        borderRadius: 50,   // borderradius of 50 will make the square a circle 
+        //height:60,
+        color: themeColors ? themeColors.textColor : 'red',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        margin: 5, // Added margin for better spacing between items
+    },
+    // Used by CategoryPicker
+    categoryRow: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginVertical: 10,
+    },
+    iconContainer:{
+        flexDirection: 'column',
+        alignItems:'center',
+        marginHorizontal:20,
+
+    },
+    colorPickerButton: {
+        padding: 10,
+        width:50,
+        height:50,
+        borderRadius: 10,
+        marginBottom: 20,
+        marginLeft: 10, 
+        marginRight: 10,
+        margin:5,
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    colorPickerButtonText: {
+        color: themeColors ? themeColors.buttonTextColor : '#fff',
+        fontSize: 16,
+    },
+    displaySubtasks: {
+        fontSize:16,
+        color: themeColors ? themeColors.labelTextColor : 'gray',
+        alignItems: 'flex-start',
+        margin: 20,
+      },
+    changeButton: {
+        backgroundColor: themeColors ? themeColors.buttonColor : '#3498db',
+        paddingVertical: 10,
+        paddingHorizontal: 10,
+        margin: 20,
+        borderRadius: 5,
+        alignItems: 'center',
+    },
     closeButtonContainer:{
         alignItems: 'flex-end',
         marginTop: 20,
@@ -345,8 +419,12 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
     closeButton: {
         // Used by ColorPicker
         fontSize: 16,
-        color: themeColors ? themeColors.buttonText : 'black',
+        color: themeColors ? themeColors.buttonTextColor : 'black',
     },
+    /// END AddTaskScreen 
+
+
+    
 
     //Tasklistscreen
       taskItem: {

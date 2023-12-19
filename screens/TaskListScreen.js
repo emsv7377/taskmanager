@@ -17,7 +17,7 @@ const TaskListScreen = ({navigation}) => {
   const [selectedDate, setSelectedDate] = useState(formattedDate); // State för att hålla det valda datumet
   const { theme } = useContext(ThemeContext);   // fetch current theme
   const { colors: themeColors } = theme;                     // Fetch colors for components current theme 
-  const [pickedColor, setPickedColor] = useState(themeColors ? themeColors.button : '#575A5E');  // TODO: change default value 
+  const [pickedColor, setPickedColor] = useState(themeColors ? themeColors.buttonColor : '#575A5E');  // TODO: change default value 
   const [showColorPicker, setShowColorPicker] = useState(false);
   const styles = Styles({themeColors, pickedColor});
 
