@@ -14,10 +14,12 @@ const CategoryPicker = ({ onSelectCategory, isVisible, onClose }) => {
 
     // Fetch category options 
     const categoryOptions = [
-        { id: '1', name: 'Wellbeing', icon: 'heart-outline'},
+        { id: '1', name: 'Health', icon: 'heart-outline'},
         { id: '2', name: 'Home', icon: 'home-outline'},
         { id: '3', name: 'Health', icon: 'medkit-outline' },
         { id: '4', name: 'Fun', icon: 'game-controller-outline' },
+        { id: '5', name: 'Important', icon: 'warning-outline' },
+        { id: '6', name: 'Food', icon: 'restaurant-outline' },
 
     ];
 
@@ -26,13 +28,15 @@ const CategoryPicker = ({ onSelectCategory, isVisible, onClose }) => {
         <SafeAreaView>
             <Modal transparent={true} animationType="slide" visible={isVisible}>
                 <View style={styles.modalContainer}>
-                    <View style={[styles.colorPickerContainer, { flexDirection: 'row',}]}>
+                        <View style={styles.colorPickerContainer}>
                         <FlatList
                             data={categoryOptions}
                             keyExtractor={(item) => item.id}
+                            contentContainerStyle={styles.categoryRow}
+                            numColumns={3}
                             renderItem={({ item }) => (
                                 <TouchableOpacity
-                                    style={[styles.colorPickerButton, {backgroundColor: '#fff', justifyContent:'center', alignItems:'center', padding:10,}]}
+                                    style={styles.categoryPickerButton}
                                     onPress={() => { onSelectCategory(item); onClose(); }}
                                 >
                                     <Ionicons name={item.icon} size={24} color={colors.icon} />
@@ -43,9 +47,8 @@ const CategoryPicker = ({ onSelectCategory, isVisible, onClose }) => {
                         <TouchableOpacity style={styles.closeButtonContainer} onPress={onClose}>
                             <Text style={styles.closeButton}>Close</Text>
                         </TouchableOpacity>
+                        </View>
                     </View>
-                    
-                </View>
             </Modal>
         </SafeAreaView>
     );

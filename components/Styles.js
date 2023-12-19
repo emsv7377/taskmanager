@@ -329,15 +329,31 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         width:'90%',
         // Additional styles for the container of date text and button
       },
+      categoryRow: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginVertical: 10,
+      },
       categoryPickerButton:{
-        padding:10, 
-        width: 40,
+        /*width: 40,
         height:40,
         borderRadius:5,
         backgroundColor: themeColors ? themeColors.text : '#fffff',
-        marginBottom: 20, 
-        marginLeft: 10,
-        marginRight: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        margin: 5, // Added margin for better spacing between items
+        borderRadius: 10,*/
+        width: '30%', // Adjust the width as needed for three buttons in a row
+        //height: 120,  // Adjust the height as needed
+        borderRadius: 10,
+        backgroundColor: themeColors ? themeColors.text : '#ffffff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        margin: 5, // Added margin for better spacing between items
       },
       colorPickerButton: {
         padding: 10,
@@ -348,6 +364,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         marginBottom: 20,
         marginLeft: 10, 
         marginRight: 10,
+        margin:5,
       },
       colorPickerButtonText: {
         color: themeColors ? themeColors.buttonText : '#fff',
@@ -379,6 +396,11 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         alignItems: 'center',
         //backgroundColor : themeColors ? themeColors.colorPicker : 'gray',
     },
+    rowContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%', // Adjust the width as needed
+      },
     colorPickerContainer: {
         //flexDirection: 'row',
         justifyContent:'space-between',
