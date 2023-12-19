@@ -68,11 +68,13 @@ const AddTaskScreen = ({ navigation }) => {
     setShowColorPicker(false);
   };
 
+  // Handles selection of category 
   const handleCategorySelect = (selectedCategory) => {
     setSelectedCategory(selectedCategory);
     setShowCategoryPicker(false);
   }
 
+  // Handles selection of priority 
   const handlePrioritySelect = (selectedPriority) => {
     setSelectedPriority(selectedPriority);
     setShowPriorityPicker(false);
@@ -82,7 +84,7 @@ const AddTaskScreen = ({ navigation }) => {
     showMode('time');
   };
 
-  //Generate a random id
+  // Generate a random id
  function generateUUID(digits) {
     let str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXZ';
     let uuid = [];
