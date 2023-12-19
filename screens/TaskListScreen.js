@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ThemeContext from '../components/ThemeContext';
 import Styles from '../components/Styles';
 
-const TaskListScreen = ({navigation}) => {
+const TaskListScreen = ({navigation, route}) => {
   const { tasks, toggleTaskCompletion } = useContext(TasksContext);
   const [currentDate, setCurrentDate] = useState(new Date());
   const dateFormatter = new Intl.DateTimeFormat('en-US', {
@@ -20,6 +20,8 @@ const TaskListScreen = ({navigation}) => {
   const [pickedColor, setPickedColor] = useState(themeColors ? themeColors.buttonColor : '#575A5E');  // TODO: change default value 
   const [showColorPicker, setShowColorPicker] = useState(false);
   const styles = Styles({themeColors, pickedColor});
+
+  const { entriesFilled } = route.params || {entriesFilled : false}
 
   const handleNextDay = () => {
     const nextDay = new Date(currentDate);
