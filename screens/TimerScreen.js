@@ -16,6 +16,15 @@ import Styles from '../components/Styles';
     });
 */
 
+/** NOTE: can also be used as a component, import Timer from 'path'; 
+ *  <Timer navigation={navigation}  // just the navigation variable 
+ *         route={{
+ *          params: {
+ *             initialTimerMinutes: //variable from task here,
+ *             taskName: // variable from task here }}}/> 
+ * Might have to change some styling but that's a minor issue */
+
+
 const Timer = ({ navigation, route }) => {
     const { theme } = useContext(ThemeContext);
     const { colors: themeColors } = theme;
