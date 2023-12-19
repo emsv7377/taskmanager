@@ -48,21 +48,23 @@ const TaskListScreen = ({navigation}) => {
 
     return (
         <View style={[styles.taskItem, { backgroundColor: item.color }]}>
+          <View style={styles.column1}>
           <Text style={styles.taskName}>{item.name}</Text>
           <Text style={styles.taskDescription}>{item.description}</Text>
           <Text style={styles.taskTime}>{item.time} mins</Text>
-          <TouchableOpacity onPress={handleCompletion}>
-          <View style={[styles.checkbox, item.completed ? styles.checkedCheckbox : null]}>
+          </View>
+          <View style={styles.column2}>
+          <TouchableOpacity onPress={handleCompletion} style={styles.checkBox}>
           {item.completed ? (
-            <Text style={styles.checkmark}>✓</Text> // Show a checkmark when completed
+            <Text style={styles.checkMark}>X</Text> // Show a checkmark when completed
           ) : (
-            <Text> </Text> // Show an empty space for the unchecked checkbox
+            <Text> </Text> // Show an empty space for the unchecked checkbox 
           )}
-        </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleMoreInfo}>
-        <Text>more</Text>
+        <Text style={styles.taskDescription}>More info {'>'}</Text>
         </TouchableOpacity>
+        </View>
         </View>
     );
   };
@@ -78,14 +80,16 @@ const TaskListScreen = ({navigation}) => {
         keyExtractor={(item, index) => index.toString()}
         contentContainerStyle={styles.taskList}
       />
-          <TouchableOpacity onPress={handleNextDay} style={styles.button}>
+      <View style={styles.row}>
+          <TouchableOpacity onPress={handleNextDay} style={styles.twobutton}>
           <Text style={styles.buttonText}>Next Day</Text>
         </TouchableOpacity>
         <TouchableOpacity 
-                style={styles.button}
+                style={styles.twobutton}
                 onPress={() => navigation.goBack()} >
           <Text style={styles.buttonText}> Back </Text>  
         </TouchableOpacity>
+        </View>
     </SafeAreaView>
   );
 };

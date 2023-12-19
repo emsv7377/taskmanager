@@ -268,28 +268,57 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         padding: 15,
         marginBottom: 15,
         borderRadius: 10,
+        flex: 1,
+        flexDirection: 'row',
       },
       taskName: {
-        fontSize: 18,
+        color: themeColors ? themeColors.boxText : '#fff',
+        fontSize: 22,
         fontWeight: 'bold',
         marginBottom: 5,
       },
       taskDescription: {
+        color: themeColors ? themeColors.boxText : '#fff',
         fontSize: 16,
         marginBottom: 5,
       },
       taskTime: {
-        fontSize: 14,
-        fontStyle: 'italic',
+        color: themeColors ? themeColors.boxText : '#fff',
+        fontSize: 16,
       },
-      checkbox: {
-        width: 20,
-        height: 20,
-        borderWidth: 1,
-        borderColor: 'black',
-        justifyContent: 'center',
-        alignItems: 'center',
+    checkBox:{
+      width: 40, // Fixed width and height for the checkbox
+      height: 40,
+      margin: 5,
+      marginBottom: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderWidth: 5,
+      borderColor: themeColors ? themeColors.boxText : '#fff',
     },
+    column1:{
+      flexDirection: 'column',
+      alignItems: 'flex-start', // Align the arrow to the right
+      flex: 1
+    },
+    column2:{
+      flexDirection: 'column',
+      alignItems: 'flex-end', // Align the arrow to the right
+      flex: 1
+    },
+    checkMark:{
+      color: themeColors ? themeColors.boxText : '#fff',
+      fontSize: 20,
+    },
+    twobutton:{
+      alignItems:'center',
+      backgroundColor: themeColors ? themeColors.button : 'gray',
+      fontSize: 24,
+      padding: 15,
+      margin: 4,
+      width:'50%',
+      borderRadius: 20,
+  },
     //End TasklistScreen
 
     //TaskScreen:
