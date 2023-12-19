@@ -6,7 +6,7 @@ import Styles from '../components/Styles';
 
 const IntroductionScreen = ({navigation}) => {
   const { theme } = useContext(ThemeContext);
-  const { colors:themeColors } = theme;
+  const { colors: themeColors } = theme;
 
   const styles = Styles({themeColors});
     return (
