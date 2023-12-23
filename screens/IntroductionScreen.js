@@ -6,7 +6,7 @@ import Styles from '../components/Styles';
 
 const IntroductionScreen = ({navigation}) => {
   const { theme } = useContext(ThemeContext);
-  const { colors:themeColors } = theme;
+  const { colors: themeColors } = theme;
 
   const styles = Styles({themeColors});
     return (
@@ -37,9 +37,9 @@ const IntroductionScreen = ({navigation}) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Timer')}>
+          onPress={() => navigation.navigate('AddTask')}>
             <Text style={styles.buttonText}>
-              DEBUG: Timer
+              DEBUG: Add task
             </Text>
         </TouchableOpacity>
         <TouchableOpacity 
