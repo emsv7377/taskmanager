@@ -156,14 +156,12 @@ const AddTaskScreen = ({ navigation }) => {
         {/* Container for date picker */}
         <View style={styles?.dateContainer}>
           {/* Ensures that the whole section of date is on the same row */}
-          <View style={styles?.dateRow}>
-            <TouchableOpacity onPress={showDatepicker} 
-              style={styles?.menuItem}>
+          <TouchableOpacity onPress={showDatepicker} 
+              style={styles.dateRow}>
                   <Text style={styles?.dateLabel}>Date:</Text>
                 <Text style={[styles?.dateLabel, {marginLeft: 10, marginTop: 0, marginRight: 20, fontSize: 16, alignSelf: 'center', fontWeight:'normal'}]}> {formattedDate}</Text>
-                <Ionicons name='calendar-outline' size={24} color="#fff" />
+                <Ionicons name='calendar-outline' size={24} color={themeColors.textColor} />
             </TouchableOpacity>
-            </View>
           {show && (
             <DateTimePicker
             testID="dateTimePicker"
@@ -202,9 +200,13 @@ const AddTaskScreen = ({ navigation }) => {
           placeholder="Enter name of sub task"
           onSubmitEditing={handleAddSubTask} // Triggered when "Enter" is pressed
         />
+        <View style={styles.subtasklist}>
         {subTasks.map(subTask => (
+          <View style={styles.subtasklistContainer} key={subTask.id}>
           <Text style={styles?.displaySubtasks}key={subTask.id}>{subTask.name}</Text>
+          </View>
         ))}
+        </View>
         <Text style={styles?.label}>Estimated duration (minutes):</Text>
           <TextInput
             style={styles?.input}
