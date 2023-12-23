@@ -53,7 +53,9 @@ const TaskListScreen = ({navigation, route}) => {
           <View style={styles.column1}>
           <Text style={styles.taskName}>{item.name}</Text>
           <Text style={styles.taskDescription}>{item.description}</Text>
+          { item.time && (
           <Text style={styles.taskTime}>{item.time} mins</Text>
+          )}
           </View>
           <View style={styles.column2}>
           <TouchableOpacity onPress={handleCompletion} style={styles.checkBox}>

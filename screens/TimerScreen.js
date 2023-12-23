@@ -29,9 +29,9 @@ const Timer = ({ navigation, route }) => {
     const { theme } = useContext(ThemeContext);
     const { colors: themeColors } = theme;
     const styles = Styles({ themeColors });
-    const initialTimerMinutes = route.params ? route.params.initialTimerMinutes : 30;       // defaults to 30 minutes 
+    const initialTimerMinutes = route.params;  // defaults to 30 minutes 
     const taskName = route.params ? route.params.taskName : 'Task';
-    const initialTimerSeconds = initialTimerMinutes * 60;   // convert to seconds 
+    const initialTimerSeconds = initialTimerMinutes * 60;   // convert to seconds '
     const [timerSeconds, setTimerSeconds] = useState(initialTimerSeconds);
     const [isTimerRunning, setIsTimerRunning] = useState(false);
 
@@ -86,7 +86,6 @@ const Timer = ({ navigation, route }) => {
     // Set up a timer interval when timer is running 
     useEffect(() => {
         let timerInterval;
-
         if (isTimerRunning && timerSeconds > 0) {
             timerInterval = setInterval(() => {
                 setTimerSeconds((prevSeconds) => { return prevSeconds - 1; });
@@ -159,10 +158,9 @@ const Timer = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-        <View style={styles.titleContainer}>
+        <View style={styles.tasknameContainer}>
             <Text style={styles.title}>Timer</Text>
         </View>
-        <Text style={styles.boxText}>Current task: {taskName}</Text>
         <View style={styles.timerButtonContainer}>
             <Text style={styles.timerText}>{formatTime(timerSeconds)}</Text>
             {/* If timer is running */}

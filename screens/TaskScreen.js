@@ -1,23 +1,29 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text ,StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text ,StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
 import { TasksContext } from './TasksContext';
 import Styles from '../components/Styles';
+import ThemeContext from '../components/ThemeContext';
+import Timer from './TimerScreen';
 
-const TaskDetailsScreen = ( {route, navigation} ) => {
+const TaskScreen = ( {route, navigation} ) => {
   // Fetch task details based on the taskId
   const { tasks, toggleSubTaskCompletion, toggleTaskCompletion } = useContext(TasksContext);
   const { taskId } = route.params;
   const [taskDetails, setTaskDetails] = useState(null);
-
+  const { theme } = useContext(ThemeContext);   // fetch current theme
+  const { colors: themeColors } = theme;                     // Fetch colors for components current theme
+  const styles = Styles({themeColors});
 // Check if all subtasks are completed or if there are no subtasks
 const areAllSubtasksCompleted = taskDetails?.subTasks?.every((subTask) => subTask.completed) || !taskDetails?.subTasks?.length;
 
   useEffect(() => {
+    console.log("här")
     if (tasks && tasks.length > 0) {
       const task = tasks.find((task) => task.id === taskId);
       if (task) {
         setTaskDetails(task);
+        console.log(taskDetails);
       }
     }
   }, [tasks, taskId]);
@@ -46,18 +52,16 @@ const areAllSubtasksCompleted = taskDetails?.subTasks?.every((subTask) => subTas
         <>
           <Text style={styles.subTasksTitle}>Subtasks:</Text>
           {taskDetails.subTasks.map((subTask) => (
-            <TouchableOpacity
-              key={subTask.id}
-              onPress={() => handleSubtaskToggle(subTask.id)}
-              style={styles.subTaskContainer}
-            >
-              <Text style={subTask.completed ? styles.completedSubTask : styles.subTask}>
-                {subTask.name}
-              </Text>
-              <View style={styles.checkbox}>
-                {subTask.completed && <Text>X</Text>} 
-              </View>
-            </TouchableOpacity>
+          <View style={styles.subTaskContainer} key={subTask.id}>
+          <Text style={styles.subTask}>{subTask.name}</Text>
+          <View style={styles.column2}>
+          <TouchableOpacity onPress={() => handleSubtaskToggle(subTask.id)}>
+            <View style={styles.checkBox}>
+              {subTask.completed && <Text>X</Text>}
+            </View>
+          </TouchableOpacity>
+          </View>
+          </View>
           ))}
         </>
       );
@@ -66,70 +70,34 @@ const areAllSubtasksCompleted = taskDetails?.subTasks?.every((subTask) => subTas
   };
 
   return (
-    <SafeAreaView style={taskDetails ? { backgroundColor: taskDetails.color } : null}>
-           {taskDetails ? (
-        <View style={styles.container}>
-          <Text style={styles.taskName}>{taskDetails.name}</Text>
-          <Text style={styles.description}>{taskDetails.description}</Text>
-          <Text style={styles.time}>Time: {taskDetails.time} mins</Text>
+    <SafeAreaView style={styles.addTaskContainer}>
+      <ScrollView>
+      <View style={[taskDetails && { backgroundColor: taskDetails.color }, styles.additionalStyle]}>
+        {taskDetails && (
+          <View style={styles.menuHeader}>
+          <View style={styles.tasknameContainer}>
+          <Text style={styles.taskTitle}>{taskDetails.name}</Text>
+          </View>
+          <Text style={styles.taskDescription}>{taskDetails.description}</Text>
+          </View>
+          )}
+          <View>
           {renderSubTasks()}
-        </View>
-      ) : (
-        <Text>Loading task details...</Text>
+          </View>
+      </View>
+      {taskDetails && taskDetails.time && (
+      <Timer navigation={navigation} route={{ params: taskDetails.time }} />
       )}
-         {areAllSubtasksCompleted || !taskDetails.subTasks || taskDetails.subTasks.length === 0 ? (
-        <TouchableOpacity onPress={handleDoneButtonPress} disabled={!(areAllSubtasksCompleted || !taskDetails.subTasks || taskDetails.subTasks.length === 0)}>
-          <Text>Done</Text>
+               {areAllSubtasksCompleted || !taskDetails.subTasks || taskDetails.subTasks.length === 0 ? (
+        <TouchableOpacity style={styles.twobutton} onPress={handleDoneButtonPress} disabled={!(areAllSubtasksCompleted || !taskDetails.subTasks || taskDetails.subTasks.length === 0)}>
+          <Text style={styles.buttonText}>Done</Text>
         </TouchableOpacity>
       ) : (
-        <Text>Complete all subtasks to enable Done button</Text>
+        <Text style={styles.buttonText}>Complete all subtasks to enable Done button</Text>
       )}
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        padding: 20,
-      },
-      taskName: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 10,
-      },
-      description: {
-        marginBottom: 15,
-      },
-      time: {
-        marginBottom: 15,
-      },
-      subTasksTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 10,
-      },
-      subTaskContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 5,
-      },
-      subTask: {
-        fontSize: 16,
-        marginRight: 10,
-      },
-      completedSubTask: {
-        fontSize: 16,
-        marginRight: 10,
-        textDecorationLine: 'line-through',
-      },
-      checkbox: {
-        width: 20,
-        height: 20,
-        borderWidth: 1,
-        borderColor: 'black',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-  });
-
-export default TaskDetailsScreen;
+export default TaskScreen;

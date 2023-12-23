@@ -109,10 +109,6 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         marginTop: 20,
         width:'100%'
     },
-    taskName:{
-        fontSize:40,
-        color: themeColors ? themeColors.textColor : 'white',
-    },
     
     // Common body text used 
     text:{
@@ -132,7 +128,6 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
     },
     timerButtonContainer:{
         width:'100%',
-        marginTop: '45%',
         alignItems:'center',    // center the buttons
         justifyContent:'space-evenly',
         //padding:15, 
@@ -457,7 +452,8 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
       borderWidth: 5,
-      borderColor: themeColors ? themeColors.boxTextColor  : '#fff',
+      borderRadius: 10,
+      borderColor: themeColors ? themeColors.boxText : '#fff',
     },
     column1:{
       flexDirection: 'column',
@@ -485,30 +481,39 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
     //End TasklistScreen
 
     //TaskScreen:
-      description: {
-        marginBottom: 15,
-      },
-      time: {
-        marginBottom: 15,
-      },
+    //name of task
+    additionalStyle:{
+      padding: 15,
+      marginBottom: 15,
+      borderRadius: 10,
+      flex: 1,
+    },
+    tasknameContainer:{
+      justifyContent:'center',
+      alignItems:'center',
+  },
+      taskTitle:{
+        fontSize: 24,
+        color: themeColors ? themeColors.boxText : 'red',
+        fontWeight: 'bold',
+    },
       subTasksTitle: {
         fontSize: 18,
+        color: themeColors ? themeColors.boxText : '#fff',
         fontWeight: 'bold',
         marginBottom: 10,
       },
       subTaskContainer: {
+        borderWidth: 1,
+        borderRadius: 10,
         flexDirection: 'row',
-        alignItems: 'center',
+        borderColor: themeColors ? themeColors.boxText : '#fff',
         marginBottom: 5,
       },
       subTask: {
-        fontSize: 16,
-        marginRight: 10,
-      },
-      completedSubTask: {
-        fontSize: 16,
-        marginRight: 10,
-        textDecorationLine: 'line-through',
+        color: themeColors ? themeColors.boxText : '#fff',
+        fontSize: 18,
+        margin: 10,
       },
       checkbox: {
         width: 20,
@@ -517,6 +522,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         borderColor: 'black',
         justifyContent: 'center',
         alignItems: 'center',
+        color: themeColors ? themeColors.boxText : '#fff',
     },
     //End TaskScreen
 }); 
