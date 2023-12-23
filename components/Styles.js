@@ -2,7 +2,7 @@
  *          StyleSheet for the application
  * 
  */
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
 
@@ -175,6 +175,8 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         fontSize:60,
         fontFamily:'Georgia',
         color:'white',
+        marginTop: Platform.OS === 'android' ? 60 : 0,
+
     },
     // Welcome text on IntroductionScreen 
     welcomeTitleContainer:{
@@ -279,7 +281,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         fontSize: 20,
     },
     addButton: {
-        backgroundColor: themeColors ? themeColors.addButtonColor : '#3498db',
+        backgroundColor: themeColors ? themeColors.backButtonColor : '#3498db',
         paddingVertical: 15,
         paddingHorizontal: 30,
         borderRadius: 20,
@@ -342,8 +344,6 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         marginTop:20,
         alignItems:'center', 
         marginBottom:10,
-        borderBottomColor: themeColors ? themeColors.headerBorderColor : 'gray',
-        borderBottomWidth:1,
         width:'100%',
     },
     dateLabel:{
@@ -398,11 +398,23 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         color: themeColors ? themeColors.buttonTextColor : '#fff',
         fontSize: 16,
     },
+    subtasklistContainer:{
+      borderColor: themeColors ? themeColors.inputContainerColor : 'gray',
+      backgroundColor: themeColors ? themeColors.inputContainerColor : 'gray',
+      paddingHorizontal: 10,
+      borderRadius:15,
+      margin: 10, // Adjust this value to add more space between subtasks
+    },
+
+    subtasklist: { 
+      marginBottiom: 20,
+      flexDirection: 'row',
+      flexWrap: 'wrap', // Sätt flex-wrap till wrap för att subtasks ska hamna på nya rader
+      justifyContent:'space-evenly',
+  },
     displaySubtasks: {
         fontSize:16,
         color: themeColors ? themeColors.labelTextColor : 'gray',
-        alignItems: 'flex-start',
-        margin: 20,
       },
     changeButton: {
         backgroundColor: themeColors ? themeColors.buttonColor : '#3498db',

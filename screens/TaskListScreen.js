@@ -77,6 +77,7 @@ const TaskListScreen = ({navigation, route}) => {
         <Text style={styles.title}>{selectedDate}</Text>
       </View>
       <FlatList
+        style={{width:'100%'}}
         data={filteredTasks}
         renderItem={renderTaskItem}
         keyExtractor={(item, index) => index.toString()}
