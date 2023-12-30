@@ -4,6 +4,8 @@ import { TasksContext } from './TasksContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ThemeContext from '../components/ThemeContext';
 import Styles from '../components/Styles';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const TaskListScreen = ({navigation, route}) => {
   const { tasks, toggleTaskCompletion } = useContext(TasksContext);
@@ -50,9 +52,25 @@ const TaskListScreen = ({navigation, route}) => {
 
     return (
         <View style={[styles.taskItem, { backgroundColor: item.color }]}>
+          <View style={styles.column3}>
+          { item.category ? (
+        <Ionicons name={item.category.icon} size={24} color={themeColors ? themeColors.iconColor : '#ffffff'} />
+        ) : (
+          <Text> </Text> 
+        )}
+        { item.priority ? (
+          <Entypo name={item.priority.icon} size={24} color={themeColors ? themeColors.iconColor : '#ffffff'}/>
+          ) : (
+            <Text> </Text> 
+        )}
+          </View>
           <View style={styles.column1}>
+          { item.name && (
           <Text style={styles.taskName}>{item.name}</Text>
+          )}
+          { item.description && (
           <Text style={styles.taskDescription}>{item.description}</Text>
+          )}
           { item.time && (
           <Text style={styles.taskTime}>{item.time} mins</Text>
           )}
@@ -60,14 +78,16 @@ const TaskListScreen = ({navigation, route}) => {
           <View style={styles.column2}>
           <TouchableOpacity onPress={handleCompletion} style={styles.checkBox}>
           {item.completed ? (
-            <Text style={styles.checkMark}>X</Text> // Show a checkmark when completed
+            <Ionicons name={'close-outline'} size={30} color={themeColors ? themeColors.iconColor : '#ffffff'} />
           ) : (
             <Text> </Text> // Show an empty space for the unchecked checkbox 
           )}
         </TouchableOpacity>
+        { (item.time || (item.subTasks && item.subTasks.length > 0)) && (
         <TouchableOpacity onPress={handleMoreInfo}>
         <Text style={styles.taskDescription}>More info {'>'}</Text>
         </TouchableOpacity>
+        )}
         </View>
         </View>
     );
