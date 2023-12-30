@@ -465,7 +465,7 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
       alignItems: 'center',
       borderWidth: 5,
       borderRadius: 10,
-      borderColor: themeColors ? themeColors.boxText : '#fff',
+      borderColor: themeColors ? themeColors.boxTextColor : '#fff',
     },
     column1:{
       flexDirection: 'column',
@@ -476,6 +476,13 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
       flexDirection: 'column',
       alignItems: 'flex-end', // Align the arrow to the right
       flex: 1
+    },
+    column3:{
+      flexDirection: 'column',
+      alignItems: 'flex-start', // Align the arrow to the right
+      flex: 0.4,
+      borderRightWidth: 0.1,
+      borderColor: themeColors ? themeColors.boxTextColor  : '#fff',
     },
     checkMark:{
       color: themeColors ? themeColors.boxTextColor  : '#fff',
@@ -506,12 +513,12 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
   },
       taskTitle:{
         fontSize: 24,
-        color: themeColors ? themeColors.boxText : 'red',
+        color: themeColors ? themeColors.boxTextColor : '#fff',
         fontWeight: 'bold',
     },
       subTasksTitle: {
         fontSize: 18,
-        color: themeColors ? themeColors.boxText : '#fff',
+        color: themeColors ? themeColors.boxTextColor : '#fff',
         fontWeight: 'bold',
         marginBottom: 10,
       },
@@ -519,11 +526,11 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         flexDirection: 'row',
-        borderColor: themeColors ? themeColors.boxText : '#fff',
+        borderColor: themeColors ? themeColors.boxTextColor : '#fff',
         marginBottom: 5,
       },
       subTask: {
-        color: themeColors ? themeColors.boxText : '#fff',
+        color: themeColors ? themeColors.boxTextColor : '#fff',
         fontSize: 18,
         margin: 10,
       },
@@ -531,11 +538,14 @@ const Styles = ({themeColors, pickedColor = '#575A5E'}) => StyleSheet.create({
         width: 20,
         height: 20,
         borderWidth: 1,
-        borderColor: 'black',
         justifyContent: 'center',
         alignItems: 'center',
-        color: themeColors ? themeColors.boxText : '#fff',
+        borderColor: themeColors ? themeColors.boxTextColor : '#fff',
     },
+    iconContainer:{
+      justifyContent: 'center',
+      alignItems: 'center',
+    }
     //End TaskScreen
 }); 
 

@@ -134,8 +134,8 @@ const AddTaskScreen = ({ navigation }) => {
       completed: false,
       date: date,
       subTasks: subTasks,
-      //category: selectedCategory,
-      //priority: selectedPriority, 
+      category: selectedCategory,
+      priority: selectedPriority, 
     };
 
     addTask(newTask);
@@ -188,7 +188,6 @@ const AddTaskScreen = ({ navigation }) => {
             style={styles?.input}
             value={description}
             onChangeText={text => setDescription(text)}
-            multiline
           />
           {/* TODO: multiline makes the input box look weird  */}
       

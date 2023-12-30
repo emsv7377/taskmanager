@@ -5,6 +5,8 @@ import { TasksContext } from './TasksContext';
 import Styles from '../components/Styles';
 import ThemeContext from '../components/ThemeContext';
 import Timer from './TimerScreen';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const TaskScreen = ( {route, navigation} ) => {
   // Fetch task details based on the taskId
@@ -29,6 +31,7 @@ const areAllSubtasksCompleted = taskDetails?.subTasks?.every((subTask) => subTas
   }, [tasks, taskId]);
 
   const handleDoneButtonPress = () => {
+    console.log(taskDetails);
     if (areAllSubtasksCompleted || !taskDetails.subTasks || taskDetails.subTasks.length === 0) {
       toggleTaskCompletion(taskId); // Mark the task as completed
       navigation.navigate('TaskList'); // Navigate back to TaskListScreen
@@ -57,7 +60,7 @@ const areAllSubtasksCompleted = taskDetails?.subTasks?.every((subTask) => subTas
           <View style={styles.column2}>
           <TouchableOpacity onPress={() => handleSubtaskToggle(subTask.id)}>
             <View style={styles.checkBox}>
-              {subTask.completed && <Text>X</Text>}
+              {subTask.completed && <Ionicons name={'close-outline'} size={30} color={themeColors ? themeColors.iconColor : '#ffffff'} />}
             </View>
           </TouchableOpacity>
           </View>
@@ -77,23 +80,24 @@ const areAllSubtasksCompleted = taskDetails?.subTasks?.every((subTask) => subTas
           <View style={styles.menuHeader}>
           <View style={styles.tasknameContainer}>
           <Text style={styles.taskTitle}>{taskDetails.name}</Text>
-          </View>
           <Text style={styles.taskDescription}>{taskDetails.description}</Text>
           </View>
+          </View>
           )}
+          <View style={styles.iconContainer}>
+          { taskDetails && taskDetails.category && (
+        <Ionicons name={taskDetails.category.icon} size={24} color={themeColors ? themeColors.iconColor : '#ffffff'} />
+        )}
+        {taskDetails && taskDetails.priority && (
+          <Entypo name={taskDetails.priority.icon} size={24} color={themeColors ? themeColors.iconColor : '#ffffff'}/>
+        )}
+        </View>
           <View>
           {renderSubTasks()}
           </View>
       </View>
       {taskDetails && taskDetails.time && (
       <Timer navigation={navigation} route={{ params: taskDetails.time }} />
-      )}
-               {areAllSubtasksCompleted || !taskDetails.subTasks || taskDetails.subTasks.length === 0 ? (
-        <TouchableOpacity style={styles.twobutton} onPress={handleDoneButtonPress} disabled={!(areAllSubtasksCompleted || !taskDetails.subTasks || taskDetails.subTasks.length === 0)}>
-          <Text style={styles.buttonText}>Done</Text>
-        </TouchableOpacity>
-      ) : (
-        <Text style={styles.buttonText}>Complete all subtasks to enable Done button</Text>
       )}
       </ScrollView>
     </SafeAreaView>
